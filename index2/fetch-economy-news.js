@@ -6,32 +6,20 @@
 const path = require("path");
 const lib = require("./collect-lib");
 
-// 2025년 정부조직개편에 따라 기획재정부는 2026.1.2부터 예산·재정 담당
-// 기획예산처(국무총리 소속)와 세제·경제·금융·국고 담당 재정경제부로 분리되었다.
-// 두 부처 모두 대한민국 정책브리핑(korea.kr) 포털 RSS로 커버한다.
+// 대한민국 정책브리핑(korea.kr)의 부처별 RSS는 2026.7.1부로 전면 중단되었다
+// (저작권 등 권리 보호에 따른 제공방식 변경, 공지: korea.kr/etc/noticeView.do?newsId=132038885).
+// 후속 대체 API가 없어 재정경제부·기획예산처·국세청은 공식 RSS를 뺐고,
+// 아래 NEWS_KEYWORDS의 관련 뉴스 검색으로 대신 커버한다.
+// 금융감독원(FSS)도 공개된 보도자료 RSS가 없어 마찬가지로 뉴스 검색만 사용한다.
 const OFFICIAL_SOURCES = [
   {
     name: "한국은행",
     url: "https://www.bok.or.kr/portal/bbs/B0000552/news.rss?menuNo=200690"
   },
   {
-    name: "재정경제부",
-    url: "https://www.korea.kr/rss/dept_mofe.xml"
-  },
-  {
-    name: "기획예산처",
-    url: "https://www.korea.kr/rss/dept_mpb.xml"
-  },
-  {
     name: "금융위원회",
     url: "https://www.fsc.go.kr/about/fsc_bbs_rss/?fid=0111"
-  },
-  {
-    name: "국세청",
-    url: "https://www.korea.kr/rss/dept_nts.xml"
   }
-  // 금융감독원(FSS)은 공개된 보도자료 RSS가 없어 아래 NEWS_KEYWORDS의
-  // 관련 뉴스 검색으로 대신 커버한다.
 ];
 
 const NEWS_KEYWORDS = ["한국은행", "금융감독원", "재정경제부", "기획예산처", "금융위원회", "국세청"];

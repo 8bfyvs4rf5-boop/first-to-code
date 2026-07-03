@@ -1,0 +1,8 @@
+.env
+node_modules/
+fetch-economy-news.log
+fetch-economy-news.err.log
+fetch-daily.log
+fetch-daily.err.log
+ollama-serve.log
+ollama-serve.err.log

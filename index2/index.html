@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>데일리 브리핑 - 정책 · 경제 · 기술</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="app-shell">
+  <aside class="sidebar">
+    <div class="sidebar-brand">데일리 브리핑</div>
+    <nav class="side-nav" id="sideNav">
+      <button class="side-nav-btn active" data-view="briefing">정책요약자료</button>
+      <button class="side-nav-btn" data-view="scrap">스크랩</button>
+      <a class="side-nav-btn side-nav-link" href="https://claude.ai/new" target="_blank" rel="noopener noreferrer">클로드에게 질문하기</a>
+    </nav>
+  </aside>
+
+  <div class="main-area">
+    <header class="site-header">
+      <div class="header-inner">
+        <h1 id="viewTitle">데일리 브리핑</h1>
+        <p class="subtitle" id="viewSubtitle">주요 정책 · 주요 경제정책 · 기술 동향을 한 곳에서</p>
+        <p class="today" id="todayDate"></p>
+      </div>
+    </header>
+
+    <nav class="tabs" id="tabs">
+      <button class="tab-btn active" data-category="economy">주요 경제정책</button>
+      <button class="tab-btn" data-category="policy">주요 정책</button>
+      <button class="tab-btn" data-category="tech">기술</button>
+    </nav>
+
+    <nav class="ministry-filters" id="ministryFilters" hidden></nav>
+
+    <main class="container">
+      <section id="feed" class="feed"></section>
+      <p id="emptyState" class="empty-state" hidden>등록된 항목이 없습니다. data.js에 내용을 추가해 보세요.</p>
+    </main>
+
+    <footer class="site-footer">
+      <p>개인 관심사 팔로업용 페이지 · data.js를 수정해서 매일 항목을 추가하세요.</p>
+    </footer>
+  </div>
+</div>
+
+<script src="data.js"></script>
+<script src="data-economy-auto.js"></script>
+<script src="data-policy-auto.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

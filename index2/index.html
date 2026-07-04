@@ -15,6 +15,7 @@
       <button class="side-nav-btn active" data-view="briefing">정책요약자료</button>
       <button class="side-nav-btn" data-view="scrap">스크랩</button>
       <button class="side-nav-btn" data-view="board">아이디어 보드</button>
+      <button class="side-nav-btn" data-view="patterns">패턴 뷰</button>
       <a class="side-nav-btn side-nav-link" href="https://claude.ai/new" target="_blank" rel="noopener noreferrer">클로드에게 질문하기</a>
     </nav>
   </aside>
@@ -59,6 +60,12 @@
           </div>
         </form>
         <div class="idea-board-columns" id="ideaBoardColumns"></div>
+      </section>
+
+      <section id="patternView" class="pattern-view" hidden>
+        <p class="pattern-hint">최근 30일간 항목에 붙은 태그를 집계합니다. 막대를 클릭하면 해당 태그가 붙은 항목을 아래에서 볼 수 있어요.</p>
+        <div id="patternSummary" class="pattern-summary"></div>
+        <div id="patternItems" class="pattern-items"></div>
       </section>
     </main>
 

@@ -21,11 +21,15 @@ const newIdeaFormEl = document.getElementById("newIdeaForm");
 const newIdeaTitleEl = document.getElementById("newIdeaTitle");
 const newIdeaDescEl = document.getElementById("newIdeaDesc");
 const newIdeaCancelEl = document.getElementById("newIdeaCancel");
+const patternViewEl = document.getElementById("patternView");
+const patternSummaryEl = document.getElementById("patternSummary");
+const patternItemsEl = document.getElementById("patternItems");
 
 let activeCategory = "economy";
 let activeMinistry = "all";
-let activeView = "briefing"; // "briefing" | "scrap" | "board"
+let activeView = "briefing"; // "briefing" | "scrap" | "board" | "patterns"
 let searchQuery = "";
+let selectedPattern = null; // { axis, tag } | null
 
 // --- 검색 ---------------------------------------------------------
 
@@ -392,6 +396,121 @@ newIdeaFormEl.addEventListener("submit", e => {
   newIdeaBtn.hidden = false;
   renderBoard();
 });
+
+// --- 패턴 뷰 ---------------------------------------------------------
+// 최근 30일간 어떤 태그가 반복적으로 등장했는지 보여준다. 태그를 붙이는
+// 사람이 늘어날수록(=사용할수록) 자연스럽게 유용해지는 뷰라 별도 데이터
+// 저장은 필요 없고, 기존 항목의 date + getItemTags()만으로 계산한다.
+
+const PATTERN_WINDOW_DAYS = 30;
+
+function getRecentItems() {
+  const cutoff = new Date();
+  cutoff.setDate(cutoff.getDate() - PATTERN_WINDOW_DAYS);
+  return getAllItems().filter(item => {
+    const d = new Date(item.date);
+    return !isNaN(d.getTime()) && d >= cutoff;
+  });
+}
+
+function computeTagFrequency(recentItems, axis) {
+  const counts = {};
+  for (const item of recentItems) {
+    for (const tag of getItemTags(item)[axis]) {
+      counts[tag] = (counts[tag] || 0) + 1;
+    }
+  }
+  return Object.entries(counts).sort((a, b) => b[1] - a[1]).slice(0, 5);
+}
+
+function renderPatternView() {
+  const recentItems = getRecentItems();
+  patternSummaryEl.innerHTML = "";
+
+  for (const axis of Object.keys(TAG_TAXONOMY)) {
+    const top5 = computeTagFrequency(recentItems, axis);
+
+    const block = document.createElement("div");
+    block.className = "pattern-block";
+
+    const heading = document.createElement("div");
+    heading.className = "pattern-block-heading";
+    heading.textContent = `${TAG_AXIS_LABELS[axis]} Top 5`;
+    block.appendChild(heading);
+
+    if (top5.length === 0) {
+      const empty = document.createElement("p");
+      empty.className = "pattern-empty";
+      empty.textContent = "최근 30일간 태그가 붙은 항목이 없습니다.";
+      block.appendChild(empty);
+    } else {
+      const maxCount = top5[0][1];
+      for (const [tag, count] of top5) {
+        const row = document.createElement("button");
+        row.type = "button";
+        row.className = "pattern-row";
+        if (selectedPattern && selectedPattern.axis === axis && selectedPattern.tag === tag) {
+          row.classList.add("active");
+        }
+
+        const label = document.createElement("span");
+        label.className = "pattern-row-label";
+        label.textContent = tag;
+        row.appendChild(label);
+
+        const barTrack = document.createElement("span");
+        barTrack.className = "pattern-row-bar-track";
+        const bar = document.createElement("span");
+        bar.className = "pattern-row-bar";
+        bar.style.width = `${Math.max(8, (count / maxCount) * 100)}%`;
+        barTrack.appendChild(bar);
+        row.appendChild(barTrack);
+
+        const countEl = document.createElement("span");
+        countEl.className = "pattern-row-count";
+        countEl.textContent = `${count}건`;
+        row.appendChild(countEl);
+
+        row.addEventListener("click", () => {
+          selectedPattern = selectedPattern && selectedPattern.axis === axis && selectedPattern.tag === tag
+            ? null
+            : { axis, tag };
+          renderPatternView();
+        });
+
+        block.appendChild(row);
+      }
+    }
+
+    patternSummaryEl.appendChild(block);
+  }
+
+  patternItemsEl.innerHTML = "";
+  if (!selectedPattern) {
+    const hint = document.createElement("p");
+    hint.className = "pattern-empty";
+    hint.textContent = "위에서 태그를 클릭하면 관련 항목이 여기 나타납니다.";
+    patternItemsEl.appendChild(hint);
+    return;
+  }
+
+  const matched = recentItems.filter(item => getItemTags(item)[selectedPattern.axis].includes(selectedPattern.tag));
+  const matchedHeading = document.createElement("div");
+  matchedHeading.className = "pattern-items-heading";
+  matchedHeading.textContent = `"${selectedPattern.tag}" 태그가 붙은 최근 30일 항목 (${matched.length}건)`;
+  patternItemsEl.appendChild(matchedHeading);
+
+  for (const [date, dayItems] of groupByDate(matched)) {
+    const dayGroup = document.createElement("div");
+    dayGroup.className = "day-group";
+    const heading = document.createElement("div");
+    heading.className = "day-heading";
+    heading.textContent = date;
+    dayGroup.appendChild(heading);
+    for (const item of dayItems) dayGroup.appendChild(renderCard(item));
+    patternItemsEl.appendChild(dayGroup);
+  }
+}
 
 function renderAutoUpdatedNote() {
   const lines = [];
@@ -814,20 +933,32 @@ tagFiltersEl.addEventListener("click", (e) => {
 function applyViewChrome() {
   const isScrapView = activeView === "scrap";
   const isBoardView = activeView === "board";
-  tabsEl.hidden = isScrapView || isBoardView;
-  ministryFiltersEl.hidden = isScrapView || isBoardView;
-  tagFiltersEl.hidden = isBoardView;
-  searchBarEl.hidden = isBoardView;
-  feedEl.hidden = isBoardView;
-  ideaBoardEl.hidden = !isBoardView;
-  if (isBoardView) emptyStateEl.hidden = true;
+  const isPatternView = activeView === "patterns";
+  const isFeedView = !isBoardView && !isPatternView;
 
-  viewTitleEl.textContent = isBoardView ? "아이디어 보드" : isScrapView ? "스크랩" : "데일리 브리핑";
+  tabsEl.hidden = isScrapView || isBoardView || isPatternView;
+  ministryFiltersEl.hidden = isScrapView || isBoardView || isPatternView;
+  tagFiltersEl.hidden = isBoardView || isPatternView;
+  searchBarEl.hidden = isBoardView || isPatternView;
+  feedEl.hidden = !isFeedView;
+  ideaBoardEl.hidden = !isBoardView;
+  patternViewEl.hidden = !isPatternView;
+  if (!isFeedView) emptyStateEl.hidden = true;
+
+  viewTitleEl.textContent = isBoardView
+    ? "아이디어 보드"
+    : isPatternView
+      ? "패턴 뷰"
+      : isScrapView
+        ? "스크랩"
+        : "데일리 브리핑";
   viewSubtitleEl.textContent = isBoardView
     ? "브리핑에서 발견한 내용을 정책 아이디어로 발전시켜 보세요"
-    : isScrapView
-      ? "저장해 둔 정책·경제·외신 항목 모음"
-      : "주요 정책 · 주요 경제정책 · 주요외신동향을 한 곳에서";
+    : isPatternView
+      ? "반복적으로 등장하는 태그로 흐름을 파악해 보세요"
+      : isScrapView
+        ? "저장해 둔 정책·경제·외신 항목 모음"
+        : "주요 정책 · 주요 경제정책 · 주요외신동향을 한 곳에서";
 }
 
 sideNavEl.addEventListener("click", (e) => {
@@ -839,6 +970,7 @@ sideNavEl.addEventListener("click", (e) => {
   applyViewChrome();
   if (activeView === "briefing") renderMinistryFilters();
   if (activeView === "board") renderBoard();
+  else if (activeView === "patterns") renderPatternView();
   else renderFeed();
 });
 

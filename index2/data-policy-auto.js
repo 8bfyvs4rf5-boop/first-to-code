@@ -1,15 +1,114 @@
 // 자동 생성 파일 — 직접 수정하지 마세요.
 // 생성: node fetch-policy-news.js
-// 마지막 갱신: Fri Jul 03 2026 16:42:44 GMT+0900 (Korean Standard Time)
-const policyAutoMeta = {"updatedAt":"Fri Jul 03 2026 16:42:44 GMT+0900 (Korean Standard Time)","count":54};
+// 마지막 갱신: Sat Jul 04 2026 16:29:36 GMT+0900 (Korean Standard Time)
+const policyAutoMeta = {"updatedAt":"Sat Jul 04 2026 16:29:36 GMT+0900 (Korean Standard Time)","count":54};
 const policyAutoItems = [
+  {
+    "date": "2026-07-04",
+    "category": "policy",
+    "type": "news",
+    "ministry": "교육부",
+    "title": "학생 독서량 6년 새 23%↓…교육부, '전 교과 독서' 국가 책무로 격상",
+    "summary": "학생들의 평균적인 독서량이 6년 사이에 약 23% 줄어든 것으로 나타났고, 이를 해결하기 위해 교육부는 모든 학과에서 책독습이 국가적 책무로 제격화될 계획이다.",
+    "content": "[교육부 관련 뉴스] v.daum.net에서 보도된 기사입니다. 아래 원문 링크에서 전체 내용을 확인하세요.",
+    "source": "v.daum.net",
+    "url": "https://news.google.com/rss/articles/CBMiT0FVX3lxTE9CMWQtUHo3bnFPUF95Y0VjRlFuRktVODJNWllLSjVUaXZid1FsRzNkWjYzWGtUVU5lZE0xQ2xQVjU4QTV2Y3FaOXBUV09Xak0?oc=5"
+  },
+  {
+    "date": "2026-07-04",
+    "category": "policy",
+    "type": "news",
+    "ministry": "외교부",
+    "title": "[ ABC AI국가대전환 = 조현 외교부 장관] AI 외교혁명, 대한민국은 세계 AI 질서를 이끄는 외교강국이 될 수 있다",
+    "summary": "한국 외교부 장관이 제안하는 AI 외교혁명은 대한민국이 세계 AI 질서를 이끄는 외교강국으로 나아갈 수 있음을 설명합니다.",
+    "content": "[외교부 관련 뉴스] 아주경제에서 보도된 기사입니다. 아래 원문 링크에서 전체 내용을 확인하세요.",
+    "source": "아주경제",
+    "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE9wVzJtdUVnVzd4dUFHcTdwSzNzTk42ZWVLYkpRYVB5SnlQSWFFcE44TUZPQThNNXRHS25xR0RuRVlPWGV4RG5OQU5PeWljdndTc2ctNEx2NjF4QdIBWEFVX3lxTE5Ja1JiWEhLVi04TEh2cHhHSXFtcThuMERqVy1NeUo4ZDVtTlh4SVdEdjFkeWZ5TmZhX095S2VsOU9GWXktSWJkcDVpWVEzNTBudm5ZYjlKa0M?oc=5"
+  },
+  {
+    "date": "2026-07-04",
+    "category": "policy",
+    "type": "news",
+    "ministry": "국방부",
+    "title": "국방부, '사관학교 통합' 강행 의지에…국힘 \"국가 안보 난도질하는 것\"",
+    "summary": "국방부는 '사관학교 통합'에 대해 강행 의지를 나타냈습니다. 이를 두고 자유한국당은 국가 안보가 흔들리게 할 것이라고 비판했습니다.",
+    "content": "[국방부 관련 뉴스] v.daum.net에서 보도된 기사입니다. 아래 원문 링크에서 전체 내용을 확인하세요.",
+    "source": "v.daum.net",
+    "url": "https://news.google.com/rss/articles/CBMiT0FVX3lxTE9CVzFfdUJiRy1tQzB6S2tHZWxiSlhYME9JWGlIZ3lZUEpJSmMtaExMeW5YdXplUl9aSnZ1WmVTTVBJZUQtZ1FidHhkUVVPclE?oc=5"
+  },
+  {
+    "date": "2026-07-04",
+    "category": "policy",
+    "type": "news",
+    "ministry": "국방부",
+    "title": "비판 여론 커져도…국방부, '사관학교 통합' 강행 의지",
+    "summary": "국방부는 비판 여론 속에서도 사관학교 통합에 강행 의지를 밝혔습니다.",
+    "content": "[국방부 관련 뉴스] v.daum.net에서 보도된 기사입니다. 아래 원문 링크에서 전체 내용을 확인하세요.",
+    "source": "v.daum.net",
+    "url": "https://news.google.com/rss/articles/CBMiT0FVX3lxTE14QnhVVmxZS0ZjbkRfVjNDcXlXU21NSE96RE9KZTVyRTBJRGN2Z3hjek1ORHMxa0hTV1lGUl9tekFQbXBOaGNDVnc2Y1lLSTA?oc=5"
+  },
+  {
+    "date": "2026-07-04",
+    "category": "policy",
+    "type": "news",
+    "ministry": "국방부",
+    "title": "비판 여론 커져도…국방부, '사관학교 통합' 강행 의지",
+    "summary": "국방부는 여론이 부상하더라도 '사관학교 통합'을 강행할 의사를 밝혔습니다. [네이트 뉴스에서 더 알고 싶으시면 클릭하세요]",
+    "content": "[국방부 관련 뉴스] 네이트에서 보도된 기사입니다. 아래 원문 링크에서 전체 내용을 확인하세요.",
+    "source": "네이트",
+    "url": "https://news.google.com/rss/articles/CBMieEFVX3lxTE5Mb1V1Zk9IdUZiNTNHLU8yd1dxT2ZXTFdSZ285X01ZSzlHUkVuY0F0VlZlOGpPQm95OE56ejJIXzNKZzVLcjNiZUs1MXZfWXJHX0dnVlFVSnFYU1pVX1NDbllrc3hLaGlDLVI2NmRsa3g2cXRBM2prVw?oc=5"
+  },
+  {
+    "date": "2026-07-04",
+    "category": "policy",
+    "type": "news",
+    "ministry": "행정안전부",
+    "title": "섬진흥원, 2026년 ‘찾아가고 싶은 섬’ 88곳 선정 인천 17곳",
+    "summary": "인천시에서 2026년 ‘찾아가고 싶은 섬’ 선정에 따라 인천 지역의 17곳이 포함되었습니다. [행정안전부 관련 뉴스] 인천투데이에서 보도된 기사입니다.",
+    "content": "[행정안전부 관련 뉴스] 인천투데이에서 보도된 기사입니다. 아래 원문 링크에서 전체 내용을 확인하세요.",
+    "source": "인천투데이",
+    "url": "https://news.google.com/rss/articles/CBMicEFVX3lxTE9zWkZJS2c5X3hmQkFPQlJaNUN3amc5TV9BbUhRLUF6YnNNek00T1daSUZwNzlQWFRTZHcxYjVWTkd5VWw0Z1o2cnhNaEZsV2NSZEFsV2U5T0lCMlN2cU9UX3Nsd1R5UkVvMV8zUktwb2U?oc=5"
+  },
+  {
+    "date": "2026-07-04",
+    "category": "policy",
+    "type": "news",
+    "ministry": "문화체육관광부",
+    "title": "[2026 개인정보보호 우수사례-1] 문체부, 개인정보 보호수준 S 등급...71개 산하기관 관리망 빛났다",
+    "summary": "문화체육관광부에서 개인정보 보호 수준이 S등급인 71개 산하기관 관리망이 우수하다는 문체부의 발표가 있습니다.",
+    "content": "[문화체육관광부 관련 뉴스] 보안뉴스에서 보도된 기사입니다. 아래 원문 링크에서 전체 내용을 확인하세요.",
+    "source": "보안뉴스",
+    "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE85Z3l2VFlJTDNNSnYtMV8xQnNvdnpMcTVnZElFelg0OGVCUUgtUnlTc0FSS2ZDcU9FVDhPQm9CaGFRVzNoRkFQZUNmNnFLM3d5cllIZEExVHRYM0xfR3c?oc=5"
+  },
+  {
+    "date": "2026-07-04",
+    "category": "policy",
+    "type": "news",
+    "ministry": "산업통상부",
+    "title": "(설명자료)가칭「메가특구특별법」의 구체적 내용은 결정된 바 없습니다",
+    "summary": "제목에 따라 중요한 핵심만 요약하면 다음과 같습니다:\n\n\"메가특구특별법의 구체적 내용이 아직 결정되지 않았음을 명시합니다.",
+    "content": "[산업통상부 관련 뉴스] 대한민국 정책브리핑에서 보도된 기사입니다. 아래 원문 링크에서 전체 내용을 확인하세요.",
+    "source": "대한민국 정책브리핑",
+    "url": "https://news.google.com/rss/articles/CBMib0FVX3lxTE8tS1BLSWVjaUs1ekhTSElzR3ZWeTgxQzFKV2d3TnRGelhqTkZIcHlGMmU3ZHd6R0k0bWZfdXdwQnJkcldOQWdnaEN5bnc3RWJGM2ZqNTI3QldxT00tVmNGYjRPTW82U29KczVPX0FQQQ?oc=5"
+  },
+  {
+    "date": "2026-07-04",
+    "category": "policy",
+    "type": "news",
+    "ministry": "기후에너지환경부",
+    "title": "김성환 환경부 장관 “위법사항 살피겠다”…홍천 양수발전소 공사 한 달 중단 요청",
+    "summary": "김성환 환경부 장관이 홍천 양수발전소 공사를 한 달 동안 중단해달라고 요청했습니다.",
+    "content": "[기후에너지환경부 관련 뉴스] 강원도민일보에서 보도된 기사입니다. 아래 원문 링크에서 전체 내용을 확인하세요.",
+    "source": "강원도민일보",
+    "url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE5Ec1dLVC1XaTB1dVdlOU1abjNmN25TUElFVGxlczRENy1sRjZxX3JQZzNFVXpWSjFuVFFlaTRYTVQ5Y1F2YXBUUG1CRGRlc1Fia0tRb2p5WGQxOThMYmczUGtpbzZTRG5Z?oc=5"
+  },
   {
     "date": "2026-07-03",
     "category": "policy",
     "type": "news",
     "ministry": "교육부",
     "title": "中교육부, 여름방학 숙제 총량 규제…변칙 시험도 금지",
-    "summary": "중국 교육부, 여름방학 숙제 총량을 제한하고 변칙적인 시험도 금지합니다. [연합뉴스 제공]",
+    "summary": "중국 교육부가 여름방학 숙제 총량을 제한하고, 변칙적인 시험도 금지했다. [연합뉴스] 관련 뉴스 기사 보기.",
     "content": "[교육부 관련 뉴스] 연합뉴스에서 보도된 기사입니다. 아래 원문 링크에서 전체 내용을 확인하세요.",
     "source": "연합뉴스",
     "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE54akdqOWpKclN3TU9YSUJqNi1RTGxJbnlueUpHTFdPYjkza0VaMk1NOVJQMWxXZFd1NXRBWmdfczIwbFZDbjJCTzEzbENEb2F4Nmc3WUc4NllvMzDSAWBBVV95cUxNeGxFTFhkaXZYMmxYemxsNEpUa2hzdlFVT3lzZi1ibmVYcTk5VmlUTHNxN1FZb3REbDB5ZENPM0hrLU1Ca2hKZ2ZwRVpCVmVUa01LT1U2bklWZjBIZEpFLWM?oc=5"
@@ -19,55 +118,77 @@ const policyAutoItems = [
     "category": "policy",
     "type": "news",
     "ministry": "교육부",
-    "title": "이화여대기술지주, 교육부 모태펀드 '대학창업' 운용사 선정",
-    "summary": "이화여대기술지주, 교육부의 모태펀드 '대학창업' 운용사로 선정되었습니다. [교육부 관련 뉴스] 뉴시스에서 보도된 기사입니다. 원문은 아래 링크를 통해 확인 가능합니다.",
-    "content": "[교육부 관련 뉴스] 뉴시스에서 보도된 기사입니다. 아래 원문 링크에서 전체 내용을 확인하세요.",
-    "source": "뉴시스",
-    "url": "https://news.google.com/rss/articles/CBMiYEFVX3lxTE1weGVraUVRRzdOMlNJWkIzc3M0NncxdEk4VC1iTGxwUDVxdmczbEtoUTZEMHVQeExsQ2hKMXlSTzk2WXdXX0J1V21xbW5TQ1A3NGl1aWNwQTZFMmU1RXp5V9IBeEFVX3lxTE9IR1p4SEdiOGlTYmN3bTQ2bldyejNubmtxQU52eHFFcHZyS2hadnBXQklEWGMwM2daLUxfcW41aDdCb1Bkbkx0N3d0UzlIMVFBQVNfdG5xSEVsWlhQX043VXBJS3pZb2dVVVNaVHpJQnY2eElabU5INQ?oc=5"
+    "title": "[인사] 교육부 외",
+    "summary": "한국일보에서 보도된 교육부 관련 뉴스 요약: 교육부에서 진행 중인 주요 이슈가 언론에 게재되었습니다.",
+    "content": "[교육부 관련 뉴스] 한국일보에서 보도된 기사입니다. 아래 원문 링크에서 전체 내용을 확인하세요.",
+    "source": "한국일보",
+    "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE9sSEMyWnVEUXcybTRwUmlWNndhc1BrTEhJZ1UyckxLYjdjaW5zaUxCTUwtb3RrY2pQLTNzTnk3N2UwTjdieGgzZzVpaDBENTV0M1pBQXpaT21adkNmOHpKa1U4MjZhWmg3c093akJ30gFzQVVfeXFMTW0xSUJOWS1SekxwUW5LekRwQkZvSjFqeEY3MExyUTNDVi02TWgtZzByc1hLSk1vNjRIZDRYNXlNOHlYbUZoMzYtdFhvUkI2REwwMFhITlpMWnYwN3M4aWVSMjNiQ1lZTG5EVmE5a0g3dTM2TQ?oc=5"
   },
   {
     "date": "2026-07-03",
     "category": "policy",
     "type": "news",
     "ministry": "외교부",
-    "title": "백악관 \"이재명 정부가 쿠팡 표적삼아\"…외교부 \"사실아냐\"",
-    "summary": "외교부는 백악관이 이재명 정부가 쿠팡을 표적삼아 행정력을 행사하고 있다고 주장하는 뉴스를 거짓이라는 입장이다.",
-    "content": "[외교부 관련 뉴스] JTBC에서 보도된 기사입니다. 아래 원문 링크에서 전체 내용을 확인하세요.",
-    "source": "JTBC",
-    "url": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE5QVGFFNjF6RmFIaWtoSEg3dnItaGJzWVZKZ0I5VVd2Zi1ibzY4NlRWTGI0cVJrRXBXV0pibjFvOS1jakNfTl8xQ2p4U2VONWE1OWVLeA?oc=5"
+    "title": "[인사] 외교부",
+    "summary": "재외동포신문에서 기사가 게재되었음을 전하는 외교부의 공식 뉴스입니다. 전체 내용은 아래 링크에서 확인 가능합니다.",
+    "content": "[외교부 관련 뉴스] 재외동포신문에서 보도된 기사입니다. 아래 원문 링크에서 전체 내용을 확인하세요.",
+    "source": "재외동포신문",
+    "url": "https://news.google.com/rss/articles/CBMibEFVX3lxTE4xTHdDUWQwM2hZTWZmQVR5aEdsZThDamplNDV2R3FHTXMtZ1BXNUlPTVlZTHlyakd4T2RneV9vWjNrM0FzWUVRZ1B4UGNjWjc2TXdEZ1RLTDNqaUJfYWtTcjBQS1F6cXVLQjdTeA?oc=5"
   },
   {
     "date": "2026-07-03",
     "category": "policy",
     "type": "news",
-    "ministry": "통일부",
-    "title": "통일부 \"北국호 사용 각계 목소리 주시…국민공감대 형성 과정\"",
-    "summary": "통일부는 북한산 '북국호' 이름 사용에 대한 다양한 의견을 주목하고 있으며, 국민의 공감대 형성을 위한 과정이 진행되고 있다고 밝혔습니다. [연합뉴스 링크 참조]",
-    "content": "[통일부 관련 뉴스] 연합뉴스에서 보도된 기사입니다. 아래 원문 링크에서 전체 내용을 확인하세요.",
+    "ministry": "외교부",
+    "title": "[인사] 외교부",
+    "summary": "연합뉴스에 따르면, 외교부가 최근 관련 뉴스를 발표했습니다.",
+    "content": "[외교부 관련 뉴스] 연합뉴스에서 보도된 기사입니다. 아래 원문 링크에서 전체 내용을 확인하세요.",
     "source": "연합뉴스",
-    "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE14aGhGX0NQazM3MjhqdlRHUlR4dktZclZ3cTZqTWMwSEl6RjVBMjZvRU5IbFFoTzNyU3NnZFVCUkxxaW52VWk3M3NIQi1mNVNWT1pqTW4xRDF0X2fSAWBBVV95cUxOdDBieU9pXzktMHNvSFlTdzhtSS1aWGpGcVpSS2Jxek1XVmVaMkNRVVIwLVcyU2w3a1NJbHRteGFLWHgwSkpHMEItSlZ5Yk5DdFl2eFZHcDE3VzZNWXktTE8?oc=5"
+    "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE1Hcng5MHhsUHdlTjgyZjRpMHF3OWNiZm9JOW1TbG5qdW9LOFRCanBvT0hiQmhUSlRiRURIbkUzWEViT29QcmVpWC02RlJjaEZpU05fOFl0MnlFa2_SAWBBVV95cUxOWGJ0bnhoMnAwc3d4LWVoMXhxdWVVVHRWR0dwNHNhbjJqZnZlVmZYLTdOMndLYUdKdGE4TnhuQ21BSy1VRjlxYU5sTGp2RzBwT3ZYNjFUUmV6Q19IVGYycHo?oc=5"
   },
   {
     "date": "2026-07-03",
     "category": "policy",
     "type": "news",
     "ministry": "통일부",
-    "title": "통일부 정례 브리핑",
-    "summary": "통일부 정례 브리핑 소식, 전체 내용은 다음과 같은 링크를 통해 확인 가능합니다. [원문 링크]",
-    "content": "[통일부 관련 뉴스] 대한민국 정책브리핑에서 보도된 기사입니다. 아래 원문 링크에서 전체 내용을 확인하세요.",
-    "source": "대한민국 정책브리핑",
-    "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTE1SSnB1cWVrZG1nQkFwVWhJWmZ0R2VUOHpqVnVEd09BY3hsc2lIek45TXk3UnN3NHpUSnpVQTk3cXJtNEJhdVBULXo5ODVWQkdZZVVCbml6RVdYQnJOSXU2WWNUSV9XYTBqWUhKUEwtTjhiNHBrMkUw?oc=5"
+    "title": "통일부 “북한 국호 사용 목소리 주시…국민공감대 형성 과정”",
+    "summary": "통일부, 북한의 국호 사용에 대한 의견을 주시하고 있으며 국민의 공감대 형성 과정을 지켜보고 있습니다.",
+    "content": "[통일부 관련 뉴스] v.daum.net에서 보도된 기사입니다. 아래 원문 링크에서 전체 내용을 확인하세요.",
+    "source": "v.daum.net",
+    "url": "https://news.google.com/rss/articles/CBMiT0FVX3lxTE5pcUx0eFo0YUkxSHotN0FDZk1mSG9UZmZlRGg3QjBFTUhneVNtLWtoZHBGbkdTZWlBODlFRTU0blRfaXJoelBRUTBfaXJZcTQ?oc=5"
+  },
+  {
+    "date": "2026-07-03",
+    "category": "policy",
+    "type": "news",
+    "ministry": "통일부",
+    "title": "[단독] 통일부, ‘DMZ 갈등’ 유엔사에 공로 포상… 화해 돌파구 될까",
+    "summary": "통일부, DMZ 갈등에 대한 유엔사의 공로를 포상합니다.",
+    "content": "[통일부 관련 뉴스] 서울신문에서 보도된 기사입니다. 아래 원문 링크에서 전체 내용을 확인하세요.",
+    "source": "서울신문",
+    "url": "https://news.google.com/rss/articles/CBMicEFVX3lxTE1qRndibno0RDFLbWtKSnFZMHRpRFJVWFFnRlo3TXNrTDgxQ2hDVENUUGZPbklQcjlHQ3hEdVVfVzBCVGVhZ2lURnJKU3FhYy1sVjVrcVAxaXJJYnNhUW5mUzZJTkhHVnFWOEI2Yl84S0g?oc=5"
   },
   {
     "date": "2026-07-03",
     "category": "policy",
     "type": "news",
     "ministry": "법무부",
-    "title": "\"교육부터 등록까지 원스톱\"…법무부, 계절근로자 프로그램 전면 개편",
-    "summary": "법무부가 계절근로자를 위한 교육과 등록 절차를 단순화하기 위해 프로그램을 전면적으로 개편할 방침입니다.",
-    "content": "[법무부 관련 뉴스] 뉴스1에서 보도된 기사입니다. 아래 원문 링크에서 전체 내용을 확인하세요.",
-    "source": "뉴스1",
-    "url": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE5WYU4zd1l4dnhKYm1iZkNRcXdkb3FScHdTUDdmNEpGZkQ2MHdOMGJtSzU5dlNqZHB0c2ZCcTVLbHNuNEtzdVotcW9TNkYwV1VBR0NkSk0welFWVnFq?oc=5"
+    "title": "'이재명 명예훼손' 모스 탄 \"한미동맹 훼손\" 법무부 \"수사 비협조\"",
+    "summary": "이재명의 명예훼손 혐의에 대해 모스(목포항만공사)가 한미동맹 훼손이라는 입장을 제시한 반면, 법무부는 이와 관련된 수사를 비협조하는 것으로 알려져 있습니다.",
+    "content": "[법무부 관련 뉴스] v.daum.net에서 보도된 기사입니다. 아래 원문 링크에서 전체 내용을 확인하세요.",
+    "source": "v.daum.net",
+    "url": "https://news.google.com/rss/articles/CBMiT0FVX3lxTE1pVUN6VWJKUnEzQXFOaGZCU3JieEtRZlMyNkwtQzNuQkRYVHdJWG54ZkRFVU5qTlQxOXQ1UUFGZFBkMXphQW1QSGlZR2VsOWs?oc=5"
+  },
+  {
+    "date": "2026-07-03",
+    "category": "policy",
+    "type": "news",
+    "ministry": "법무부",
+    "title": "신천지 교도관이 이만희 '밀착 관리' 의혹…법무부, 긴급 감찰 착수",
+    "summary": "신천지 교도관이 이만희 '밀착 관리' 의혹에 대한 법무부의 긴급 감찰 착수로报道。",
+    "content": "[법무부 관련 뉴스] 주간조선에서 보도된 기사입니다. 아래 원문 링크에서 전체 내용을 확인하세요.",
+    "source": "주간조선",
+    "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTFB2RzhwemtrSkpyV19TZnN4X293cFJTR0tOcXNORXVlYWQtX2hwMUNoR29YX1JpRUtUT3FDU0xGdG1EQVVwWU45eVBIaUF3VV9QUndMMkJla29HUnB6U1BubnIyTFVnV3hmc18w0gFuQVVfeXFMTW9UejlmN0tQOGJIWHZiMGgyVXBtU3N1Ym1KazdwUms4bWRKN25fSS1sMHpTOWtMUkx5UjBBeTg1c3NPeDFmQnBpUDhvdHpWcjh4WHNxZ3RobUhTc2lFZURqa1d3THNselVoNHRpa0E?oc=5"
   },
   {
     "date": "2026-07-03",
@@ -75,7 +196,7 @@ const policyAutoItems = [
     "type": "news",
     "ministry": "법무부",
     "title": "정성호 법무부장관, JTBC ‘신천지 교도관’ 보도에 \"감찰·긴급점검 신속 착수\"",
-    "summary": "정성호 법무부장관이 JTBC가 방송한 '신천지 교도관' 보도에 대해 감찰과 긴급점검을 신속히 실시할 것을 지시했다.",
+    "summary": "정성호 법무부장관이 JTBC의 \"신천지 교도관\" 보도에 대해 감찰과 긴급점검 등을 신속히 실시하기로 결정했다.",
     "content": "[법무부 관련 뉴스] JTBC에서 보도된 기사입니다. 아래 원문 링크에서 전체 내용을 확인하세요.",
     "source": "JTBC",
     "url": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE1RQ1JkaU5JaTBJTnpMYklhQ3cyNmRhR2pMazAxN3VkX0RjRFZCbEdhZ1B1b1ZQN2kzTTFGUzI4a3F1M2lGaG1hTjlyT2Y2UzdtdjhuOQ?oc=5"
@@ -84,122 +205,56 @@ const policyAutoItems = [
     "date": "2026-07-03",
     "category": "policy",
     "type": "news",
-    "ministry": "법무부",
-    "title": "춘천소년원, ‘직업훈련 연계 지역사회 공헌’ 법무부 ‘특별성과 포상’ 수상",
-    "summary": "춘천소년원, 직업훈련 연계 지역사회 공헌으로 법무부 '특별성과 포상' 수상",
-    "content": "[법무부 관련 뉴스] 로이슈에서 보도된 기사입니다. 아래 원문 링크에서 전체 내용을 확인하세요.",
-    "source": "로이슈",
-    "url": "https://news.google.com/rss/articles/CBMiekFVX3lxTE9iekdWQjlVaWRmTXEtWlFjNWZVWVQyakFqTXI1N3pzc28xelVXUHRmejh5bU5CZTV0Sk1PVHBrM01pVmkyVGwwZVEtYkdrb2pla2xOUHpYclFRVllOX1ZNNVZkdTJveXMzRlg0aVNDSkxfZFJNWlFhN3V3?oc=5"
-  },
-  {
-    "date": "2026-07-03",
-    "category": "policy",
-    "type": "news",
-    "ministry": "국방부",
-    "title": "보잉 주가, Air Force One 진전에 상승…국방부 지연은 지속",
-    "summary": "국방부의 Air Force One 지연이 계속됨에 따라 보잉 주가 상승하였습니다.",
-    "content": "[국방부 관련 뉴스] Investing.com 한국어에서 보도된 기사입니다. 아래 원문 링크에서 전체 내용을 확인하세요.",
-    "source": "Investing.com 한국어",
-    "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTE82N1AyNWRXOEoyMnRGSWJEVHdQYmpWcG8yOHpNZ1h2aUZJaE9BOFR4QXNKc0ZCejk1RWtEc2NIdjQ4Ym9YTk5lc1RYNGdHUk5WWjJyNllWbWRiLUoyQkJzV2hCaTRFX1dTVGd3V0Y0TDFCVjczYk13?oc=5"
-  },
-  {
-    "date": "2026-07-03",
-    "category": "policy",
-    "type": "news",
     "ministry": "행정안전부",
-    "title": "행정안전부",
-    "summary": "한국경제에서 보도된 행정안전부 관련 뉴스입니다. 전체 내용은 해당 링크에서 확인할 수 있습니다.",
-    "content": "[행정안전부 관련 뉴스] 한국경제에서 보도된 기사입니다. 아래 원문 링크에서 전체 내용을 확인하세요.",
-    "source": "한국경제",
-    "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE1wc3dxZFk0NC1fX0R6bUNGRC1wVTVsVFN6amhYNFM1a3M2ODBEd0hlZVlUVGl3Z0JtNUtRcnd6aTFJV3dDeVJ0cWs5VzEyMkN6NmoyamFEakN4UdIBVEFVX3lxTE5Bay02MFlWNl9NNUwtOUl1R1JUOE41TVRTMDFISnlpSjhPdW4zWjFMeG5mT3RyMy1ldFpyZThpcTVUUG0wbVl6eERxZmUwdW9JRmE2UQ?oc=5"
-  },
-  {
-    "date": "2026-07-03",
-    "category": "policy",
-    "type": "news",
-    "ministry": "문화체육관광부",
-    "title": "[ ABC AI국가대전환 = 최휘영 문화체육관광부 장관 ] AI 문화혁명, 대한민국은 세계 최고의 AI 문화강국이 될 수 있다",
-    "summary": "AI 문화혁명, 대한민국은 세계 최고의 AI 문화강국이 될 수 있다.",
-    "content": "[문화체육관광부 관련 뉴스] 아주경제에서 보도된 기사입니다. 아래 원문 링크에서 전체 내용을 확인하세요.",
-    "source": "아주경제",
-    "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE8wVm1ja1NXWkVqRW5VT2dJenVFSE11cHNacVpPNUtsUDlLaEhMQ0FWQTlWUlVaWHB2WDRhbFRseE9PYjl2MzRoX0FBVENnVUJHbFNOMXYzNU9xd9IBWEFVX3lxTFBZSmFCcWIwQWw2OXRJUUVnc0w0Zl9FSDBUM3lfX1ViTFItZ1BiYUVrTC0waW9HbjVOS0VPSG1VNUMxRk1LX29ZX25sWGd6VHVvcWx2WF81M28?oc=5"
-  },
-  {
-    "date": "2026-07-03",
-    "category": "policy",
-    "type": "news",
-    "ministry": "문화체육관광부",
-    "title": "\"K-해양레저관광 도약 위해 정부 협력 강화\"…문체부·해수부 협업모델 제시",
-    "summary": "문체부와 해수부가 K-해양레저관광의 도약을 위해 협력을 강화하고 있다는 문체부 관련 뉴스 기사 요약.",
-    "content": "[문화체육관광부 관련 뉴스] 해사신문에서 보도된 기사입니다. 아래 원문 링크에서 전체 내용을 확인하세요.",
-    "source": "해사신문",
-    "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTE9UMUxjRFZELTVtRmRMeWZkbHZUczROaFNGUnBwc09DREJIMVJZcDlUYjJKX3F4YmhXOURjbW9ZSGdTdm9yVnZnY1dOVXNibEFXZTlDTHE3SFNvQ2huYm0yWFhBaFVoR0prQ3Rn?oc=5"
+    "title": "[인사] 행정안전부",
+    "summary": "[행정안전부 관련 뉴스] 뉴스핌에서 보도된 기사를 확인하세요.",
+    "content": "[행정안전부 관련 뉴스] 뉴스핌에서 보도된 기사입니다. 아래 원문 링크에서 전체 내용을 확인하세요.",
+    "source": "뉴스핌",
+    "url": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE0yNnZpODk2UkZQVllMVm1vNllTalo0Q3BSNkxzb2ZwWDdVR1ZqbDFSeHUxUGp0QVJXbWJfY3R1empkUUlITUVxOTVwdzBmd1JnUWJSa1FkNlVTb290?oc=5"
   },
   {
     "date": "2026-07-03",
     "category": "policy",
     "type": "news",
     "ministry": "농림축산식품부",
-    "title": "청송군, 농림축산식품부 주관 2027년 취약지역 생활여건 개조사업 공모에 최종 선정",
-    "summary": "청송군이 농림축산식품부 주관 2027년 취약지역 생활여건 개조사업 공모에 최종 선정되었다.",
-    "content": "[농림축산식품부 관련 뉴스] hidomin.com에서 보도된 기사입니다. 아래 원문 링크에서 전체 내용을 확인하세요.",
-    "source": "hidomin.com",
-    "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE9nVEVpcUdkay14OXBlcHNIRlhyZ3VzdU85bVU1aGxGREdWOTlSRFdueEpJMVdMQUpSdndablpZWExXZFBZY18xdVNsdEFmeWMtRUZ3MXhqcG8xSTF5UXAtTUhRNTJVMVVWb2c?oc=5"
+    "title": "장마 앞두고 농업 취약시설 6만7000곳 점검…“주민대피 재점검”",
+    "summary": "장마가 오기 전 농업 취약시설 6만7000곳 점검…주민 대피 재점검, 농림축산식품부가 주최하는 검토 작업이 시작됩니다.",
+    "content": "[농림축산식품부 관련 뉴스] 데일리안에서 보도된 기사입니다. 아래 원문 링크에서 전체 내용을 확인하세요.",
+    "source": "데일리안",
+    "url": "https://news.google.com/rss/articles/CBMi-AFBVV95cUxNdVZ3QzlYUk53dzFaMGZtRUgyZllVcW82djlrRHZxVlhWOVdpNldJZVp0RWhsV1dIOEdlQm5fRFY5aUdkVThnMkI1c0JRTGJ0UXc1Rmw0N2J0LWl5aEhjaFF6MjZsN0VwVUxaQkVaeEtZWkZjeVhZblc5Tm9UdkRiZ3I3dWtoYnZ6MEhYRmZnUWNoWTNXbFZtbTU1dzZWRlBNaDk5a0Z3VWtNS0hHYU5FYnNKdlllTE95N2dkZUlyZm1DdnJMWDBtd0pnRGNESldFQU9sX01rZFEzYTFybFJXSGZqajVncVliY0RubXU3dnEyU3A1VE44dNIB-wFBVV95cUxQcFYyR1FoZUJjWndNeFZrZkRVU2pSSXB4d2h4NDNWVFVwaHNmOFc5UHhKTzZLM2FzWlB0SHdFclVWX3VaaUpTN20xSThiTVUwYURkVmZzbHRKMFJPckloSFQtelVIYjBRc0NlS1kwV0FiQTJKTWR6ZTNKbi1Bd2VqZURiVkI3LTJad2hDY0dZRWVFVDMyTjZ5YnptcW5zQUFGMWVLN1U3UEdoMmJJMGxyOTk5ajRURnR6d2RmV1FlVlV1dkZSVmxKekhPWDZCeDBIMDJqQ2ZZRUU0NW1BUC1WVVBrMXlFR0RoQzc1M1RSbTdwTmM0ZlRWWmlpQQ?oc=5"
   },
   {
     "date": "2026-07-03",
     "category": "policy",
     "type": "news",
     "ministry": "농림축산식품부",
-    "title": "“기상정보 수시로 확인해야”…주말 폭우 예고에 농업재해 예방 나서",
-    "summary": "주말에 폭우가 예보되어 있는 상황으로 인해 농업재해를 방지하기 위해 노력이 필요하다고 농림축산식품부가 주최한 농민신문에서 보도되었다.",
-    "content": "[농림축산식품부 관련 뉴스] 농민신문에서 보도된 기사입니다. 아래 원문 링크에서 전체 내용을 확인하세요.",
-    "source": "농민신문",
-    "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTFAweElVNi1lZTVxcXZIRnM0VVNYNEVoa2NEWTNkTFduSXFvdzJKNnIzb3RwRVZ6YWRmLTNVX2JUZ2dvbXA0OGRQZlF5b1k4TTRaQXMzVWtnbVl1QQ?oc=5"
-  },
-  {
-    "date": "2026-07-03",
-    "category": "policy",
-    "type": "news",
-    "ministry": "농림축산식품부",
-    "title": "함평군, 농림축산식품부 '기초생활거점조성사업' 공모 선정…\"손불채움복합센터 건립 추진\"",
-    "summary": "함평군이 농림축산식품부가 실시한 '기초생활거점조성사업' 공모에 선정되었으며, 이를 통해 손불채움복합센터 건립 계획을 추진하고 있습니다.",
-    "content": "[농림축산식품부 관련 뉴스] 웰페어뉴스에서 보도된 기사입니다. 아래 원문 링크에서 전체 내용을 확인하세요.",
-    "source": "웰페어뉴스",
-    "url": "https://news.google.com/rss/articles/CBMib0FVX3lxTFBKSkJfc2tZZWVxdm14VFBJNVF0cXFaek9INWJ1MElhNklBTjBnLTdGVWppemgyZ3BXUDVDZ2NLRlBQVFlsZGdSa3ZMRVJmdDdSX1Z6aTU5VktZajQ5YlZKNndVb1ZrOXJIQU9JVTdSTQ?oc=5"
+    "title": "함평군, 농림축산식품부 ‘기초생활거점조성사업’ 공모 선정…“손불채움복합센터 건립 추진”",
+    "summary": "함평군이 농림축산식품부가 공모한 '기초생활거점조성사업'에 선정되어 손불채움복합센터 건립을 추진하고 있습니다. [농림축산식품부 관련 뉴스] 일간투데이에서 보도된 기사입니다.",
+    "content": "[농림축산식품부 관련 뉴스] 일간투데이에서 보도된 기사입니다. 아래 원문 링크에서 전체 내용을 확인하세요.",
+    "source": "일간투데이",
+    "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTFBKeVpuQ3VBUVZSQm9XQk1Mem9ZS2VFMEo4di1Mb2p5dkJneXExRkJMN0NwUTVaTXpITVFKRmtQbWg0QnBFeGNlY0dNUkN3OHlWTTRiRUFzMC16WHdFSEpfeDBydVJ2YW5jWGlz?oc=5"
   },
   {
     "date": "2026-07-03",
     "category": "policy",
     "type": "news",
     "ministry": "산업통상부",
-    "title": "한국첨단안전산업협회, 올해 첨단안전산업 제품‧기술 공모",
-    "summary": "한국첨단안전산업협회, 올해 첨단안전산업 제품 및 기술 공모 안내를 발표했다. [링크: https://source.mofcom.go.kr/69801]",
-    "content": "[산업통상부 관련 뉴스] 디일렉에서 보도된 기사입니다. 아래 원문 링크에서 전체 내용을 확인하세요.",
-    "source": "디일렉",
-    "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE54YzEwYUhvaUtraGtBNzZxaUw3LV80QWplTGFtTkF0VC1LcFREZlE5V01tTVRqVTVrOG9CTGlHWWhDVHVnZ2xoTHdrampCSVk5VzRoQVNUZElWbnBIcGpYZXBBc3Mzdw?oc=5"
+    "title": "[인사] 산업통상부",
+    "summary": "[산업통상부 관련 뉴스] 지디넷코리아에서 보도된 기사입니다. 전체 내용은 아래 링크에서 확인 가능합니다.",
+    "content": "[산업통상부 관련 뉴스] 지디넷코리아에서 보도된 기사입니다. 아래 원문 링크에서 전체 내용을 확인하세요.",
+    "source": "지디넷코리아",
+    "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE9Ed0RrdFp3S0otYkNXRUE0TEl1aUQ3ekpuZTJSMXFrRVdGVWpTM2N5cWFETDBGbUNyWVBvYzc2ME1zajBFT01LLVlTOUg2Z0U0Q1pwNnpB?oc=5"
   },
   {
     "date": "2026-07-03",
     "category": "policy",
     "type": "news",
     "ministry": "산업통상부",
-    "title": "글로벌 첨단산업의 중심, '충청'이 초격차를 선도합니다! - 카드/한컷 | 멀티미디어",
-    "summary": "충청이 글로벌 첨단산업의 중심을 선도하고 있습니다. - 카드/한컷 | 멀티미디어",
-    "content": "[산업통상부 관련 뉴스] 대한민국 정책브리핑에서 보도된 기사입니다. 아래 원문 링크에서 전체 내용을 확인하세요.",
-    "source": "대한민국 정책브리핑",
-    "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTFAzOFU0YmNTaWRSOGhXUmVyeVNNQ09HcmtkTG1oODdHOUp5R1BkWTNaang5eVVJM05UaTBvT3Mwbmx4TkF1YU01eWI1ajJ2aUx1TTVaZTBjR2tDYlZZaGVBb2p2ZG54V3BTZEFONVVn?oc=5"
-  },
-  {
-    "date": "2026-07-03",
-    "category": "policy",
-    "type": "news",
-    "ministry": "산업통상부",
-    "title": "산업통상부는 태풍 1호와 그로 인한 홍수에 대한 선제적 대응에 관한 긴급 공문을 발표했습니다.",
-    "summary": "산업통상부, 태풍 1호와 홍수 대응 긴급 공문 발표",
-    "content": "[산업통상부 관련 뉴스] Vietnam.vn에서 보도된 기사입니다. 아래 원문 링크에서 전체 내용을 확인하세요.",
-    "source": "Vietnam.vn",
-    "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxOOWhaV05aUFh3UlJKenBNWDBoSnZYcmJZTXkxaUxaNlF2LXdEMkk0NmJkRERVZnRIRUFXZ3BmLV9MMFRLd1l3VTFOUUVwMkg3MTEzTG9xV2Qwc0RUVWkxQWl4X0hFV0REMzFHM0U2YjdhY2VlNEFFV1JwX0hKVU1CV21DLTZlNTNnMG44SjV0MGUxUElGN1FUNjFiSk1QalV0SmZRSTBMbXl0clE3eUI2bzh4UXpTWk0?oc=5"
+    "title": "[인사] 산업통상부",
+    "summary": "산업통상부 관련 뉴스가 연합뉴스에서 보도되었습니다. 전체 내용은 아래 원문 링크를 통해 확인할 수 있습니다.",
+    "content": "[산업통상부 관련 뉴스] 연합뉴스에서 보도된 기사입니다. 아래 원문 링크에서 전체 내용을 확인하세요.",
+    "source": "연합뉴스",
+    "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE1wT1FoRjBPNnlnYUllVDZGUS1oREhnVDVpclVCdFk0VGZkTlZ4aHotRS1DUlVmSlJYeTFiTHRzalRzR2plSEtjTDJEZEFzNjZ3RVIwbnF1S1dfbU3SAWBBVV95cUxOampOYkV0TmZYc0VVbkpEbnNMNlFJVmhrUThRMDMxbGFCN1A1SzF1OUxJMEZUX08xSE02X2lKdFpoc2ZJVkw2ajNMOWMwWm1PZUJXX0VHaF9zWDV3SzdlNmY?oc=5"
   },
   {
     "date": "2026-07-03",
@@ -207,7 +262,7 @@ const policyAutoItems = [
     "type": "news",
     "ministry": "보건복지부",
     "title": "기금 규모 커지자…복지부, 국민연금 기금운용관리과 신설한다",
-    "summary": "보육부가 국민연금의 기금운용 관리를 위해 새로운 부서인 기금운용관리과를 신설하기로 결정했다.",
+    "summary": "보조기금 규모가 커지자, 복지부에서 국민연금 기금운용관리과를 신설한다. [보건복지부 관련 뉴스] 연합뉴스 기사 요약입니다.",
     "content": "[보건복지부 관련 뉴스] 연합뉴스에서 보도된 기사입니다. 아래 원문 링크에서 전체 내용을 확인하세요.",
     "source": "연합뉴스",
     "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE5qeGdJNkFQODJ2dkJGMUtzZ1RvZ1Jac0pWM2k5c1NrTnRHdHozWm93WEpRbF9VYlJTM0xUSmVkTGpUUVhpYzZwVGtmNlU1RGl6UjRxQWJfMHk0Z3PSAWBBVV95cUxPamVIcjV6Z2t5YVVGT2I4R1pMdWNxbktUcjBiaGtreHRHaE1XTHdFbkc1bm5lYWhkUjVDbXNienR4V0ppLXZVX0lSSDhUUndHczFRZ3JVTVF1dVA0YzJlZTY?oc=5"
@@ -217,88 +272,66 @@ const policyAutoItems = [
     "category": "policy",
     "type": "news",
     "ministry": "보건복지부",
-    "title": "보건복지부 장관과 대화 나누는 조정식 국회의장",
-    "summary": "보건복지부와 조정식 국회의장이 대화를 나눈 뉴스가报道되었습니다.",
-    "content": "[보건복지부 관련 뉴스] 뉴스1에서 보도된 기사입니다. 아래 원문 링크에서 전체 내용을 확인하세요.",
-    "source": "뉴스1",
-    "url": "https://news.google.com/rss/articles/CBMiS0FVX3lxTFBGVTIxTm9qQ3owcldBWk8ybVlhLVEzN0tFVUdPdmEtOC1WTE84TjNqSkJsclVEQVk5QU9UQVljOVpZNmVEckpVOUMxTQ?oc=5"
-  },
-  {
-    "date": "2026-07-03",
-    "category": "policy",
-    "type": "news",
-    "ministry": "보건복지부",
-    "title": "보건복지부 장관과 악수 나누는 국회의장",
-    "summary": "[보건복지부 관련 뉴스] 국회의장이 보건복지부 장관과 악수를 나누었다.",
-    "content": "[보건복지부 관련 뉴스] 뉴스1에서 보도된 기사입니다. 아래 원문 링크에서 전체 내용을 확인하세요.",
-    "source": "뉴스1",
-    "url": "https://news.google.com/rss/articles/CBMiS0FVX3lxTE40SHdicDJBeF9BLTBoLUdfS054THpUV1VSZ0psMzJIRWlHakJiWk5KWkhPOF85VU1Wa2pQTHJabFNBS0Zsc1lzZW9TSQ?oc=5"
-  },
-  {
-    "date": "2026-07-03",
-    "category": "policy",
-    "type": "news",
-    "ministry": "기후에너지환경부",
-    "title": "발언나선 김성환 기후에너지환경부 장관",
-    "summary": "[기후에너지환경부 관련 뉴스] 뉴스핌에서 보도된 기사입니다. 전체 내용은 해당 링크에서 확인할 수 있습니다.",
-    "content": "[기후에너지환경부 관련 뉴스] 뉴스핌에서 보도된 기사입니다. 아래 원문 링크에서 전체 내용을 확인하세요.",
-    "source": "뉴스핌",
-    "url": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE5FMmJldU42bmYxLXpUY29oWEwyRVIydjlJek9XWC11SlEtVzduZmZLWGI2dXZHVkpxOXROS2ZyQ3EzalBxMnJxWWt4ZWltaTI5bE9va0laZTB0M09t?oc=5"
-  },
-  {
-    "date": "2026-07-03",
-    "category": "policy",
-    "type": "news",
-    "ministry": "기후에너지환경부",
-    "title": "(설명) 서남권 반도체 산단은 지역내 원전, 재생에너지, LNG 등 다양한 자원을 믹스하여 공급할 예정임을 여러 차례 밝힌 바 있음",
-    "summary": "서남권 반도체 산단은 다양한能源,如原発、可再生能源和液化天然氣等混合作為供應源，已多次宣布。韩国环境部相關新闻报道。",
-    "content": "[기후에너지환경부 관련 뉴스] 대한민국 정책브리핑에서 보도된 기사입니다. 아래 원문 링크에서 전체 내용을 확인하세요.",
-    "source": "대한민국 정책브리핑",
-    "url": "https://news.google.com/rss/articles/CBMib0FVX3lxTFAySnFmcy1rVzAxMDlRSXp3TV9lTEktSGttalpPUk5CdG43TnBXWG54Mko0TEhUN21hZnVDU2xBbVB0cHg3aGczODZvWTFpb0xsLXMtb2VrLTFXVFdJVVpYT0JnTHdfbTRFajYxbnFUSQ?oc=5"
+    "title": "기금 규모 커지자‥복지부, 국민연금 기금운용관리과 신설한다",
+    "summary": "보건복지부는 국민연금 기금 규모가 커지자, 기금운용 관리과를 신설할 계획이라고 한다.",
+    "content": "[보건복지부 관련 뉴스] MBC 뉴스에서 보도된 기사입니다. 아래 원문 링크에서 전체 내용을 확인하세요.",
+    "source": "MBC 뉴스",
+    "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTE5SV1c0eS03OWVvd1gxTVJCOXJTMHY0TW16ZHpEdnFrZnVWVHhzYU5WRW9SZGRiWDN5ZWlrSlUxWWdJcWtiWVZqZjI0OFpTRXpqLXRETmVXWTE0dDV3QlVtNWY1Zk1uc3Z4OFhiUmlWV0Jqb3V5c1ZR0gF3QVVfeXFMTTZpbHRhMFN5RHhUOUI0NG0yS2pVM2pTbzRSMjhSYk9wQmFPWlJQM0xRMG9xNzJESG9OOVZSemJiRTJERlV2MWVlVWsyU0NrdzhEajI5dzBRalU3T0M5Q3RMSnZaX3lkUWx2am5NYVBaRnp1Yk05Q28?oc=5"
   },
   {
     "date": "2026-07-03",
     "category": "policy",
     "type": "news",
     "ministry": "고용노동부",
-    "title": "사회적기업과 상생 성과 인정…전기안전공사, 고용노동부장관상 수상",
-    "summary": "전기안전공사는 사회적기업과의 상생 성과로 고용노동부장관상을 수상했습니다.",
+    "title": "노동부, 15개 제조기업과 긴급 점검회의...\"끼임사고 반복되지 않아야 \"",
+    "summary": "고용노동부는 15개 제조기업과 긴급 점검회의를 가졌으며, \"끼임사고가 반복되지 않아야 한다\"고 강조했다.",
     "content": "[고용노동부 관련 뉴스] 전기신문에서 보도된 기사입니다. 아래 원문 링크에서 전체 내용을 확인하세요.",
     "source": "전기신문",
-    "url": "https://news.google.com/rss/articles/CBMibEFVX3lxTE5FWDFvUUVMNkxxZzRiYlQ0TF9pZ1JWTHRkck1MazhReU1FZEhLaFMwTW9RNURUTUNrdEFPOERwTkhabVAwRGhoNWdxRlZ6U050bk53YTVYTVNVeXk0amY5Qkt0SzNFQ0NfZWdqddIBcEFVX3lxTE1Qa0QyZ0lLYmZqQnVRZmNtdHRZRnZQaDBmSUxvVTFWM2dBZ0VLeTlfSDV6cWpXUU5BUXgwOGQ0ZmN5UF9VNjVFWUhBWEdQRFE4SXkxR0R4TnQ3M0Fnd3hld0VteVBYT0lfMDNCaGlEcFI?oc=5"
+    "url": "https://news.google.com/rss/articles/CBMibEFVX3lxTFBxUmxzWDFFRmxrQWYyb242X3dDTm5aS1hQNDhiQ2lOSlpNYWpLWkpVOGt4cWZQSThWYTB3Rk8xUGVkRnA5SEVmQ3F5QnJzNXpfVXIzSDlvT0lBQng2UGhUQzRMMW8xUTlTcVdPcQ?oc=5"
   },
   {
     "date": "2026-07-03",
     "category": "policy",
     "type": "news",
     "ministry": "고용노동부",
-    "title": "반복되는 제조업 끼임사고…노동 장관, 15개 대표이사 긴급 소집",
-    "summary": "한국 노동 장관이 제조업의 반복되는 안전 사고에 대해 혼잡을 부른다며, 15개 회사 대표이사를 긴급으로 모으겠다고 발표했다.",
+    "title": "［포토뉴스］민형배 전남광주통합특별시장, 김영훈 고용노동부 장관 접견",
+    "summary": "민형배 전남광주통합특별시장이 김영훈 고용노동부 장관과 접견한此事, 고용노동부 관련 뉴스입니다. v.daum.net에서 더 자세히 확인할 수 있습니다.",
     "content": "[고용노동부 관련 뉴스] v.daum.net에서 보도된 기사입니다. 아래 원문 링크에서 전체 내용을 확인하세요.",
     "source": "v.daum.net",
-    "url": "https://news.google.com/rss/articles/CBMiT0FVX3lxTE4zX01uVGNJSXFEeXAyZUpJM3BhaVJUTnotUTRHckxEOEcxOXo0eXdfUDZFYThneG1Eb3hfSU5FRVdmcEJiU1Zxd2xDMGlyRDQ?oc=5"
+    "url": "https://news.google.com/rss/articles/CBMiT0FVX3lxTFBnRTRWbmhkRXBYelBsNVNEeENqWGdGNlJ1OENQQzNtRTJvbEh3dnI2M1FQemdabUtDTnhrYUo0ZUNtbmJ0OG5uZEUtWjNGaGc?oc=5"
+  },
+  {
+    "date": "2026-07-03",
+    "category": "policy",
+    "type": "news",
+    "ministry": "고용노동부",
+    "title": "전남광주 서구, '사회적기업 육성 ' 고용노동부 장관 표창",
+    "summary": "제목: 전남광주 서구, '사회적기업 육성' 고용노동부 장관 표창\n\n[고용노동부 관련 뉴스] 아시아경제에서 보도된 기사입니다. 아래 원문 링크에서 전체 내용을 확인하세요.\n\n한국어 1~2 문장 요약:\n전남광주 서구가 사회적기업 육성으로 고용노동부 장관 표창을 받았다는 뉴스입니다.",
+    "content": "[고용노동부 관련 뉴스] 아시아경제에서 보도된 기사입니다. 아래 원문 링크에서 전체 내용을 확인하세요.",
+    "source": "아시아경제",
+    "url": "https://news.google.com/rss/articles/CBMiYEFVX3lxTE83WmNYYWgwek5LYko1b0g1UndoYU1KclpYeWFjZnBmNlVpZG0yaENOcTc1QUxCNEluVzNIVlJPNHkxLXlQd2lLV2hzUk9HckxGcVE2aEw1c0Q1azFGZVBDUQ?oc=5"
   },
   {
     "date": "2026-07-03",
     "category": "policy",
     "type": "news",
     "ministry": "성평등가족부",
-    "title": "원민경 성평등가족부 장관, 경찰-가정폭력상담소 공동대응체계 점검 간담회",
-    "summary": "원민경 성평등가족부 장관이 경찰과 가정폭력 상담소를 통합한 대응 체계 점검에 참석했다.",
-    "content": "[성평등가족부 관련 뉴스] 뉴시스에서 보도된 기사입니다. 아래 원문 링크에서 전체 내용을 확인하세요.",
-    "source": "뉴시스",
-    "url": "https://news.google.com/rss/articles/CBMiYEFVX3lxTE9ZNGVJMjFUZXU5QnV0YWtVUThEV0QySmdpdURocEtSenkxV2FKbVJfMVJEczJiZkpHNnhpWE5ZUjhGUXgybUtiMW5GQVpkZ2cySy0xcWp5SlBQdzRxZVRWWQ?oc=5"
+    "title": "성평등가족부, 중앙 성평등위원회 협의체 재가동",
+    "summary": "성평등가족부, 중앙 성평등위원회 협의체 재구성 논의중",
+    "content": "[성평등가족부 관련 뉴스] 웰페어뉴스에서 보도된 기사입니다. 아래 원문 링크에서 전체 내용을 확인하세요.",
+    "source": "웰페어뉴스",
+    "url": "https://news.google.com/rss/articles/CBMib0FVX3lxTFBpcldMNUNNdlhaM1FITGJXSEJDMWdIMW42UFZacFY5N0I2c2hkV01HMkZSVEFtemlCem9Db1JQX01MTENFUVRKaDFLYkZXS3NVRktWeUg1NHQweUpQaXBaMW1VX0o1MEMwRzJZMWpPVQ?oc=5"
   },
   {
     "date": "2026-07-03",
     "category": "policy",
     "type": "news",
     "ministry": "성평등가족부",
-    "title": "성평등가족부, 전국 공공시설에 공공생리대 '모두의 생리대' 보급 개시",
-    "summary": "성평등가족부, 전국 공공시설에 '모두의 생리대' 보급 시작",
-    "content": "[성평등가족부 관련 뉴스] 내외뉴스통신에서 보도된 기사입니다. 아래 원문 링크에서 전체 내용을 확인하세요.",
-    "source": "내외뉴스통신",
-    "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE9ucEtVZ2tkdjlja01GTmQ5d0NPV0NNbHdJX01NNVEwbkRRVHlzWWFaaW9Ya3RnTURCSFVXLTIzZUEzbkVLa0dOd2l5NlFXS3VSRXgtNjF1b2hVd3hCTGhPWVRUOGFiVHVhNkh3dWJB0gFwQVVfeXFMTlVJUEJfRlFtZk50aHhuYUs4amN4X2ZiUEVJajI2STJqZlF6T1VhYmxtdzJqYzBFbjByREtsNjhmZkpWTUN6WktXei0yN2xzX2YyQThZQVVtb3RWd2Z2WWxtNENROXRyZzkzektXMWN2cw?oc=5"
+    "title": "[국정과제로 읽는 젠더정책] 성평등정책 컨트롤타워의 성패",
+    "summary": "성평등가족부 관련 뉴스를 여성신문이 보도한 내용입니다.",
+    "content": "[성평등가족부 관련 뉴스] 여성신문에서 보도된 기사입니다. 아래 원문 링크에서 전체 내용을 확인하세요.",
+    "source": "여성신문",
+    "url": "https://news.google.com/rss/articles/CBMic0FVX3lxTFByc1dOLWtubENvNEJnOXdHRU4yaUdNV3p6M1I1U0R5SFZRU3pPWEJxeFNVbmQ5bFBhbkZPQ0xVcUhsa2FzSDNCWHJyTll5TDdsV3QwbmtqTzd5MU52VTRtWGt6Qmw2WncwcFd5aEhEN1EzeDTSAXNBVV95cUxQcnNXTi1rbmxDbzRCZzl3R0VOMmlHTVd6ejNSNVNEeUhWUVN6T1hCcXhTVW5kOWxQYW5GT0NMVXFIbGthc0gzQlhyck5ZeUw3bFd0MG5rak83eTFOdlU0bVhrekJsNlp3MHBXeWhIRDdRM3g0?oc=5"
   },
   {
     "date": "2026-07-03",
@@ -306,7 +339,7 @@ const policyAutoItems = [
     "type": "news",
     "ministry": "국토교통부",
     "title": "신탄진 맥포터널 장마철 철도 시설물 수해 방지대책 점검 - 사진 | 멀티미디어",
-    "summary": "국土運輸部의 관련 뉴스로, 신탄진 맥포터널에서 장마철 철도 시설물 수해 방지대책 점검이 이루어질 예정입니다.",
+    "summary": "국토교통부가 신탄진 맥포터널에 대한 철도 시설물 수해 방지 대책 점검 결과를 발표했습니다.",
     "content": "[국토교통부 관련 뉴스] 대한민국 정책브리핑에서 보도된 기사입니다. 아래 원문 링크에서 전체 내용을 확인하세요.",
     "source": "대한민국 정책브리핑",
     "url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE8tclMtRDRPTWRvV1UtMlJfc2REa3ZBMnBmNzF5bkd4d3A4dEVROHdVY2JiTXc2SVh5ZC16NldhMmszM1dLQWRJT1g1N3FSWTNxa0psdV9zWXpEU1pfcWtIaUxYUHV3bHdq?oc=5"
@@ -316,44 +349,55 @@ const policyAutoItems = [
     "category": "policy",
     "type": "news",
     "ministry": "국토교통부",
-    "title": "가스공사, 이전공공기관 지역발전 우수사례 '국토교통부 장관상' 수상",
-    "summary": "가스공사는 이전 공공기관 지역발전 우수 사례로 국토교통부 장관상을 수상했습니다. [국土交通부 相關 新聞] 관련 뉴스 포털에서 전체 내용을 확인할 수 있습니다.",
+    "title": "LH 신임 사장에 이성훈 국토교통비서관",
+    "summary": "LH 신임 사장에 이성훈 국토교통비서관이 임명될 예정이다. [국토교통부 관련 뉴스] 연합뉴스에서 보도된 기사입니다.",
     "content": "[국토교통부 관련 뉴스] 연합뉴스에서 보도된 기사입니다. 아래 원문 링크에서 전체 내용을 확인하세요.",
     "source": "연합뉴스",
-    "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTFB3My1PMWtnamV5QVBsVXJGOXlEemxzalN3ZFdfRHlES1phclAxTWpxNENaNlZFdTh3WHJodmNPdzNVYkgwWGh3eE5DeHhPVDZwZVNrdHliLXB5WjQ?oc=5"
+    "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE5sdTlpNWZUSjYxQjRGS2RXZm15NHY4cEN6SVJPMURPbkFlV0FmcDlpbVdPRllpS3p2cXYwYVdheWktOF9BZTdJZWRpTVBwU2NkWWVyc0hNYkFMQ1nSAWBBVV95cUxOa0NWdXVzdVlNUHlRZ2U0aGl0NTV4N1VJVGsyMEdJZ0h3Q3NDNDZSb083ZlkwS09xam8wR2l2ek9UaWZXY0tkVWZrTUtjWks1ZDBmU2JhcUx4a1NRdFctdnY?oc=5"
   },
   {
     "date": "2026-07-03",
     "category": "policy",
     "type": "news",
     "ministry": "해양수산부",
-    "title": "남재헌 해수부 차관 \"북극항로 운항, 선박·화물 확보 막바지\"",
-    "summary": "남재헌 해수부 차관은 \"북극항로 운항을 위해선 선박과 화물 확보가 마무리 단계\"라고 밝혔다. [해양수산부 관련 뉴스] 연합뉴스에서 기사가 발행되었다.",
-    "content": "[해양수산부 관련 뉴스] 연합뉴스에서 보도된 기사입니다. 아래 원문 링크에서 전체 내용을 확인하세요.",
-    "source": "연합뉴스",
-    "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE9TWFpOTUsteVdjWl9XeWdJUS1COGE5M1EwcDhLT3BHWGtMeUp2bGxsTFpkSFpsUzdVR3BnVkp3bDNqU3RyWXBzc0t1VFRMRXkwNXlQNkxpMnJuZlnSAWBBVV95cUxPeGVUY0xCNktMQjRZdFAyM1Q1TUxfcEg1LUNOdUN0VGtwSzdMN1BDOHY5RGtKTHB5SW1vU3ZsSTdRZUxZcmk0cTJiZ1VaSFBPWjQtM0dQcDV1NkszajBGVFE?oc=5"
+    "title": "해수부 “북극항로 시범운항 준비 막바지…화물 1300TEU 확보”",
+    "summary": "해수부는 북극항로 시범운항 준비가 마무리 단계에 있다고 밝혔으며, 화물 1300TEU를 확보했다.",
+    "content": "[해양수산부 관련 뉴스] 매일경제 마켓에서 보도된 기사입니다. 아래 원문 링크에서 전체 내용을 확인하세요.",
+    "source": "매일경제 마켓",
+    "url": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE9zc0haSlFBdEw1RDBoV09SbFBDZkNWNFU3Ui1kWGdpNG0zTUc2bEdzRHRaV05yak15bWxIYVRzVEMzbFlTd2UyOTRUYnpSUy1CQ1E?oc=5"
   },
   {
     "date": "2026-07-03",
     "category": "policy",
     "type": "news",
     "ministry": "해양수산부",
-    "title": "해양수산부, 항만 내 드론 불법 침입 막는 안티드론 시스템 가동",
-    "summary": "해양수산부가 항만 내 드론 불법 침입을 방지하기 위해 안티드론 시스템을 가동한다고 함.",
-    "content": "[해양수산부 관련 뉴스] 보안뉴스에서 보도된 기사입니다. 아래 원문 링크에서 전체 내용을 확인하세요.",
-    "source": "보안뉴스",
-    "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTFBDZmlUMVNnNThUNlZEc3dYYmpTV0VZRXozOHVRTFd2eDJDS3E2TGNST2hGZldDLVRmMVRCeE5ITWRVSkNnc0lhVDlCeE9oMFZqMGZVdGptbndKT2JMeUE?oc=5"
+    "title": "해수부 차관 \"북극항로 운항 마지막 단계‥화물 확보 중\"",
+    "summary": "해수부 차관은 북극항로 운항에 마지막 단계를 밟았으며 화물 확보 작업이 진행 중이라고 전했다.",
+    "content": "[해양수산부 관련 뉴스] MBC 뉴스에서 보도된 기사입니다. 아래 원문 링크에서 전체 내용을 확인하세요.",
+    "source": "MBC 뉴스",
+    "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE82dXZ6NVBWNEhydFBFUkdLMnkxTFdRTmg2bEowZkJlNElNdHpRc0djX0lpOHhvSTdqaGRaQ0NBVzBPNTBtRWQ5SnduR2hyUXJVbE1DdHhEWlVQVVBKbjRWUmJ5S0VWWkVHdzlESEpSMjM0SlJH0gF0QVVfeXFMT2FLRFpqUExyeHJjSV95SUNocHpJdWRCZUlqdTFETlcwOU4zQnRWZUJMaXBvQUVtNzU2N0pGZ21ZT1VXNTJVZkkwVjJURDBqQUhaOVdiU2tsOG52MjU0ZnctaUk4Q2Fvby1ZRVRUWGh1YzdXZ1Y?oc=5"
   },
   {
     "date": "2026-07-03",
     "category": "policy",
     "type": "news",
     "ministry": "해양수산부",
-    "title": "[인사]해양수산부",
-    "summary": "[한국어 요약문]: \n해양수산부에 대한 인사가 인터넷 신문 이데일리에서 보도되었습니다.",
-    "content": "[해양수산부 관련 뉴스] 이데일리에서 보도된 기사입니다. 아래 원문 링크에서 전체 내용을 확인하세요.",
-    "source": "이데일리",
-    "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxNYUs4bzd6TXVuaGdyOVBWejBPSUdxdXBEQ29QaUQySFJmRDVNSUN3eGZnOHFfaENSNFZwc1hDV3VkYV9vME5ZOWVhUzFLRnpLYTNRRVpxVnFwRDZpZDh4a3FlcW1yaXdKSDlQT292MFZpTGZFdmRuX2xISmhYUURidw?oc=5"
+    "title": "남재헌 해수부 차관 “북극항로 시범운항 최소 화물 확보 완료”",
+    "summary": "남재헌 해수부 차관이 북극항로 시범운항 최소 화물 확보에 성공했다. [해양수산부 관련 뉴스] 부산일보 보도.",
+    "content": "[해양수산부 관련 뉴스] 부산일보에서 보도된 기사입니다. 아래 원문 링크에서 전체 내용을 확인하세요.",
+    "source": "부산일보",
+    "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE9XT2dSY0luR2s0OFNKeHczNW12RUV4S1FKdDA3akVFX2RabG1UNlNXRXRHRndFVXY3RmlnVU5vLUJpTU9nUUMtYVFwSGZMbmVRcnZsV2dULTk4MzhHR09jeTRxNTJIaTlMZnZZOVkyT05WUE5t?oc=5"
+  },
+  {
+    "date": "2026-07-03",
+    "category": "policy",
+    "type": "news",
+    "ministry": "중소벤처기업부",
+    "title": "모두의 창업 프로젝트는 보안 강화를 통한 신뢰 회복 후 2기 모집을 시작할 예정입니다.",
+    "summary": "다음 글의 중요한 핵심은 ' 모두의 창업 프로젝트'가 보안 강화를 통해 신뢰 회복한 후 2기 모집을 시작한다는 것입니다. [중소벤처기업부 관련 뉴스] 대한민국 정책브리핑에서 기사가 등록되어 있습니다.",
+    "content": "[중소벤처기업부 관련 뉴스] 대한민국 정책브리핑에서 보도된 기사입니다. 아래 원문 링크에서 전체 내용을 확인하세요.",
+    "source": "대한민국 정책브리핑",
+    "url": "https://news.google.com/rss/articles/CBMib0FVX3lxTE5fWXlJZER5cGUxSUpyNEhSbS1IbEZENjZLdHA5VmZzd3NBaEtiR3Y0UGlXZTlSMi1pWmYyVjVZYk4wSndxdXEyUG1pcktVeno4LW5iQ2dGYlZzZFRzVXBfaElkSkliQUpHTGphdldNbw?oc=5"
   },
   {
     "date": "2026-07-03",
@@ -361,7 +405,7 @@ const policyAutoItems = [
     "type": "news",
     "ministry": "중소벤처기업부",
     "title": "중기부, 여성창업경진대회 시상…대상에 기능성 속옷 '이너마음'",
-    "summary": "중기부가 여성창업경진대회 시상식에서 대상을 수상한 기능성 속옷 기업 '이너마인'에 대해 발표했다.",
+    "summary": "중기부가 여성창업경진대회를 시상식으로举行了，大赏给了功能性内衣品牌“INNERMIND”。",
     "content": "[중소벤처기업부 관련 뉴스] 연합뉴스에서 보도된 기사입니다. 아래 원문 링크에서 전체 내용을 확인하세요.",
     "source": "연합뉴스",
     "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE5TYUpnd19LLW9MSi12NHFBSTBjR2JPbE9jNmlJYTNYckZzV0kyRWhIMmxEa2tVUFVIMEUyNF9qam5ONEgwNmNsRVRCWjlyR0R3Z0J2UkRnNVBkTXfSAWBBVV95cUxOaDhMQjdCM3BjNVRsYVJnVTA4QzA5MGZVTWt0RXgzbVNIN1N3bV9MZ0ExeVdJRkQzT2xyT1UyUXUyNDYydlJCZWU5TEVJRkkwRU1CQjdDcng1dUdkYUJ3cHU?oc=5"
@@ -371,19 +415,8 @@ const policyAutoItems = [
     "category": "policy",
     "type": "news",
     "ministry": "중소벤처기업부",
-    "title": "중기부, 여성창업경진대회 시상식 개최…1712팀 중 44팀 수상",
-    "summary": "중기부가 시상식을 개최하고, 여성창업경진대회에서 1712팀 중 44팀이 수상했다.",
-    "content": "[중소벤처기업부 관련 뉴스] 이투데이에서 보도된 기사입니다. 아래 원문 링크에서 전체 내용을 확인하세요.",
-    "source": "이투데이",
-    "url": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE9haFZZTzV4T0Vaekl3WlZIY0VoaEM0Q3BzUzEyODB4QjFsRm1xT05kWnlJQjd0VkpJUVRJa0szTHpRYWdGcUFHVmtyRUNXdnpORm05Xw?oc=5"
-  },
-  {
-    "date": "2026-07-03",
-    "category": "policy",
-    "type": "news",
-    "ministry": "중소벤처기업부",
     "title": "중기부, 여성창업경진대회 시상…44팀 사업화 지원 - 조선비즈",
-    "summary": "중기부가 44팀의 창업 경진대회 시상식을 열고, 사업화 지원을 진행했다.",
+    "summary": "중기부가 여성창업경진대회 시상식을 열고, 44팀 중 사업화 지원을 하기로 했습니다.",
     "content": "[중소벤처기업부 관련 뉴스] Chosunbiz에서 보도된 기사입니다. 아래 원문 링크에서 전체 내용을 확인하세요.",
     "source": "Chosunbiz",
     "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxOT1NOVFY0bHU4S0lRYVNBemV4am1nckVDTVZXZ3hsSW44Q3FFb29aR243LS1GcWhEV1l6TDdLLVVVOFAxSDN4Tk5pVnRtLU1zeHBva0NKc1MxdTg2bnFwRTYxSHhFYk9pQ0hlQ3E0bURFR1ZROEM0UmhqSGJqaDRsT3R1OHJuZVExXzZINUJnUjDSAaQBQVVfeXFMUEVJYmkwMkNqSVVxbnhrVkNTQ0ZGTVpYRGhNeXZJRm5ITTVYZU1la1JpRy03RjY5Mi1KSkhMckFXcmZTX0lRUnpLZC1sRXR0bk1MWlBXOGMwa25HWEE1QmNhbVo5cXpYb1BPOGpNbEoyWGk4Zldnc0ZJdktSQXM0RVpEV3Nka3ZPYUNELXhIeDZTUTdaMXduMVdISElDMWt3LTNwTFM?oc=5"
@@ -393,22 +426,33 @@ const policyAutoItems = [
     "category": "policy",
     "type": "news",
     "ministry": "과학기술정보통신부",
-    "title": "과기혁신본부장, KIST 찾아 국가연구데이터 수집 체계 구축 논의",
-    "summary": "과학기술정보통신부가 KIST를 찾아와 국가 연구 데이터 수집 체계 구축에 대한 논의를 가졌다.",
-    "content": "[과학기술정보통신부 관련 뉴스] 뉴스1에서 보도된 기사입니다. 아래 원문 링크에서 전체 내용을 확인하세요.",
-    "source": "뉴스1",
-    "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE1CaXpaNjB4aU14WXpJSGloME1Nd0U0OGJ4Z05yYWV6ZjBQRmVQd3ZfZHZDdmRPbHFGdFZWcEV4bVVkejAyRlp0N0hLem5kRDhHVEphcDNFbnFPUXBTZjNoWF92cnJNZw?oc=5"
+    "title": "과기정통부, 캐나다·영국·EU 등과 양자 협력 본격화",
+    "summary": "과학기술정보통신부, 캐나다·영국·EU와 양자 협력을 본격화한다. [원문보기: 지디넷코리아]",
+    "content": "[과학기술정보통신부 관련 뉴스] 지디넷코리아에서 보도된 기사입니다. 아래 원문 링크에서 전체 내용을 확인하세요.",
+    "source": "지디넷코리아",
+    "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE0wOF9tWGVEbXVONE9mNXBMeVNPTTJVNFhHUzhiUHhXcHpWNXc2M19Md2dMQkR0Y05aRXJNcHhBV2RsTUlUX1FHZlRneGJNYXRuRGFaRnVn?oc=5"
   },
   {
     "date": "2026-07-03",
     "category": "policy",
     "type": "news",
     "ministry": "과학기술정보통신부",
-    "title": "과기정통부, 캐나다·영국·EU와 양자기술 협력 확대",
-    "summary": "과학기술정보통신부, 캐나다·영국·EU와 양자기술 협력 강화키로 결정",
-    "content": "[과학기술정보통신부 관련 뉴스] v.daum.net에서 보도된 기사입니다. 아래 원문 링크에서 전체 내용을 확인하세요.",
-    "source": "v.daum.net",
-    "url": "https://news.google.com/rss/articles/CBMiT0FVX3lxTE9oMFdyT25KU0JhQTIxTERSWmZmblZkM1FCa3lvQnZhd21fUFljZUgtdGsxbUVyNDJEem9qNmMxNEsxME9LM2ZLcFJKdktIZ28?oc=5"
+    "title": "과기정통부, 퀀텀 코리아서 글로벌 양자협력 본격화",
+    "summary": "과학기술정보통신부가 퀀텀 코리아에서 글로벌 양자분야 협력을 본격화할 예정이다.",
+    "content": "[과학기술정보통신부 관련 뉴스] 네이트에서 보도된 기사입니다. 아래 원문 링크에서 전체 내용을 확인하세요.",
+    "source": "네이트",
+    "url": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE04cnppYjhoUFQydTN1cEw2NVZlU3Y0RS1ZWmFsTUt6TXQzT2NadWpSYnZfaHJsR3N0ckY2c00tVlJ1NktMWHZ6Z1BYMTYwdkxFRTl3?oc=5"
+  },
+  {
+    "date": "2026-07-03",
+    "category": "policy",
+    "type": "news",
+    "ministry": "과학기술정보통신부",
+    "title": "과기정통부, 캐나다·영국·EU 등 글로벌 양자 협력 본격화",
+    "summary": "과학기술정보통신부가 글로벌 양자 협력을 본격화하고 있습니다.",
+    "content": "[과학기술정보통신부 관련 뉴스] 더팩트에서 보도된 기사입니다. 아래 원문 링크에서 전체 내용을 확인하세요.",
+    "source": "더팩트",
+    "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE1XUjlCOTluWTlGNG10cmxNZ0xzU3pFdFBFQkVfNlByYXhNNGFTcXFINXNPUHZVMXFGMFlCZ1FuRkVFZnZDcnhTUFFlbTdzU2hBWUR1d04wNU9Md9IBVEFVX3lxTE9WYkNwRW1WVjBsY19ORTNVeVBSTVNJeEJ4a19nOHNvX2lPNWxKN28zakI3MXl5ZVFvV2JfTTgtR05pcGc5Zk5yYVFzUjhoZ0hTeC1feQ?oc=5"
   },
   {
     "date": "2026-07-03",
@@ -416,109 +460,43 @@ const policyAutoItems = [
     "type": "news",
     "ministry": "국가보훈부",
     "title": "국가보훈부, 6·25 참전 유엔 13개국과 미래 교류 캠프 개최",
-    "summary": "국가보훈부, 6·25 참전 유엔 13개국과 미래 교류 캠프 개최를 위한 준비를 시작합니다.",
+    "summary": "국가보훈부, 6·25 참전 유엔 13개국과 미래 교류 캠프 개최를 위한 캠프를 개최합니다.",
     "content": "[국가보훈부 관련 뉴스] v.daum.net에서 보도된 기사입니다. 아래 원문 링크에서 전체 내용을 확인하세요.",
     "source": "v.daum.net",
     "url": "https://news.google.com/rss/articles/CBMiT0FVX3lxTE9ISlhMS1NMYnhDYjRrU1pTeGVESnh3QWNJVEhCZVJ0ejRoeXpUdGYyZVpjYkxlbU1lWF9XREgyRjFzazhzQzJkRUxVNndQRDQ?oc=5"
-  },
-  {
-    "date": "2026-07-03",
-    "category": "policy",
-    "type": "news",
-    "ministry": "국가보훈부",
-    "title": "보훈부, ‘유엔참전국 미래세대 교류캠프’ 진행…13개국 144명 참여",
-    "summary": "국가보훈부는 유엔참전국 미래세대 교류캠프를 진행해 13개국의 144명이 참여했다.",
-    "content": "[국가보훈부 관련 뉴스] 문화일보에서 보도된 기사입니다. 아래 원문 링크에서 전체 내용을 확인하세요.",
-    "source": "문화일보",
-    "url": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE1KcGw4Y1Q2RjNsUTNrNy0xaVFhTzRSMjlza1A2dllUQjRPUzZPeFRnZm0zNmJUMTE0d0NJc2FfWjRldWxuY0RsOFhOZWk0eWNU?oc=5"
-  },
-  {
-    "date": "2026-07-03",
-    "category": "policy",
-    "type": "news",
-    "ministry": "국가보훈부",
-    "title": "보훈부, 유엔참전국 미래세대 교류캠프 진행…13개국 144명 참여 - 머니투데이",
-    "summary": "국가보훈부는 유엔참전국의 미래세대 교류캠프를 진행하고 있으며, 이번 캠프에는 13개국에 걸쳐 약 144명이 참여했다. - 머니투데이",
-    "content": "[국가보훈부 관련 뉴스] 머니투데이에서 보도된 기사입니다. 아래 원문 링크에서 전체 내용을 확인하세요.",
-    "source": "머니투데이",
-    "url": "https://news.google.com/rss/articles/CBMibEFVX3lxTE9hWVJXSk9QQXJPeVRUdDVJbHkxMEd5QV9RR0hCUzNOSS1Ma0oweHhKZGtsejQyMXhBUUJwQU5sRm82NTZnaEtFRXNKajNfWUFPVUJTR0x6UkdyeGhSd1I5SEVkeFZlM203ZDdkdtIBckFVX3lxTE1vRXpUX3dMaU1lVXpLYW5GcGdxZTA2R05xcG1lbGZRQWJUQklhYUk3eUhtME5xbDhHYmJRNTdtaTdGTzZKckI5U2habWlObmZhRmw3dlhLSTREWDZ5MEZXRzlNdTF3WTdVYjhMWlFoSnZnZw?oc=5"
-  },
-  {
-    "date": "2026-07-02",
-    "category": "policy",
-    "type": "news",
-    "ministry": "교육부",
-    "title": "교육부 \"거점 국립대에 반도체 계약학과 신설 논의 중\"",
-    "summary": "교육부가 거점 국립대에 반도체 계약학과 신설을 검토 중이라는 내용.",
-    "content": "[교육부 관련 뉴스] YTN 사이언스에서 보도된 기사입니다. 아래 원문 링크에서 전체 내용을 확인하세요.",
-    "source": "YTN 사이언스",
-    "url": "https://news.google.com/rss/articles/CBMijAFBVV95cUxPSUJydklHdU14YTI4MHE1dDd1dlZpT2FRTlVfUkw5QWxEZTgyX0JnQ00wR2plaHd5UVZTamotOEdpdEJOTi1BYjNKMndTeENFSEtMV0VXNXJoUURtTTBVeTA1N3owTGpmN29SUkRsSXpsX2UxWnd5QV9jLXQ1ZV93YXJyUGZWZVBOclVDbA?oc=5"
-  },
-  {
-    "date": "2026-07-02",
-    "category": "policy",
-    "type": "news",
-    "ministry": "외교부",
-    "title": "외교부, '쿠팡' 미 의회 보고서에 \"유감‥사실과 다른 쿠팡 주장만\"",
-    "summary": "외교부는 \"쿠팡\"이 미 의회 보고서에 등장한 주장에 대해 유감을 표하며, 실제와 다르게 제기된 사실만 언급되었다고 밝혔습니다.",
-    "content": "[외교부 관련 뉴스] MBC 뉴스에서 보도된 기사입니다. 아래 원문 링크에서 전체 내용을 확인하세요.",
-    "source": "MBC 뉴스",
-    "url": "https://news.google.com/rss/articles/CBMieEFVX3lxTFBvYXBfWGhrc2hwYTlkYlBVMElIcUJla1hUb18xWlBLSTJVSVdqMkNpRHdiWThfbnNFT19nMWY3SDhPOS1YczVkcC0yaHBsNEFFY1FUREdxY3JtM01JYlloT0M3VlFDcmp5Nk9SYnhDU1dMai1UMTBVQ9IBeEFVX3lxTE1IMlJ6cnpHUE1EUjJ6MVctVDItWVVOamNqUXB3b2pFT1ZaclRiQzhqUTJ2X0haVGFsMy1saXJ6MVN1VHQtczB3N293OGlEVWxuZ3RvOVZGcC1BdHhLQXNqaFhhMkxvX3YyLTN3Q3dSbUx5SW5laEJZcw?oc=5"
-  },
-  {
-    "date": "2026-07-02",
-    "category": "policy",
-    "type": "news",
-    "ministry": "외교부",
-    "title": "외교부 \"美 하원 법사위 보고서, 쿠팡의 일방적 주장만 담아 유감\"",
-    "summary": "외교부는 미국 하원 법사위의 보고서가 쿠팡의 일방적 주장만 포함되어 있다고 비판하며 유감함을 표명했습니다. [조선일보 관련 뉴스 기사]",
-    "content": "[외교부 관련 뉴스] 조선일보에서 보도된 기사입니다. 아래 원문 링크에서 전체 내용을 확인하세요.",
-    "source": "조선일보",
-    "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxNaEg0UEdRMUtwTk53TncwR0pKRTVVRFlUeUJwbGlPT21FWkVpdjFROWpnM214dDdISzB6ZWFFUGhNR2MzMXNsczZGa1c5clZTZGY3WFlTWlFCaUU3LXBKSXJUVWZIMEtNYjM2QmY0QWtXd09fWW56ZldGcFJORjFjd2lsbEV1R2RzZ0ViaUZLdlU?oc=5"
   },
   {
     "date": "2026-07-02",
     "category": "policy",
     "type": "news",
     "ministry": "통일부",
-    "title": "인권위, \"'북향민' 명칭 변경, 당사자 의견 수렴해야\"…통일부에 권고",
-    "summary": "통일부에 '북향민' 명칭 변경과 관련해 당사자 의견 수렴해야 한다는 인권위의 권고가 제기되었습니다.",
-    "content": "[통일부 관련 뉴스] v.daum.net에서 보도된 기사입니다. 아래 원문 링크에서 전체 내용을 확인하세요.",
-    "source": "v.daum.net",
-    "url": "https://news.google.com/rss/articles/CBMiT0FVX3lxTFAweUJTVVhmSzFSOUpqVmd0b284WEV5WFFuTkFXSUFGdmVYd1hQeERkQ3VPZWFMMkM1aGZzUzgwLVQ1VXhiUlNwR1dwWkJZTjA?oc=5"
+    "title": "\"청년 목소리 듣는다\"…통일부, 대학 찾아가는 '평화경청 ON 캠퍼스' 시작",
+    "summary": "통일부가 대학들을 찾아가는 '평화경청 ON 캠퍼스' 프로그램을 시작했다.",
+    "content": "[통일부 관련 뉴스] 뉴스1에서 보도된 기사입니다. 아래 원문 링크에서 전체 내용을 확인하세요.",
+    "source": "뉴스1",
+    "url": "https://news.google.com/rss/articles/CBMiV0FVX3lxTE5HSEptYnF4MHRqUTFvMEhkbDRsblBGNkMxc1RrZG1oNWlrdDltTjNhRHFhcUozMHcwekpoV1F0YldVQjgtdXVqbmQyWG0zMVdXVGhUMEotdw?oc=5"
   },
   {
     "date": "2026-07-02",
     "category": "policy",
     "type": "news",
-    "ministry": "국방부",
-    "title": "국방부 양성평등위 \"육아휴직 사용여건 실질적 개선해야\"",
-    "summary": "국방부 양성평등위는 육아휴직 사용 여건을 실질적으로 개선해야 한다고 주장했다.",
-    "content": "[국방부 관련 뉴스] 연합뉴스에서 보도된 기사입니다. 아래 원문 링크에서 전체 내용을 확인하세요.",
+    "ministry": "문화체육관광부",
+    "title": "문화체육관광부 [이벤트] 마음이 먼저 도착해 기다리는 그곳, 당신에겐 어디인가요?",
+    "summary": "문화체육관광부 관련 이벤트 '마음이 먼저 도착해 기다리는 그곳, 당신에겐 어디인가요?'라는 제목의 뉴스报道.",
+    "content": "[문화체육관광부 관련 뉴스] GNN 뉴스통신에서 보도된 기사입니다. 아래 원문 링크에서 전체 내용을 확인하세요.",
+    "source": "GNN 뉴스통신",
+    "url": "https://news.google.com/rss/articles/CBMiQ0FVX3lxTE9nalhLSVNYS04tcmpuZUZCX0FUZWZmMHZxQlJrbjNHcWEtMFcxTlZvd0FUNW5haGVfN0RXOUUzRFFiZVE?oc=5"
+  },
+  {
+    "date": "2026-07-02",
+    "category": "policy",
+    "type": "news",
+    "ministry": "농림축산식품부",
+    "title": "농식품부, 내년 일반농산어촌개발 신규 사업지 15곳 선정",
+    "summary": "농식품부, 내년 일반농산어촌개발 신규 사업지 15곳 선정: 연합뉴스 자료.",
+    "content": "[농림축산식품부 관련 뉴스] 연합뉴스에서 보도된 기사입니다. 아래 원문 링크에서 전체 내용을 확인하세요.",
     "source": "연합뉴스",
-    "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE9ZRGl6TE50RmNtdWV5YXhHLUxkcmg0R3dxazBtZEUyU1ZHYWgxMFdEVmdrWnI0UEttUE50aHFqUHFMRUVGT0xNT2ZkRjM5T0E5VHpXZ2ttYlhKS2vSAWBBVV95cUxNWWMxZjdKT2l4aFY2Z3BXc3hMeXlhNHRNemJyd3VJU3k4X3JGWnJHUzFVSnhkN0RsMkY1clBUNERkYTNqOHRLb2R2bDFpbm5TUlBNeEtqaUJkS2tMajEtYzQ?oc=5"
-  },
-  {
-    "date": "2026-07-02",
-    "category": "policy",
-    "type": "news",
-    "ministry": "행정안전부",
-    "title": "행안부, 장마·폭염 대응 점검…풍수해 위기경보 '주의' 상향",
-    "summary": "행정안전부가 장마와 폭염 대응 점검에 나섰고, 풍수해 위기경보를 '주의' 단계로 상향시켰다.",
-    "content": "[행정안전부 관련 뉴스] news.sbs.co.kr에서 보도된 기사입니다. 아래 원문 링크에서 전체 내용을 확인하세요.",
-    "source": "news.sbs.co.kr",
-    "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE5aMjlCLUdEckFDb2ZGd0hMRm5IMW1LUXZWMVhHdzZJd0Nfc0FUV0pYNzZCTzdQV0h6LWFoeGVyTzlaQWNjWEt5T01uekh6Zzh3WmRjN1lDX2VmcTNvSFpnSFFoX3FTNWFqYmc?oc=5"
-  },
-  {
-    "date": "2026-07-02",
-    "category": "policy",
-    "type": "news",
-    "ministry": "행정안전부",
-    "title": "행안부, 'AI 정부 실험실' 운영...\"공무원이 직접 현장 혁신\"",
-    "summary": "행정안전부가 \"AI 정부 실험실\"을 운영하며 공무원이 직접 현장 혁신에 참여할 수 있도록 한다.",
-    "content": "[행정안전부 관련 뉴스] 디일렉에서 보도된 기사입니다. 아래 원문 링크에서 전체 내용을 확인하세요.",
-    "source": "디일렉",
-    "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE1Qa0dLXzQ1ZWE5ejFHakxqb09NNkdaUXh6ajlnRHVaa3hEaF93LXRCUGJoNUdCaEhwbDNLNHBoQmpTU190R3hTcm5QUDRRTERGeTJSa3l6bGlCZEt1M3RkZmJHT1ZRUQ?oc=5"
+    "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE9TZjJDb1ktVmlVclRyS3Y0bkZzRjJ2M09xQ2pRdFVXbC1hUlNQZnFQbllUVmRrWGlBZVRnV2dRU0duSmREN0lTN2xPQ0VHQTJsRFE0SXgyUE9IZVHSAWBBVV95cUxPZkVZMFdGY2RoZUlid0x4QlBRczlPcS1rakF6d05OT0pKNnkzQVIwVlFJMXotazVQdFZ2Zk9Ed1dvLTA5TEM4cGtmRjNvclJQRTFEdXBNS3RrZnVRb19zYVI?oc=5"
   },
   {
     "date": "2026-07-02",
@@ -526,7 +504,7 @@ const policyAutoItems = [
     "type": "news",
     "ministry": "기후에너지환경부",
     "title": "강연하는 김성환 기후에너지환경부 장관",
-    "summary": "김성환 기후에너지환경부 장관의 강연 소식이에요.",
+    "summary": "한국 기후에너지환경부 관련 뉴스를 통해 김성환 기후에너지환경부 장관의 강연이 실시간으로 보도되고 있습니다.",
     "content": "[기후에너지환경부 관련 뉴스] 연합뉴스에서 보도된 기사입니다. 아래 원문 링크에서 전체 내용을 확인하세요.",
     "source": "연합뉴스",
     "url": "https://news.google.com/rss/articles/CBMiYEFVX3lxTE03RG14TkhGbzR6M1VERWV1WC1xcW9MRGk5UUVxU3A5RmpQLWNMRF9mVnhmUnNOaEJSd0hISGFGUHQzUmNiX2ZETHFsS0x5VVRQbnprSkNMZEJxenpoVVJOVtIBYEFVX3lxTE03RG14TkhGbzR6M1VERWV1WC1xcW9MRGk5UUVxU3A5RmpQLWNMRF9mVnhmUnNOaEJSd0hISGFGUHQzUmNiX2ZETHFsS0x5VVRQbnprSkNMZEJxenpoVVJOVg?oc=5"
@@ -535,56 +513,78 @@ const policyAutoItems = [
     "date": "2026-07-02",
     "category": "policy",
     "type": "news",
-    "ministry": "고용노동부",
-    "title": "김영훈 고용노동부 장관, 광주서 ‘반도체 인재’ 해법 모색",
-    "summary": "김영훈 고용노동부 장관이 광주에서 반도체 인재 양성에 대해 대안을 모색하고 있다. [고용노동부 관련 뉴스] MTN 머니투데이방송에서 보도된 기사입니다.",
-    "content": "[고용노동부 관련 뉴스] MTN 머니투데이방송에서 보도된 기사입니다. 아래 원문 링크에서 전체 내용을 확인하세요.",
-    "source": "MTN 머니투데이방송",
-    "url": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE40cXYtYlZHT3pPTDBNd2NEcXJGeXZST2ZhRElQcllNWlU4Z3IxNEYtTnpsaURzekJMZGtOMUhpS0VUUmVqRG5oRVJRbjk4THQ1ZGtRbmtGNkViVnh1Z2d4ZUlyeng?oc=5"
-  },
-  {
-    "date": "2026-07-02",
-    "category": "policy",
-    "type": "news",
-    "ministry": "성평등가족부",
-    "title": "[여성뉴스] 성평등가족부, 여성노동 현장과 고용평등공시제 안착 위해 머리 맞댄다 外",
-    "summary": "성평등가족부, 여성노동 현장과 고용평등공시제 안착 위해 노력 중",
-    "content": "[성평등가족부 관련 뉴스] v.daum.net에서 보도된 기사입니다. 아래 원문 링크에서 전체 내용을 확인하세요.",
-    "source": "v.daum.net",
-    "url": "https://news.google.com/rss/articles/CBMiT0FVX3lxTFB2OFd2aHZ0dVE0SXYyZGZIX1hiSUNDY2trNS1ETHhCTVZsNFU5UnVqN3oxeThkbldQbFpSN012ZGZUSldNQTkwaGRuV01hTzA?oc=5"
-  },
-  {
-    "date": "2026-07-02",
-    "category": "policy",
-    "type": "news",
     "ministry": "국토교통부",
     "title": "종합특검, ‘양평 고속도로’ 원희룡 전 국토교통부 장관 출석 요구",
-    "summary": "종합특검이 ‘양평 고속도로’와 관련해 원희룡 전 국토교통부 장관의 출석 요구를 했습니다. [국토교통부 관련 뉴스] v.daum.net 기사에 자세한 내용이 있습니다.",
-    "content": "[국토교통부 관련 뉴스] v.daum.net에서 보도된 기사입니다. 아래 원문 링크에서 전체 내용을 확인하세요.",
-    "source": "v.daum.net",
-    "url": "https://news.google.com/rss/articles/CBMiT0FVX3lxTFB6RFlXU2tDU2h2VDk2Z3NrUElKVWdqb0hONm9scVFCdndJSFBuZVJOQnBzX3V6ZHVwbE5UWFJkTV82dWJpUGdGNjRpQzJkMW8?oc=5"
+    "summary": "경향신문이 발행한 기사에 따르면, 종합특검이 원희룡 전 국토교통부 장관의 출석 요구를 하고 있다. 이는 관련 국토교통부 문제와 관련된 것으로 보인다. \n\n(원문 링크 참조)",
+    "content": "[국토교통부 관련 뉴스] 경향신문에서 보도된 기사입니다. 아래 원문 링크에서 전체 내용을 확인하세요.",
+    "source": "경향신문",
+    "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTFB0ODVSMTdQS1p3eVNadmhrVzc1VktjMmdQN0pvcFZrSWRSMGZyRXRKUzZqVzgyZDAwOU90QXBKV3BfbTQ3eGdpUWlWNEJ0YmVRcUlDNU51aVBLUdIBX0FVX3lxTE1NMHJ4RUN5RmJIRzFyOWQwcmh1amNSaWdFdDFZcFUtc2N6S2tYVXU5c0swTnZrV0U2ZXJOZDBUcjVmS2F3bjNRSUxJb0NHalZHY2oxS0RVeGRVcGdQRzM4?oc=5"
   },
   {
     "date": "2026-07-02",
     "category": "policy",
     "type": "news",
-    "ministry": "과학기술정보통신부",
-    "title": "과기정통부 \"2030년까지 100큐비트 양자프로세서 실증\"",
-    "summary": "과학기술정보통신부가 2030년까지 100큐비트 양자프로세서를 실증할 계획이라고 밝혔습니다. [원문보기: 지디넷코리아]",
-    "content": "[과학기술정보통신부 관련 뉴스] 지디넷코리아에서 보도된 기사입니다. 아래 원문 링크에서 전체 내용을 확인하세요.",
-    "source": "지디넷코리아",
-    "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE9SRHRjbVNVel9HdUtHaXA0RFp5N2ZfWHVNNTZhRGRpOW1lbGpvZ0Y0VmlyZ2czdENGOFplMnpSaERPRDVLNjh4M0ozSDBoc2REaDNlU25n?oc=5"
+    "ministry": "국가보훈부",
+    "title": "울진군1호 영업사원 황이주 울진군수 국가보훈부 찾아 첫 '세일즈 행정",
+    "summary": "울진군1호 영업사원 황이주 울진군수가 국가보훈부를 방문해 첫 '세일즈 행정'을 실시했다. [국家保護部 관련 新聞] 프레시안에서 보도된 기사입니다.",
+    "content": "[국가보훈부 관련 뉴스] 프레시안에서 보도된 기사입니다. 아래 원문 링크에서 전체 내용을 확인하세요.",
+    "source": "프레시안",
+    "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTE01Z09nb1FCU1FPRHNET3JKUnBPN0RSR2lLZnotVG9VaUNqSVVkR3NGMHBOblkzcHFlSnByVXVTSm9zN09td2tEdVVuQWdqV2tUYnB6WGE4ODZUeFZXMjcwSUxacmswbGdVd1Rj?oc=5"
+  },
+  {
+    "date": "2026-07-02",
+    "category": "policy",
+    "type": "news",
+    "ministry": "국가보훈부",
+    "title": "'울진군 1호 영업사원' 황이주 군수, 첫 세일즈 행보는 국가보훈부",
+    "summary": "황이주 군수의 첫 세일즈 행보는 국가보훈부에 관한 것으로 나타났다. [국가보훈부 관련 뉴스]라는 제목으로 보도된 이 기사는 뉴스핌에서 게재되어 있다.",
+    "content": "[국가보훈부 관련 뉴스] 뉴스핌에서 보도된 기사입니다. 아래 원문 링크에서 전체 내용을 확인하세요.",
+    "source": "뉴스핌",
+    "url": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE1SYkJwSW9IUUgyMW9BVTA3N2ZOU0RkekJHajl6eUZ3aDJBOVhEdHFsR01pNy1abFZEVUx0X2VobnRRZGFQLWhRN3hZUXV0Y0k5dl9tWGhZN3hyVnM5?oc=5"
+  },
+  {
+    "date": "2026-07-01",
+    "category": "policy",
+    "type": "news",
+    "ministry": "보건복지부",
+    "title": "\"중증 아니면 문턱 높인다\"…제6기 상급종합병원 지정 '시동'",
+    "summary": "보건복지부가 중증 병원이 아닌 일반 상급 종합병원에 대해서만 제6기 상급종합병원 지정 시동을 내는 내용으로 전해진다.",
+    "content": "[보건복지부 관련 뉴스] 청년의사에서 보도된 기사입니다. 아래 원문 링크에서 전체 내용을 확인하세요.",
+    "source": "청년의사",
+    "url": "https://news.google.com/rss/articles/CBMib0FVX3lxTFAtVFpPTFJWcXg2Mld0Vm9GTFU1NXZudDI2cnNBZ2J0MUZjSGdkdGZTeWFkcTRSc0ZaWHpOb0FjU0JsSWNTQllfQktYejJrbEFnSE8xaFNYaUVOUnowNUtacTY2TEx0TWZ6c1hvWE42a9IBc0FVX3lxTFBabzJRR3dKa3N4T3FPejBpVTRLa1ZsaDRXdmllMDNDUzNudk9nSzRUUG5BX1BycHVCZWREODA1Rkp6LWpySWdfQ2xnLWdaN29Qek9ydHcwOWNTeDR0bnF3Z2dyTHlRQmdMZThfZ0NVamhLMzQ?oc=5"
   },
   {
     "date": "2026-06-30",
     "category": "policy",
     "type": "news",
-    "ministry": "국방부",
-    "title": "국정기조 “적극 소통인데”…국방정책실 ‘깜깜이식’ 통합사관학교 추진 논란[이현호의 밀리터리!톡]",
-    "summary": "한국경제에서 국방정책실이 통합사관학교 추진에 대해 깜깜이식으로 공식 발표를 미延迟導致 논란이 일고 있습니다.",
-    "content": "[국방부 관련 뉴스] 서울경제에서 보도된 기사입니다. 아래 원문 링크에서 전체 내용을 확인하세요.",
-    "source": "서울경제",
-    "url": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE9KSHNtOUVyMjh6NUZGUnVaUl8tV1FFalN3LW5BcWZFam41U1hPSDJqcm1JOXUzUW5FNjNvQmNyNlpWTUhmNEg4ZVVuVTd6OHBub1HSAVNBVV95cUxNNG12OTltdmZmdGN6dkw3YjVmV1JsdDAyeENOUHZoRndkX0Ffd0VuTDY3V3ozWnkzSm1KYkp4NVJBTl80djRxTFU1ZDZzaXpjZkkzcw?oc=5"
+    "ministry": "기후에너지환경부",
+    "title": "(인사) 기후에너지환경부",
+    "summary": "기후에너지환경부가 관련 기사로 신문에서 보도되었습니다.具体内容请参阅原文链接。",
+    "content": "[기후에너지환경부 관련 뉴스] 전기신문에서 보도된 기사입니다. 아래 원문 링크에서 전체 내용을 확인하세요.",
+    "source": "전기신문",
+    "url": "https://news.google.com/rss/articles/CBMibEFVX3lxTE1ETEVwZWhLWGl4SFk2RzY3TVZLdW5HdjlYMmdRQm8tclVuTm5qVlcwMEotd05qRXdXOTVLZi14Tmh2b2dnUEdHcWprdjNZelpEQmxRdlVrNEFFZm9ZS19TdE1JUFVodGxoRE8xa9IBcEFVX3lxTFAzZVlUdXl3WDg1OGswWENPdkY2SXhIRll5SElKZkNBZDJTWXBQQ1FNcFMzTEZ2N2JWazFaaTlsY2FrSzZ2ZDdjOVVzZE1pemYzeDM2VW9fZERVeWg2ejdJSkJ3dFpXVGM3cnNuWVF4SEI?oc=5"
+  },
+  {
+    "date": "2026-06-30",
+    "category": "policy",
+    "type": "news",
+    "ministry": "성평등가족부",
+    "title": "성평등가족부, 여름방학 청소년 성장지원 프로그램 운영",
+    "summary": "성평등가족부, 여름방학 청소년 성장지원 프로그램 운영합니다.",
+    "content": "[성평등가족부 관련 뉴스] v.daum.net에서 보도된 기사입니다. 아래 원문 링크에서 전체 내용을 확인하세요.",
+    "source": "v.daum.net",
+    "url": "https://news.google.com/rss/articles/CBMiT0FVX3lxTE1OSVlUM2VGUXR5S2R4azl4SlpnOVNJblY4MGZkUll1TVd0ZUUzZmhKcl9Sck5sOFZaLXNoenNsNHFvY203QkowZGpLOTNlTFU?oc=5"
+  },
+  {
+    "date": "2026-06-29",
+    "category": "policy",
+    "type": "news",
+    "ministry": "행정안전부",
+    "title": "[행정안전부] 탄소중립 실천 마을 조성사업에 16개 지자체 선정",
+    "summary": "행정안전부가 주관하는 탄소중립 실천 마을 조성사업에 16개 지자체가 선정되었다.",
+    "content": "[행정안전부 관련 뉴스] 국가기후위기대응위원회에서 보도된 기사입니다. 아래 원문 링크에서 전체 내용을 확인하세요.",
+    "source": "국가기후위기대응위원회",
+    "url": "https://news.google.com/rss/articles/CBMi2AFBVV95cUxQVzNuMVBHS0t5dnZEbW9OS0dlaTlyU3RUTS1TNm9jR01xWlVtMjg4OGpnQkJGSW1QOEVWejczRTdUMUZnTkFibFl0WWUtenB5cUZRVWxkcG1jSlAyZXVQUnBsQ1RiQlRoWVVGLXRDRFhoZDJnb2RuMVAxb2lMcUg0NUdrd2pTZ0VEMjZnX01UTGxVVXRDNUlLN1JYeDBhMHM5dVRObGZPSWpwaTA1Zk5zVmJzZ3pTR08tTlNzSXk0aUd2eVVicFlJNjg4b1Q1NHNtN0cwMGp6cFA?oc=5"
   },
   {
     "date": "2026-06-29",
@@ -592,7 +592,7 @@ const policyAutoItems = [
     "type": "news",
     "ministry": "문화체육관광부",
     "title": "[인사] 문화체육관광부",
-    "summary": "한국어 1~2문장으로 요약한 글: \n이투데이에 실린 문화체육관광부 관련 기사의 요약입니다. 더 자세한 내용은 해당 링크에서 확인하실 수 있습니다.",
+    "summary": "한국 인터넷 매체 이투데이에서 보도된 문화체육관광부 관련 뉴스 요약입니다. 전체 내용은 해당 사이트에서 확인 가능합니다.",
     "content": "[문화체육관광부 관련 뉴스] 이투데이에서 보도된 기사입니다. 아래 원문 링크에서 전체 내용을 확인하세요.",
     "source": "이투데이",
     "url": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE1CQzlyTUlPLUVnRmFkZDFuYTFYZFJmcU85LVY5TmlyZ0tOVkF2VjR2OWhtMG1wWjhZYWIxdm54VVdQcjE1VXpFUEFVWHpsUTl0SEw4RA?oc=5"

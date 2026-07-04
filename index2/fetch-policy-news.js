@@ -43,6 +43,11 @@ async function main() {
   all = lib.dedupeExact(all);
   all.sort((a, b) => b.date.localeCompare(a.date));
 
+  if (all.length === 0) {
+    console.error(`[경고] 수집 결과 0건 — 네트워크 오류 등으로 판단해 기존 ${path.basename(OUTPUT_FILE)} 파일을 유지합니다.`);
+    return;
+  }
+
   await lib.summarizeWithOllama(all);
 
   lib.writeOutputFile(OUTPUT_FILE, "policyAutoItems", "policyAutoMeta", all, "fetch-policy-news.js");

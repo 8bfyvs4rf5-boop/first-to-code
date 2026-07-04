@@ -177,6 +177,10 @@ body {
   z-index: 10;
 }
 
+.tabs[hidden] {
+  display: none;
+}
+
 .tab-btn {
   border: 1px solid var(--border);
   background: #fff;
@@ -207,6 +211,10 @@ body {
   padding: 10px 16px;
   background: #fafafa;
   border-bottom: 1px solid var(--border);
+}
+
+.ministry-filters[hidden] {
+  display: none;
 }
 
 .ministry-chip {

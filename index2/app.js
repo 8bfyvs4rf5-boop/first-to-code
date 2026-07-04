@@ -9,6 +9,7 @@ const emptyStateEl = document.getElementById("emptyState");
 const tabsEl = document.getElementById("tabs");
 const ministryFiltersEl = document.getElementById("ministryFilters");
 const tagFiltersEl = document.getElementById("tagFilters");
+const searchInputEl = document.getElementById("searchInput");
 const sideNavEl = document.getElementById("sideNav");
 const viewTitleEl = document.getElementById("viewTitle");
 const viewSubtitleEl = document.getElementById("viewSubtitle");
@@ -16,6 +17,22 @@ const viewSubtitleEl = document.getElementById("viewSubtitle");
 let activeCategory = "economy";
 let activeMinistry = "all";
 let activeView = "briefing"; // "briefing" | "scrap"
+let searchQuery = "";
+
+// --- 검색 ---------------------------------------------------------
+
+function itemMatchesSearch(item) {
+  if (!searchQuery) return true;
+  const haystack = `${item.title} ${item.summary || ""} ${item.content || ""}`.toLowerCase();
+  return haystack.includes(searchQuery);
+}
+
+searchInputEl.addEventListener("input", () => {
+  searchQuery = searchInputEl.value.trim().toLowerCase();
+  renderFeed();
+});
+
+// --- 태그 ---------------------------------------------------------
 
 // --- 태그 ---------------------------------------------------------
 // 분야/유형 2축 고정 태그 체계. 항목 자체(data.js 등)에 기본 tags를 심어둘
@@ -229,15 +246,19 @@ function renderFeed() {
       return true;
     });
   }
-  items = items.filter(itemMatchesTagFilters);
+  items = items.filter(itemMatchesTagFilters).filter(itemMatchesSearch);
 
   feedEl.innerHTML = "";
 
   if (items.length === 0) {
-    emptyStateEl.textContent =
-      activeView === "scrap"
-        ? "스크랩한 항목이 없습니다. 카드의 스크랩 버튼을 눌러 저장해 보세요."
-        : "등록된 항목이 없습니다. data.js에 내용을 추가해 보세요.";
+    if (searchQuery) {
+      emptyStateEl.textContent = `"${searchInputEl.value.trim()}"에 대한 검색 결과가 없습니다.`;
+    } else {
+      emptyStateEl.textContent =
+        activeView === "scrap"
+          ? "스크랩한 항목이 없습니다. 카드의 스크랩 버튼을 눌러 저장해 보세요."
+          : "등록된 항목이 없습니다. data.js에 내용을 추가해 보세요.";
+    }
     emptyStateEl.hidden = false;
     return;
   }

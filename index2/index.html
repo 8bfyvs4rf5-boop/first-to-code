@@ -14,6 +14,7 @@
     <nav class="side-nav" id="sideNav">
       <button class="side-nav-btn active" data-view="briefing">정책요약자료</button>
       <button class="side-nav-btn" data-view="scrap">스크랩</button>
+      <button class="side-nav-btn" data-view="board">아이디어 보드</button>
       <a class="side-nav-btn side-nav-link" href="https://claude.ai/new" target="_blank" rel="noopener noreferrer">클로드에게 질문하기</a>
     </nav>
   </aside>
@@ -27,7 +28,7 @@
       </div>
     </header>
 
-    <div class="search-bar">
+    <div class="search-bar" id="searchBar">
       <input type="search" id="searchInput" class="search-input" placeholder="제목·본문 검색 (예: AI, 임대차, 관세)" />
     </div>
 
@@ -44,6 +45,21 @@
     <main class="container">
       <section id="feed" class="feed"></section>
       <p id="emptyState" class="empty-state" hidden>등록된 항목이 없습니다. data.js에 내용을 추가해 보세요.</p>
+
+      <section id="ideaBoard" class="idea-board" hidden>
+        <div class="idea-board-header">
+          <button type="button" id="newIdeaBtn" class="idea-new-btn">+ 새 아이디어</button>
+        </div>
+        <form id="newIdeaForm" class="new-idea-form" hidden>
+          <input type="text" id="newIdeaTitle" class="new-idea-title" placeholder="아이디어 제목" required />
+          <textarea id="newIdeaDesc" class="new-idea-desc" rows="2" placeholder="간단한 설명 (선택)"></textarea>
+          <div class="new-idea-form-actions">
+            <button type="submit" class="new-idea-submit">추가</button>
+            <button type="button" id="newIdeaCancel" class="new-idea-cancel">취소</button>
+          </div>
+        </form>
+        <div class="idea-board-columns" id="ideaBoardColumns"></div>
+      </section>
     </main>
 
     <footer class="site-footer">

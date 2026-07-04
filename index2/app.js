@@ -9,14 +9,22 @@ const emptyStateEl = document.getElementById("emptyState");
 const tabsEl = document.getElementById("tabs");
 const ministryFiltersEl = document.getElementById("ministryFilters");
 const tagFiltersEl = document.getElementById("tagFilters");
+const searchBarEl = document.getElementById("searchBar");
 const searchInputEl = document.getElementById("searchInput");
 const sideNavEl = document.getElementById("sideNav");
 const viewTitleEl = document.getElementById("viewTitle");
 const viewSubtitleEl = document.getElementById("viewSubtitle");
+const ideaBoardEl = document.getElementById("ideaBoard");
+const ideaBoardColumnsEl = document.getElementById("ideaBoardColumns");
+const newIdeaBtn = document.getElementById("newIdeaBtn");
+const newIdeaFormEl = document.getElementById("newIdeaForm");
+const newIdeaTitleEl = document.getElementById("newIdeaTitle");
+const newIdeaDescEl = document.getElementById("newIdeaDesc");
+const newIdeaCancelEl = document.getElementById("newIdeaCancel");
 
 let activeCategory = "economy";
 let activeMinistry = "all";
-let activeView = "briefing"; // "briefing" | "scrap"
+let activeView = "briefing"; // "briefing" | "scrap" | "board"
 let searchQuery = "";
 
 // --- 검색 ---------------------------------------------------------
@@ -158,6 +166,232 @@ function debounce(fn, delay) {
     timer = setTimeout(() => fn(...args), delay);
   };
 }
+
+// --- 정책 아이디어 보드 -------------------------------------------------
+// 스크랩과 별개로, 사용자가 직접 만드는 아이디어 카드. 브리핑 항목과 달리
+// 자동으로 채워지지 않으므로 localStorage에 배열 그대로 저장한다.
+
+const IDEA_STORAGE_KEY = "dailyBriefing.ideas";
+const IDEA_STATUSES = [
+  { value: "idea", label: "아이디어" },
+  { value: "researching", label: "조사중" },
+  { value: "draft", label: "초안" },
+  { value: "done", label: "보류·완료" }
+];
+
+function loadIdeas() {
+  try {
+    const raw = localStorage.getItem(IDEA_STORAGE_KEY);
+    return raw ? JSON.parse(raw) : [];
+  } catch {
+    return [];
+  }
+}
+
+function saveIdeas(ideas) {
+  localStorage.setItem(IDEA_STORAGE_KEY, JSON.stringify(ideas));
+}
+
+function createIdea(title, description) {
+  const ideas = loadIdeas();
+  ideas.push({
+    id: `idea_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`,
+    title,
+    description,
+    status: "idea",
+    linkedItemKeys: [],
+    createdAt: new Date().toISOString()
+  });
+  saveIdeas(ideas);
+}
+
+function updateIdea(id, patch) {
+  const ideas = loadIdeas();
+  const idx = ideas.findIndex(i => i.id === id);
+  if (idx === -1) return;
+  ideas[idx] = { ...ideas[idx], ...patch };
+  saveIdeas(ideas);
+}
+
+function deleteIdea(id) {
+  saveIdeas(loadIdeas().filter(i => i.id !== id));
+}
+
+function renderIdeaCard(idea) {
+  const card = document.createElement("div");
+  card.className = "idea-card";
+
+  const titleInput = document.createElement("input");
+  titleInput.type = "text";
+  titleInput.className = "idea-card-title-input";
+  titleInput.value = idea.title;
+  titleInput.addEventListener("input", debounce(() => {
+    updateIdea(idea.id, { title: titleInput.value });
+  }, 300));
+  card.appendChild(titleInput);
+
+  const descTextarea = document.createElement("textarea");
+  descTextarea.className = "idea-card-desc";
+  descTextarea.rows = 3;
+  descTextarea.placeholder = "아이디어 설명, 근거, 다음 액션 등을 적어보세요.";
+  descTextarea.value = idea.description || "";
+  descTextarea.addEventListener("input", debounce(() => {
+    updateIdea(idea.id, { description: descTextarea.value });
+  }, 300));
+  card.appendChild(descTextarea);
+
+  const statusSelect = document.createElement("select");
+  statusSelect.className = "idea-status-select";
+  for (const s of IDEA_STATUSES) {
+    const opt = document.createElement("option");
+    opt.value = s.value;
+    opt.textContent = s.label;
+    if (s.value === idea.status) opt.selected = true;
+    statusSelect.appendChild(opt);
+  }
+  statusSelect.addEventListener("change", () => {
+    updateIdea(idea.id, { status: statusSelect.value });
+    renderBoard();
+  });
+  card.appendChild(statusSelect);
+
+  const linkedWrap = document.createElement("div");
+  linkedWrap.className = "idea-linked-items";
+  const renderLinkedChips = () => {
+    linkedWrap.innerHTML = "";
+    const allItems = getAllItems();
+    for (const key of idea.linkedItemKeys || []) {
+      const linkedItem = allItems.find(it => itemKey(it) === key);
+      const chip = document.createElement("span");
+      chip.className = "idea-linked-chip";
+      chip.textContent = linkedItem ? linkedItem.title : "(삭제된 항목)";
+      if (linkedItem && linkedItem.url) {
+        chip.title = "클릭하면 원문으로 이동";
+        chip.addEventListener("click", () => window.open(linkedItem.url, "_blank", "noopener,noreferrer"));
+      }
+      const removeBtn = document.createElement("button");
+      removeBtn.type = "button";
+      removeBtn.className = "idea-linked-remove";
+      removeBtn.textContent = "×";
+      removeBtn.title = "연결 해제";
+      removeBtn.addEventListener("click", e => {
+        e.stopPropagation();
+        idea.linkedItemKeys = (idea.linkedItemKeys || []).filter(k => k !== key);
+        updateIdea(idea.id, { linkedItemKeys: idea.linkedItemKeys });
+        renderLinkedChips();
+      });
+      chip.appendChild(removeBtn);
+      linkedWrap.appendChild(chip);
+    }
+  };
+  renderLinkedChips();
+  card.appendChild(linkedWrap);
+
+  const linkSearchWrap = document.createElement("div");
+  linkSearchWrap.className = "idea-link-search";
+  const linkSearchInput = document.createElement("input");
+  linkSearchInput.type = "text";
+  linkSearchInput.className = "idea-link-search-input";
+  linkSearchInput.placeholder = "관련 브리핑 항목 검색해 연결...";
+  const linkResults = document.createElement("div");
+  linkResults.className = "idea-link-results";
+
+  linkSearchInput.addEventListener("input", () => {
+    const q = linkSearchInput.value.trim().toLowerCase();
+    linkResults.innerHTML = "";
+    if (!q) return;
+    const matches = getAllItems()
+      .filter(it => it.title.toLowerCase().includes(q))
+      .filter(it => !(idea.linkedItemKeys || []).includes(itemKey(it)))
+      .slice(0, 5);
+    for (const m of matches) {
+      const resultBtn = document.createElement("button");
+      resultBtn.type = "button";
+      resultBtn.className = "idea-link-result-btn";
+      resultBtn.textContent = `${m.title} (${m.date})`;
+      resultBtn.addEventListener("click", () => {
+        idea.linkedItemKeys = [...(idea.linkedItemKeys || []), itemKey(m)];
+        updateIdea(idea.id, { linkedItemKeys: idea.linkedItemKeys });
+        renderLinkedChips();
+        linkSearchInput.value = "";
+        linkResults.innerHTML = "";
+      });
+      linkResults.appendChild(resultBtn);
+    }
+  });
+
+  linkSearchWrap.appendChild(linkSearchInput);
+  linkSearchWrap.appendChild(linkResults);
+  card.appendChild(linkSearchWrap);
+
+  const deleteBtn = document.createElement("button");
+  deleteBtn.type = "button";
+  deleteBtn.className = "idea-delete-btn";
+  deleteBtn.textContent = "삭제";
+  deleteBtn.addEventListener("click", () => {
+    if (confirm("이 아이디어를 삭제할까요?")) {
+      deleteIdea(idea.id);
+      renderBoard();
+    }
+  });
+  card.appendChild(deleteBtn);
+
+  return card;
+}
+
+function renderBoard() {
+  const ideas = loadIdeas();
+  ideaBoardColumnsEl.innerHTML = "";
+
+  for (const statusDef of IDEA_STATUSES) {
+    const column = document.createElement("div");
+    column.className = "idea-column";
+
+    const columnIdeas = ideas.filter(i => i.status === statusDef.value);
+
+    const heading = document.createElement("div");
+    heading.className = "idea-column-heading";
+    heading.textContent = `${statusDef.label} (${columnIdeas.length})`;
+    column.appendChild(heading);
+
+    const list = document.createElement("div");
+    list.className = "idea-column-list";
+    if (columnIdeas.length === 0) {
+      const empty = document.createElement("p");
+      empty.className = "idea-column-empty";
+      empty.textContent = "아직 없음";
+      list.appendChild(empty);
+    } else {
+      for (const idea of columnIdeas) list.appendChild(renderIdeaCard(idea));
+    }
+    column.appendChild(list);
+
+    ideaBoardColumnsEl.appendChild(column);
+  }
+}
+
+newIdeaBtn.addEventListener("click", () => {
+  newIdeaFormEl.hidden = false;
+  newIdeaBtn.hidden = true;
+  newIdeaTitleEl.focus();
+});
+
+newIdeaCancelEl.addEventListener("click", () => {
+  newIdeaFormEl.reset();
+  newIdeaFormEl.hidden = true;
+  newIdeaBtn.hidden = false;
+});
+
+newIdeaFormEl.addEventListener("submit", e => {
+  e.preventDefault();
+  const title = newIdeaTitleEl.value.trim();
+  if (!title) return;
+  createIdea(title, newIdeaDescEl.value.trim());
+  newIdeaFormEl.reset();
+  newIdeaFormEl.hidden = true;
+  newIdeaBtn.hidden = false;
+  renderBoard();
+});
 
 function renderAutoUpdatedNote() {
   const lines = [];
@@ -579,12 +813,21 @@ tagFiltersEl.addEventListener("click", (e) => {
 
 function applyViewChrome() {
   const isScrapView = activeView === "scrap";
-  tabsEl.hidden = isScrapView;
-  ministryFiltersEl.hidden = isScrapView;
-  viewTitleEl.textContent = isScrapView ? "스크랩" : "데일리 브리핑";
-  viewSubtitleEl.textContent = isScrapView
-    ? "저장해 둔 정책·경제·외신 항목 모음"
-    : "주요 정책 · 주요 경제정책 · 주요외신동향을 한 곳에서";
+  const isBoardView = activeView === "board";
+  tabsEl.hidden = isScrapView || isBoardView;
+  ministryFiltersEl.hidden = isScrapView || isBoardView;
+  tagFiltersEl.hidden = isBoardView;
+  searchBarEl.hidden = isBoardView;
+  feedEl.hidden = isBoardView;
+  ideaBoardEl.hidden = !isBoardView;
+  if (isBoardView) emptyStateEl.hidden = true;
+
+  viewTitleEl.textContent = isBoardView ? "아이디어 보드" : isScrapView ? "스크랩" : "데일리 브리핑";
+  viewSubtitleEl.textContent = isBoardView
+    ? "브리핑에서 발견한 내용을 정책 아이디어로 발전시켜 보세요"
+    : isScrapView
+      ? "저장해 둔 정책·경제·외신 항목 모음"
+      : "주요 정책 · 주요 경제정책 · 주요외신동향을 한 곳에서";
 }
 
 sideNavEl.addEventListener("click", (e) => {
@@ -595,7 +838,8 @@ sideNavEl.addEventListener("click", (e) => {
   activeView = btn.dataset.view;
   applyViewChrome();
   if (activeView === "briefing") renderMinistryFilters();
-  renderFeed();
+  if (activeView === "board") renderBoard();
+  else renderFeed();
 });
 
 renderTodayDate();

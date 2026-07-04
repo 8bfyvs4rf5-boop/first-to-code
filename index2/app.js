@@ -8,6 +8,7 @@ const feedEl = document.getElementById("feed");
 const emptyStateEl = document.getElementById("emptyState");
 const tabsEl = document.getElementById("tabs");
 const ministryFiltersEl = document.getElementById("ministryFilters");
+const tagFiltersEl = document.getElementById("tagFilters");
 const sideNavEl = document.getElementById("sideNav");
 const viewTitleEl = document.getElementById("viewTitle");
 const viewSubtitleEl = document.getElementById("viewSubtitle");
@@ -15,6 +16,62 @@ const viewSubtitleEl = document.getElementById("viewSubtitle");
 let activeCategory = "economy";
 let activeMinistry = "all";
 let activeView = "briefing"; // "briefing" | "scrap"
+
+// --- 태그 ---------------------------------------------------------
+// 분야/유형 2축 고정 태그 체계. 항목 자체(data.js 등)에 기본 tags를 심어둘
+// 수도 있지만, 사용자가 실제로 붙이고 떼는 태그는 스크랩과 동일하게
+// localStorage에 itemKey로 저장한다 — auto 파일이 매일 통째로 재생성돼도
+// 사용자가 붙인 태그는 그대로 남는다.
+const TAG_TAXONOMY = {
+  domain: ["교육", "노동", "부동산", "AI", "산업", "복지", "환경", "금융", "외교안보", "행정"],
+  type: ["규제", "지원", "제도개선", "예산·재정", "조사·연구"]
+};
+const TAG_AXIS_LABELS = { domain: "분야", type: "유형" };
+const TAG_STORAGE_KEY = "dailyBriefing.tags";
+
+const activeTagFilters = { domain: new Set(), type: new Set() };
+
+function loadTagStore() {
+  try {
+    const raw = localStorage.getItem(TAG_STORAGE_KEY);
+    return raw ? JSON.parse(raw) : {};
+  } catch {
+    return {};
+  }
+}
+
+function saveTagStore(store) {
+  localStorage.setItem(TAG_STORAGE_KEY, JSON.stringify(store));
+}
+
+// 사용자가 한 번도 편집하지 않은 항목은 data.js 등에 미리 심어둔 tags를
+// 기본값으로 쓰고, 편집한 적이 있으면 localStorage에 저장된 값을 그대로 쓴다.
+function getItemTags(item) {
+  const store = loadTagStore();
+  const stored = store[itemKey(item)];
+  const base = stored || item.tags || {};
+  return { domain: base.domain || [], type: base.type || [] };
+}
+
+function toggleItemTag(item, axis, value) {
+  const store = loadTagStore();
+  const key = itemKey(item);
+  const current = store[key] || getItemTags(item);
+  const set = new Set(current[axis] || []);
+  if (set.has(value)) set.delete(value);
+  else set.add(value);
+  store[key] = { domain: current.domain || [], type: current.type || [], [axis]: Array.from(set) };
+  saveTagStore(store);
+}
+
+function itemMatchesTagFilters(item) {
+  const tags = getItemTags(item);
+  for (const axis of Object.keys(activeTagFilters)) {
+    const selected = activeTagFilters[axis];
+    if (selected.size > 0 && !tags[axis].some(t => selected.has(t))) return false;
+  }
+  return true;
+}
 
 // --- 스크랩 ---------------------------------------------------------
 
@@ -130,6 +187,37 @@ function renderMinistryFilters() {
   for (const ministry of ministries) makeChip(ministry, ministry);
 }
 
+function renderTagFilters() {
+  tagFiltersEl.innerHTML = "";
+
+  for (const axis of Object.keys(TAG_TAXONOMY)) {
+    const group = document.createElement("div");
+    group.className = "tag-filter-group";
+
+    const label = document.createElement("span");
+    label.className = "tag-filter-label";
+    label.textContent = TAG_AXIS_LABELS[axis];
+    group.appendChild(label);
+
+    const makeChip = (value, text) => {
+      const chip = document.createElement("button");
+      chip.className = "tag-chip";
+      chip.dataset.axis = axis;
+      chip.dataset.tag = value;
+      chip.textContent = text;
+      if (value === "all" ? activeTagFilters[axis].size === 0 : activeTagFilters[axis].has(value)) {
+        chip.classList.add("active");
+      }
+      group.appendChild(chip);
+    };
+
+    makeChip("all", "전체");
+    for (const tag of TAG_TAXONOMY[axis]) makeChip(tag, tag);
+
+    tagFiltersEl.appendChild(group);
+  }
+}
+
 function renderFeed() {
   let items;
   if (activeView === "scrap") {
@@ -137,10 +225,11 @@ function renderFeed() {
   } else {
     items = getAllItems().filter(item => {
       if (item.category !== activeCategory) return false;
-      if (activeMinistry !== "all") return item.ministry === activeMinistry;
+      if (activeMinistry !== "all" && item.ministry !== activeMinistry) return false;
       return true;
     });
   }
+  items = items.filter(itemMatchesTagFilters);
 
   feedEl.innerHTML = "";
 
@@ -244,6 +333,23 @@ function renderCard(item) {
   summary.className = "card-summary";
   summary.textContent = item.summary || "";
 
+  // 붙은 태그를 한눈에 볼 수 있도록 펼치지 않아도 보이는 읽기 전용 칩 목록.
+  const cardTags = document.createElement("div");
+  cardTags.className = "card-tags";
+  const syncCardTags = () => {
+    const tags = getItemTags(item);
+    const all = [...tags.domain, ...tags.type];
+    cardTags.innerHTML = "";
+    cardTags.hidden = all.length === 0;
+    for (const t of all) {
+      const chip = document.createElement("span");
+      chip.className = "card-tag-chip";
+      chip.textContent = t;
+      cardTags.appendChild(chip);
+    }
+  };
+  syncCardTags();
+
   const detail = document.createElement("div");
   detail.className = "card-detail";
   detail.hidden = true;
@@ -262,9 +368,41 @@ function renderCard(item) {
   link.addEventListener("click", e => e.stopPropagation());
   detail.appendChild(link);
 
+  const tagEditor = document.createElement("div");
+  tagEditor.className = "tag-editor";
+  for (const axis of Object.keys(TAG_TAXONOMY)) {
+    const group = document.createElement("div");
+    group.className = "tag-editor-group";
+
+    const label = document.createElement("span");
+    label.className = "tag-editor-label";
+    label.textContent = TAG_AXIS_LABELS[axis];
+    group.appendChild(label);
+
+    for (const value of TAG_TAXONOMY[axis]) {
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "tag-editor-btn";
+      btn.textContent = value;
+      btn.classList.toggle("active", getItemTags(item)[axis].includes(value));
+      btn.addEventListener("click", e => {
+        e.stopPropagation();
+        toggleItemTag(item, axis, value);
+        btn.classList.toggle("active");
+        syncCardTags();
+        if (activeTagFilters.domain.size > 0 || activeTagFilters.type.size > 0) renderFeed();
+      });
+      group.appendChild(btn);
+    }
+
+    tagEditor.appendChild(group);
+  }
+  detail.appendChild(tagEditor);
+
   card.appendChild(top);
   card.appendChild(title);
   card.appendChild(summary);
+  card.appendChild(cardTags);
   card.appendChild(detail);
 
   const toggle = () => {
@@ -303,6 +441,19 @@ ministryFiltersEl.addEventListener("click", (e) => {
   renderFeed();
 });
 
+tagFiltersEl.addEventListener("click", (e) => {
+  const chip = e.target.closest(".tag-chip");
+  if (!chip) return;
+  const { axis, tag } = chip.dataset;
+  if (tag === "all") activeTagFilters[axis].clear();
+  else {
+    if (activeTagFilters[axis].has(tag)) activeTagFilters[axis].delete(tag);
+    else activeTagFilters[axis].add(tag);
+  }
+  renderTagFilters();
+  renderFeed();
+});
+
 function applyViewChrome() {
   const isScrapView = activeView === "scrap";
   tabsEl.hidden = isScrapView;
@@ -328,4 +479,5 @@ renderTodayDate();
 renderAutoUpdatedNote();
 applyViewChrome();
 renderMinistryFilters();
+renderTagFilters();
 renderFeed();

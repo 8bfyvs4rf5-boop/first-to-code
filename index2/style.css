@@ -239,6 +239,52 @@ body {
   color: #fff;
 }
 
+.tag-filters {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 10px 16px;
+  background: #fff;
+  border-bottom: 1px solid var(--border);
+}
+
+.tag-filter-group {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.tag-filter-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  margin-right: 2px;
+  min-width: 32px;
+}
+
+.tag-chip {
+  border: 1px solid var(--border);
+  background: #fff;
+  color: var(--text-muted);
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.76rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.tag-chip:hover {
+  border-color: var(--policy);
+  color: var(--policy);
+}
+
+.tag-chip.active {
+  background: var(--policy);
+  border-color: var(--policy);
+  color: #fff;
+}
+
 .container {
   max-width: 860px;
   margin: 0 auto;
@@ -378,10 +424,71 @@ body {
   font-size: 0.92rem;
 }
 
+.card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 8px;
+}
+
+.card-tag-chip {
+  font-size: 0.72rem;
+  color: var(--policy);
+  background: #f3e8ff;
+  padding: 2px 8px;
+  border-radius: 999px;
+}
+
 .card-detail {
   margin-top: 12px;
   padding-top: 12px;
   border-top: 1px solid var(--border);
+}
+
+.tag-editor {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px dashed var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.tag-editor-group {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.tag-editor-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  min-width: 32px;
+}
+
+.tag-editor-btn {
+  border: 1px solid var(--border);
+  background: #fff;
+  color: var(--text-muted);
+  padding: 3px 9px;
+  border-radius: 999px;
+  font-size: 0.74rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.tag-editor-btn:hover {
+  border-color: var(--policy);
+  color: var(--policy);
+}
+
+.tag-editor-btn.active {
+  background: #f3e8ff;
+  border-color: var(--policy);
+  color: var(--policy);
+  font-weight: 600;
 }
 
 .card-content {

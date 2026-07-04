@@ -49,7 +49,7 @@ function parseRssItems(xml) {
   const items = xml.match(/<item[\s\S]*?<\/item>/gi) || [];
   return items.map(block => ({
     title: stripHtml(extractTag(block, "title")),
-    link: extractTag(block, "link").trim(),
+    link: decodeEntities(extractTag(block, "link")).trim(),
     pubDate: extractTag(block, "pubDate"),
     description: stripHtml(extractTag(block, "description")),
     sourceTag: stripHtml(extractTag(block, "source"))
@@ -58,7 +58,12 @@ function parseRssItems(xml) {
 
 function toDateStr(pubDateRaw) {
   if (!pubDateRaw) return null;
-  const d = new Date(pubDateRaw);
+  let d = new Date(pubDateRaw);
+  if (isNaN(d.getTime())) {
+    // 일부 기관 RSS(mcee.go.kr 등)는 Node의 Date 파서가 못 읽는
+    // "KST" 타임존 약어를 쓴다 (예: "Mon Mar 30 09:00:00 KST 2026").
+    d = new Date(pubDateRaw.replace(/\bKST\b/, "GMT+0900"));
+  }
   if (isNaN(d.getTime())) return null;
   const y = d.getFullYear();
   const m = String(d.getMonth() + 1).padStart(2, "0");
@@ -66,24 +71,28 @@ function toDateStr(pubDateRaw) {
   return `${y}-${m}-${day}`;
 }
 
-async function fetchText(url) {
+async function fetchText(url, { method = "GET" } = {}) {
   const res = await fetch(url, {
+    method,
     headers: { "User-Agent": "Mozilla/5.0 (compatible; DailyBriefingBot/1.0)" }
   });
   if (!res.ok) throw new Error(`HTTP ${res.status}`);
   return res.text();
 }
 
-// sources: [{ name, url }] — 각 기관의 공식 발표자료 RSS
+// sources: [{ name, url, method? }] — 각 기관의 공식 발표자료 RSS.
+// method은 motir.go.kr처럼 RSS를 폼 POST로만 내려주는 사이트를 위한 옵션(기본 GET).
 async function collectOfficial(sources, category, maxPerSource) {
   const results = [];
   for (const source of sources) {
     try {
-      const xml = await fetchText(source.url);
+      const xml = await fetchText(source.url, { method: source.method });
       const items = parseRssItems(xml).slice(0, maxPerSource);
       const today = toDateStr(new Date().toString());
       for (const item of items) {
         const content = item.description || `${source.name} 발표자료입니다. 원문을 확인해 주세요.`;
+        // mcee.go.kr 등 일부 사이트는 <link>에 도메인 없이 상대경로만 내려준다.
+        const link = item.link ? new URL(item.link, source.url).href : "";
         results.push({
           date: toDateStr(item.pubDate) || today,
           category,
@@ -93,7 +102,7 @@ async function collectOfficial(sources, category, maxPerSource) {
           summary: truncate(content, 90),
           content,
           source: `${source.name} · 발표자료`,
-          url: item.link
+          url: link
         });
       }
       console.log(`[OK] ${source.name}: ${items.length}건`);

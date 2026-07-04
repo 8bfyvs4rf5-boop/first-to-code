@@ -7,7 +7,7 @@
   --accent: #2563eb;
   --policy: #7c3aed;
   --economy: #059669;
-  --tech: #2563eb;
+  --foreign: #2563eb;
   --radius: 10px;
 }
 
@@ -335,7 +335,7 @@ body {
 
 .badge.policy { background: var(--policy); }
 .badge.economy { background: var(--economy); }
-.badge.tech { background: var(--tech); }
+.badge.foreign { background: var(--foreign); }
 
 .card-source {
   font-size: 0.78rem;

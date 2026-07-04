@@ -148,6 +148,40 @@ async function collectNews(keywords, category, maxPerKeyword) {
   return results;
 }
 
+// sources: [{ name, topic, url, method? }] — 해외 주요 언론사 RSS.
+// topic("정치"/"경제"/"사회")은 부처 필터와 같은 자리(ministry)에 재사용해
+// 주요외신동향 탭에서도 대분류 필터 칩으로 노출된다. 번역/요약은
+// translateAndSummarizeWithOllama가 별도로 처리하므로 여기서는 원문 그대로 담는다.
+async function collectForeign(sources, category, maxPerSource) {
+  const results = [];
+  for (const source of sources) {
+    try {
+      const xml = await fetchText(source.url, { method: source.method });
+      const items = parseRssItems(xml).slice(0, maxPerSource);
+      const today = toDateStr(new Date().toString());
+      for (const item of items) {
+        const link = item.link ? new URL(item.link, source.url).href : "";
+        const content = item.description || item.title;
+        results.push({
+          date: toDateStr(item.pubDate) || today,
+          category,
+          type: "foreign",
+          ministry: source.topic,
+          title: item.title,
+          summary: truncate(content, 90),
+          content,
+          source: source.name,
+          url: link
+        });
+      }
+      console.log(`[OK] ${source.name}(${source.topic}): ${items.length}건`);
+    } catch (err) {
+      console.error(`[경고] ${source.name}(${source.topic}) 수집 실패: ${err.message}`);
+    }
+  }
+  return results;
+}
+
 // --- 중복 제거 -------------------------------------------------------
 
 // 정확히 같은 URL(또는 제목)을 가진 항목 제거
@@ -208,6 +242,10 @@ function dedupeCrossType(items) {
 
 const OLLAMA_URL = "http://127.0.0.1:11434";
 const OLLAMA_MODEL = "qwen2.5:3b";
+// 외국어 번역은 3b로는 한자/키릴 문자가 섞이거나 고유명사가 심하게
+// 왜곡되는 경우가 많아, 이미 한국어인 글을 요약만 하는 summarizeWithOllama와
+// 달리 번역이 필요한 translateAndSummarizeWithOllama는 더 큰 모델을 쓴다.
+const OLLAMA_TRANSLATE_MODEL = "qwen2.5:14b";
 
 async function isOllamaAvailable() {
   try {
@@ -253,6 +291,74 @@ async function summarizeWithOllama(items) {
   console.log(`[OK] Ollama 요약 ${ok}/${items.length}건 완료`);
 }
 
+// qwen 계열 소형 모델은 번역 중에 한자(중국어)·키릴·히브리·아랍·일본 가나 등
+// 엉뚱한 문자를 섞어 넣는 경우가 있다 — 그런 응답은 쓰지 않고 원문을
+// 그대로 유지하는 게 낫다. (한글/영문/숫자/기호만 정상으로 간주)
+const FOREIGN_SCRIPT_RE = /[一-鿿Ѐ-ӿ֐-׿؀-ۿ぀-ゟ゠-ヿ०-९ก-๿]/;
+// 형식은 맞지만 내용이 사실상 비어있는(모델이 응답을 중간에 끊은) 경우 방지.
+const MIN_TRANSLATED_SUMMARY_LEN = 15;
+
+// 외신(원문이 외국어)을 한국어 제목/요약으로 번역한다. 번역과 요약을
+// 한 번의 호출로 같이 처리해 Ollama 호출 횟수를 절반으로 줄인다.
+async function translateOneWithOllama(item) {
+  const original = (item.content || item.title || "").slice(0, 800);
+  const prompt =
+    "다음 외국어 뉴스 제목과 내용을 한국어로 번역하고 요약하세요.\n" +
+    "규칙:\n" +
+    "- 한자(중국어)나 키릴 문자를 절대 쓰지 마세요.\n" +
+    "- 영어 단어를 그대로 남기지 말고 전부 한글로 옮기세요.\n" +
+    "- 유명인·지명은 한국 뉴스에서 실제로 쓰는 정확한 한글 표기를 사용하세요.\n" +
+    "아래 형식을 정확히 지키고 다른 설명은 절대 덧붙이지 마세요.\n" +
+    "제목: <한국어로 번역한 제목>\n" +
+    "요약: <한국어 1~2문장 요약>\n\n" +
+    `제목: ${item.title}\n내용: ${original}`;
+
+  const res = await fetch(`${OLLAMA_URL}/api/generate`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      model: OLLAMA_TRANSLATE_MODEL,
+      prompt,
+      stream: false,
+      options: { temperature: 0 }
+    })
+  });
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  const data = await res.json();
+  const text = (data.response || "").trim();
+  const titleMatch = text.match(/제목:\s*(.+)/);
+  const summaryMatch = text.match(/요약:\s*([\s\S]+)/);
+  if (!titleMatch || !summaryMatch) throw new Error("응답 형식 불일치");
+  const translatedTitle = titleMatch[1].trim();
+  const translatedSummary = summaryMatch[1].split(/\n\s*제목:/)[0].trim();
+  if (FOREIGN_SCRIPT_RE.test(translatedTitle) || FOREIGN_SCRIPT_RE.test(translatedSummary)) {
+    throw new Error("번역 결과에 엉뚱한 문자 혼입");
+  }
+  if (translatedSummary.length < MIN_TRANSLATED_SUMMARY_LEN) {
+    throw new Error("번역 결과가 비정상적으로 짧음");
+  }
+  item.title = translatedTitle;
+  item.content = translatedSummary;
+  item.summary = truncate(translatedSummary, 90);
+}
+
+async function translateAndSummarizeWithOllama(items) {
+  if (!(await isOllamaAvailable())) {
+    console.log(`[정보] Ollama(${OLLAMA_URL})에 연결할 수 없어 원문(외국어) 그대로 둡니다.`);
+    return;
+  }
+  let ok = 0;
+  for (const item of items) {
+    try {
+      await translateOneWithOllama(item);
+      ok++;
+    } catch (err) {
+      console.error(`[경고] "${item.title}" 번역 실패, 원문 유지: ${err.message}`);
+    }
+  }
+  console.log(`[OK] Ollama 번역/요약 ${ok}/${items.length}건 완료`);
+}
+
 // --- 출력 ---------------------------------------------------------
 
 function writeOutputFile(outputPath, itemsVarName, metaVarName, items, scriptName) {
@@ -273,9 +379,11 @@ module.exports = {
   stripHtml,
   collectOfficial,
   collectNews,
+  collectForeign,
   dedupeExact,
   dedupeCrossType,
   titleSimilarity,
   summarizeWithOllama,
+  translateAndSummarizeWithOllama,
   writeOutputFile
 };

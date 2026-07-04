@@ -1,7 +1,7 @@
 const categoryLabels = {
   policy: "주요 정책",
   economy: "주요 경제정책",
-  tech: "기술"
+  foreign: "주요외신동향"
 };
 
 const feedEl = document.getElementById("feed");
@@ -57,6 +57,9 @@ function renderAutoUpdatedNote() {
   if (typeof policyAutoMeta !== "undefined") {
     lines.push(`주요 정책 ${policyAutoMeta.updatedAt} (${policyAutoMeta.count}건)`);
   }
+  if (typeof foreignAutoMeta !== "undefined") {
+    lines.push(`주요외신동향 ${foreignAutoMeta.updatedAt} (${foreignAutoMeta.count}건)`);
+  }
   if (lines.length === 0) return;
   const note = document.createElement("p");
   note.className = "auto-updated-note";
@@ -88,7 +91,8 @@ function getAllItems() {
   const manual = typeof briefingItems !== "undefined" ? briefingItems : [];
   const economyAuto = typeof economyAutoItems !== "undefined" ? economyAutoItems : [];
   const policyAuto = typeof policyAutoItems !== "undefined" ? policyAutoItems : [];
-  return [...manual, ...economyAuto, ...policyAuto];
+  const foreignAuto = typeof foreignAutoItems !== "undefined" ? foreignAutoItems : [];
+  return [...manual, ...economyAuto, ...policyAuto, ...foreignAuto];
 }
 
 function renderMinistryFilters() {
@@ -201,6 +205,11 @@ function renderCard(item) {
     tag.className = "sub-tag";
     tag.textContent = "공식 발표";
     top.appendChild(tag);
+  } else if (item.type === "foreign") {
+    const tag = document.createElement("span");
+    tag.className = "sub-tag";
+    tag.textContent = "해외 언론 · AI 번역";
+    top.appendChild(tag);
   }
 
   const scrapBtn = document.createElement("button");
@@ -300,8 +309,8 @@ function applyViewChrome() {
   ministryFiltersEl.hidden = isScrapView;
   viewTitleEl.textContent = isScrapView ? "스크랩" : "데일리 브리핑";
   viewSubtitleEl.textContent = isScrapView
-    ? "저장해 둔 정책·경제·기술 항목 모음"
-    : "주요 정책 · 주요 경제정책 · 기술 동향을 한 곳에서";
+    ? "저장해 둔 정책·경제·외신 항목 모음"
+    : "주요 정책 · 주요 경제정책 · 주요외신동향을 한 곳에서";
 }
 
 sideNavEl.addEventListener("click", (e) => {

@@ -1,5 +1,5 @@
 #!/bin/bash
-# 매일 launchd가 실행하는 스크립트 — 경제정책 + 주요 정책 데이터를 순서대로 갱신한다.
+# 매일 launchd가 실행하는 스크립트 — 경제정책 + 주요 정책 + 주요외신동향 데이터를 순서대로 갱신한다.
 cd "$(dirname "$0")" || exit 1
 
 # launchd가 새벽에 맥을 깨울 때 와이파이가 아직 안 붙어있는 경우가 있어
@@ -19,3 +19,4 @@ done
 
 /usr/local/bin/node fetch-economy-news.js
 /usr/local/bin/node fetch-policy-news.js
+/usr/local/bin/node fetch-foreign-news.js

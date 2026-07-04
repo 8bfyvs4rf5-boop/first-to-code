@@ -1,5 +1,5 @@
 // 매일 여기에 항목을 추가하세요.
-// category: "policy"(주요 정책) | "economy"(한국 경제정책) | "tech"(기술)
+// category: "policy"(주요 정책) | "economy"(한국 경제정책) | "foreign"(주요외신동향)
 // date: "YYYY-MM-DD" 형식
 // summary: 초기 화면에 보이는 짧은 요약 (1~2문장)
 // content: 카드를 클릭했을 때 펼쳐지는 확장된 내용 (없으면 summary로 대체됨)
@@ -14,15 +14,16 @@ const briefingItems = [
     source: "출처명",
     url: "#"
   },
-  // economy(한국 경제정책) 항목은 fetch-economy-news.js 실행 결과인
-  // data-economy-auto.js에서 자동으로 채워집니다. 수동으로 추가하고 싶은
-  // 항목이 있으면 아래처럼 category: "economy"로 추가해도 됩니다.
+  // economy(한국 경제정책)·foreign(주요외신동향) 항목은 각각
+  // fetch-economy-news.js·fetch-foreign-news.js 실행 결과인
+  // data-economy-auto.js·data-foreign-auto.js에서 자동으로 채워집니다.
+  // 수동으로 추가하고 싶은 항목이 있으면 아래처럼 추가해도 됩니다.
   {
     date: "2026-07-02",
-    category: "tech",
-    title: "예시: 신기술/제품 관련 소식",
-    summary: "기술 동향 요약 내용을 여기에 작성하세요.",
-    content: "기술 동향에 대한 상세 내용을 여기에 작성하세요.",
+    category: "foreign",
+    title: "예시: 해외 언론 보도 요약",
+    summary: "해외 언론 기사를 한국어로 번역/요약한 내용을 여기에 작성하세요.",
+    content: "번역된 상세 내용을 여기에 작성하세요.",
     source: "출처명",
     url: "#"
   }

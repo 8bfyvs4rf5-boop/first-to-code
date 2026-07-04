@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>데일리 브리핑 - 정책 · 경제 · 기술</title>
+<title>데일리 브리핑 - 정책 · 경제 · 외신</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -22,7 +22,7 @@
     <header class="site-header">
       <div class="header-inner">
         <h1 id="viewTitle">데일리 브리핑</h1>
-        <p class="subtitle" id="viewSubtitle">주요 정책 · 주요 경제정책 · 기술 동향을 한 곳에서</p>
+        <p class="subtitle" id="viewSubtitle">주요 정책 · 주요 경제정책 · 주요외신동향을 한 곳에서</p>
         <p class="today" id="todayDate"></p>
       </div>
     </header>
@@ -30,7 +30,7 @@
     <nav class="tabs" id="tabs">
       <button class="tab-btn active" data-category="economy">주요 경제정책</button>
       <button class="tab-btn" data-category="policy">주요 정책</button>
-      <button class="tab-btn" data-category="tech">기술</button>
+      <button class="tab-btn" data-category="foreign">주요외신동향</button>
     </nav>
 
     <nav class="ministry-filters" id="ministryFilters" hidden></nav>
@@ -49,6 +49,7 @@
 <script src="data.js"></script>
 <script src="data-economy-auto.js"></script>
 <script src="data-policy-auto.js"></script>
+<script src="data-foreign-auto.js"></script>
 <script src="app.js"></script>
 </body>
 </html>

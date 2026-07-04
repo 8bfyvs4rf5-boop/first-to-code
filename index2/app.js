@@ -33,8 +33,6 @@ searchInputEl.addEventListener("input", () => {
 });
 
 // --- 태그 ---------------------------------------------------------
-
-// --- 태그 ---------------------------------------------------------
 // 분야/유형 2축 고정 태그 체계. 항목 자체(data.js 등)에 기본 tags를 심어둘
 // 수도 있지만, 사용자가 실제로 붙이고 떼는 태그는 스크랩과 동일하게
 // localStorage에 itemKey로 저장한다 — auto 파일이 매일 통째로 재생성돼도
@@ -121,6 +119,44 @@ function toggleScrap(item) {
   if (keys.has(key)) keys.delete(key);
   else keys.add(key);
   saveScrapKeys(keys);
+}
+
+// --- 발굴 노트 -------------------------------------------------------
+// 스크랩한 항목에 남기는 메모. 스크랩과 마찬가지로 localStorage에
+// itemKey로 저장해 auto 파일 재생성과 무관하게 유지된다.
+
+const NOTE_STORAGE_KEY = "dailyBriefing.notes";
+
+function loadNoteStore() {
+  try {
+    const raw = localStorage.getItem(NOTE_STORAGE_KEY);
+    return raw ? JSON.parse(raw) : {};
+  } catch {
+    return {};
+  }
+}
+
+function saveNoteStore(store) {
+  localStorage.setItem(NOTE_STORAGE_KEY, JSON.stringify(store));
+}
+
+function getItemNote(item) {
+  const store = loadNoteStore();
+  return store[itemKey(item)] || { why: "", idea: "", needsResearch: false };
+}
+
+function saveItemNote(item, note) {
+  const store = loadNoteStore();
+  store[itemKey(item)] = note;
+  saveNoteStore(store);
+}
+
+function debounce(fn, delay) {
+  let timer;
+  return (...args) => {
+    clearTimeout(timer);
+    timer = setTimeout(() => fn(...args), delay);
+  };
 }
 
 function renderAutoUpdatedNote() {
@@ -336,6 +372,7 @@ function renderCard(item) {
     e.stopPropagation();
     toggleScrap(item);
     syncScrapBtn();
+    syncNoteVisibility();
     if (activeView === "scrap") renderFeed();
   });
   top.appendChild(scrapBtn);
@@ -388,6 +425,71 @@ function renderCard(item) {
   link.textContent = "원문 보기 ↗";
   link.addEventListener("click", e => e.stopPropagation());
   detail.appendChild(link);
+
+  // 스크랩한 항목에만 보이는 발굴 노트: 왜 관심있는지 / 적용 아이디어 / 추가 조사 필요 여부.
+  const noteSection = document.createElement("div");
+  noteSection.className = "note-section";
+  noteSection.addEventListener("click", e => e.stopPropagation());
+
+  const noteTitle = document.createElement("div");
+  noteTitle.className = "note-section-title";
+  noteTitle.textContent = "발굴 노트";
+  noteSection.appendChild(noteTitle);
+
+  const whyLabel = document.createElement("label");
+  whyLabel.className = "note-label";
+  whyLabel.textContent = "왜 관심있는지";
+  const whyInput = document.createElement("textarea");
+  whyInput.className = "note-textarea";
+  whyInput.rows = 2;
+  whyInput.placeholder = "이 항목이 왜 눈에 띄었는지 적어보세요.";
+
+  const ideaLabel = document.createElement("label");
+  ideaLabel.className = "note-label";
+  ideaLabel.textContent = "적용 아이디어";
+  const ideaInput = document.createElement("textarea");
+  ideaInput.className = "note-textarea";
+  ideaInput.rows = 2;
+  ideaInput.placeholder = "여기서 발전시켜볼 만한 정책 아이디어를 적어보세요.";
+
+  const researchLabel = document.createElement("label");
+  researchLabel.className = "note-checkbox-label";
+  const researchCheckbox = document.createElement("input");
+  researchCheckbox.type = "checkbox";
+  researchLabel.appendChild(researchCheckbox);
+  researchLabel.appendChild(document.createTextNode(" 추가 조사 필요"));
+
+  const persistNote = debounce(() => {
+    saveItemNote(item, {
+      why: whyInput.value,
+      idea: ideaInput.value,
+      needsResearch: researchCheckbox.checked
+    });
+  }, 300);
+
+  const syncNoteFields = () => {
+    const note = getItemNote(item);
+    whyInput.value = note.why;
+    ideaInput.value = note.idea;
+    researchCheckbox.checked = note.needsResearch;
+  };
+  syncNoteFields();
+
+  whyInput.addEventListener("input", persistNote);
+  ideaInput.addEventListener("input", persistNote);
+  researchCheckbox.addEventListener("change", persistNote);
+
+  noteSection.appendChild(whyLabel);
+  noteSection.appendChild(whyInput);
+  noteSection.appendChild(ideaLabel);
+  noteSection.appendChild(ideaInput);
+  noteSection.appendChild(researchLabel);
+  detail.appendChild(noteSection);
+
+  const syncNoteVisibility = () => {
+    noteSection.hidden = !isScrapped(item);
+  };
+  syncNoteVisibility();
 
   const tagEditor = document.createElement("div");
   tagEditor.className = "tag-editor";

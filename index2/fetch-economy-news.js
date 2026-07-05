@@ -41,6 +41,7 @@ async function main() {
 
   let all = lib.dedupeExact([...official, ...news]);
   all = lib.dedupeCrossType(all);
+  all = lib.mergeSimilarNews(all);
   all.sort((a, b) => b.date.localeCompare(a.date));
 
   if (all.length === 0) {
@@ -49,6 +50,7 @@ async function main() {
   }
 
   await lib.summarizeWithOllama(all);
+  lib.autoTagItems(all);
 
   lib.writeOutputFile(OUTPUT_FILE, "economyAutoItems", "economyAutoMeta", all, "fetch-economy-news.js");
   console.log(`\n총 ${all.length}건 저장 완료 -> ${path.basename(OUTPUT_FILE)}`);

@@ -269,6 +269,114 @@ function dedupeCrossType(items) {
   });
 }
 
+// --- 분야/유형 자동 태그 분류 -------------------------------------------
+// app.js의 TAG_TAXONOMY(분야 10종 · 유형 5종)와 동일한 체계를 Node 스크립트
+// 쪽에서도 써야 해서 여기 그대로 옮겨 적었다 — 브라우저용 app.js와는 실행
+// 환경이 달라 공유가 안 되니, 분야/유형 태그 종류를 바꾸면 양쪽 다 손봐야 한다.
+// 제목·본문(그리고 부처명)에 연관 키워드가 있으면 해당 태그를 붙이는
+// 단순 키워드 매칭 방식이라 완벽하진 않지만, 자동 수집 항목도 수동으로
+// 태그를 붙이기 전까지 분야/유형 필터에서 아예 빠져 있던 문제를 해소해 준다.
+// 사용자가 화면에서 직접 태그를 고치면 localStorage 값이 우선하므로
+// (getItemTags 참고) 이 자동 분류는 어디까지나 기본값이다.
+const DOMAIN_KEYWORDS = {
+  "교육": ["교육", "학교", "학생", "대학", "입시", "학부모", "교원", "유치원", "보육"],
+  "노동": ["노동", "고용", "일자리", "근로자", "근로", "임금", "노사", "실업"],
+  "부동산": ["부동산", "주택", "전세", "임대", "아파트", "분양", "재건축", "재개발"],
+  "AI": ["인공지능", "AI", "생성형", "챗봇", "알고리즘"],
+  "산업": ["산업", "제조", "수출", "중소기업", "벤처", "반도체", "공장"],
+  "복지": ["복지", "돌봄", "연금", "의료", "건강보험", "저출산", "노인", "장애인", "아동"],
+  "환경": ["환경", "기후", "탄소", "에너지", "재생에너지", "미세먼지"],
+  "금융": ["금융", "은행", "증권", "대출", "금리", "세제", "세금", "국세"],
+  "외교안보": ["외교", "안보", "국방", "북한", "통일", "군사", "동맹"],
+  "행정": ["행정", "지방자치", "규제", "제도", "공공기관", "지자체"]
+};
+
+const TYPE_KEYWORDS = {
+  "규제": ["규제", "단속", "제한", "금지", "처벌", "과태료", "의무화"],
+  "지원": ["지원", "지원금", "보조금", "혜택", "바우처", "장려금"],
+  "제도개선": ["개선", "개편", "도입", "시행", "완화"],
+  "예산·재정": ["예산", "재정", "세금", "세제", "국고", "재원"],
+  "조사·연구": ["조사", "연구", "실태", "통계", "발표"]
+};
+
+// 부처명만으로는 분야 키워드가 본문에 안 드러나는 경우를 보완하는 힌트.
+// (예: "국토교통부"엔 "부동산"이라는 글자가 없다.) 키워드만으로 이미
+// 잡히는 부처(예: "보건복지부"→"복지")는 중복이라 여기 넣지 않았다.
+const MINISTRY_DOMAIN_HINTS = {
+  "국토교통부": ["부동산"],
+  "중소벤처기업부": ["산업"],
+  "과학기술정보통신부": ["AI", "산업"]
+};
+
+function classifyTags(item) {
+  const haystack = `${item.ministry || ""} ${item.title || ""} ${item.content || ""}`;
+  const domainSet = new Set(
+    Object.keys(DOMAIN_KEYWORDS).filter(tag => DOMAIN_KEYWORDS[tag].some(kw => haystack.includes(kw)))
+  );
+  for (const hint of MINISTRY_DOMAIN_HINTS[item.ministry] || []) domainSet.add(hint);
+  const type = Object.keys(TYPE_KEYWORDS).filter(tag => TYPE_KEYWORDS[tag].some(kw => haystack.includes(kw)));
+  return { domain: Array.from(domainSet), type };
+}
+
+// 항목마다 tags를 채워준다. 아무 태그도 못 찾은 항목은 건드리지 않고 그대로
+// 둬서(빈 배열을 강제로 넣지 않음) 화면에서 사용자가 직접 붙일 수 있게 한다.
+function autoTagItems(items) {
+  for (const item of items) {
+    const tags = classifyTags(item);
+    if (tags.domain.length > 0 || tags.type.length > 0) item.tags = tags;
+  }
+}
+
+// --- 관련 뉴스 중복 통합 ------------------------------------------------
+// 같은 사안이 여러 부처 키워드 검색이나 여러 매체에 걸쳐 중복으로 잡히는
+// 경우가 많아, 제목이 비슷하고 날짜가 가까운 관련 뉴스(type: "news")를
+// 하나로 묶어 "OO 등 N개 매체 종합" 형태의 단일 항목으로 표시한다.
+const NEWS_CLUSTER_SIMILARITY_THRESHOLD = 0.55;
+const NEWS_CLUSTER_MAX_DAY_GAP = 2;
+
+function mergeNewsCluster(cluster) {
+  if (cluster.length === 1) return cluster[0];
+  const sorted = [...cluster].sort((a, b) => a.date.localeCompare(b.date));
+  const base = sorted[0];
+  const outlets = Array.from(new Set(cluster.map(c => c.source).filter(Boolean)));
+  const sourceLabel =
+    outlets.length <= 2 ? outlets.join(", ") : `${outlets.slice(0, 2).join(", ")} 외 ${outlets.length - 2}곳`;
+  return {
+    ...base,
+    source: sourceLabel,
+    mergedCount: cluster.length,
+    mergedOutlets: outlets,
+    content: `[${base.ministry} 관련 뉴스] ${outlets.length}개 매체(${outlets.join(", ")})에서 보도한 내용을 종합했습니다.`,
+    summary: `[${base.ministry} 관련 뉴스] ${outlets.length}개 매체 종합 보도`
+  };
+}
+
+function mergeSimilarNews(items) {
+  const newsItems = items.filter(i => i.type === "news");
+  const others = items.filter(i => i.type !== "news");
+
+  const used = new Array(newsItems.length).fill(false);
+  const merged = [];
+  for (let i = 0; i < newsItems.length; i++) {
+    if (used[i]) continue;
+    const cluster = [newsItems[i]];
+    used[i] = true;
+    for (let j = i + 1; j < newsItems.length; j++) {
+      if (used[j]) continue;
+      if (
+        daysBetween(newsItems[i].date, newsItems[j].date) <= NEWS_CLUSTER_MAX_DAY_GAP &&
+        titleSimilarity(newsItems[i].title, newsItems[j].title) >= NEWS_CLUSTER_SIMILARITY_THRESHOLD
+      ) {
+        cluster.push(newsItems[j]);
+        used[j] = true;
+      }
+    }
+    merged.push(mergeNewsCluster(cluster));
+  }
+
+  return [...others, ...merged];
+}
+
 // --- 무료 로컬 AI 요약 (Ollama) ---------------------------------------
 // 서버는 launchd로 상시 실행됨 (~/Library/LaunchAgents/com.dailybriefing.ollama-serve.plist)
 
@@ -414,7 +522,9 @@ module.exports = {
   collectForeign,
   dedupeExact,
   dedupeCrossType,
+  mergeSimilarNews,
   titleSimilarity,
+  autoTagItems,
   summarizeWithOllama,
   translateAndSummarizeWithOllama,
   writeOutputFile

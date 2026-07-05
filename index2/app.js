@@ -1568,6 +1568,13 @@ function renderCard(item) {
     top.appendChild(tag);
   }
 
+  if (item.mergedCount > 1) {
+    const tag = document.createElement("span");
+    tag.className = "sub-tag";
+    tag.textContent = `${item.mergedCount}개 매체 종합`;
+    top.appendChild(tag);
+  }
+
   const scrapBtn = document.createElement("button");
   scrapBtn.className = "scrap-btn";
   scrapBtn.type = "button";

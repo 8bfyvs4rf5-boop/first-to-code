@@ -35,6 +35,7 @@ async function main() {
   }
 
   await lib.translateAndSummarizeWithOllama(all);
+  lib.autoTagItems(all);
 
   lib.writeOutputFile(OUTPUT_FILE, "foreignAutoItems", "foreignAutoMeta", all, "fetch-foreign-news.js");
   console.log(`\n총 ${all.length}건 저장 완료 -> ${path.basename(OUTPUT_FILE)}`);

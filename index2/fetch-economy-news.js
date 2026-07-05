@@ -8,9 +8,10 @@ const lib = require("./collect-lib");
 
 // 대한민국 정책브리핑(korea.kr)의 부처별 RSS는 2026.7.1부로 전면 중단되었다
 // (저작권 등 권리 보호에 따른 제공방식 변경, 공지: korea.kr/etc/noticeView.do?newsId=132038885).
-// 후속 대체 API가 없어 재정경제부·기획예산처·국세청은 공식 RSS를 뺐고,
-// 아래 NEWS_KEYWORDS의 관련 뉴스 검색으로 대신 커버한다.
-// 금융감독원(FSS)도 공개된 보도자료 RSS가 없어 마찬가지로 뉴스 검색만 사용한다.
+// 2025년 정부조직개편으로 기획재정부가 재정경제부(세제·경제·금융·국고)와
+// 기획예산처(예산·기금, 국무총리 소속)로 분리되면서 재정경제부는 신도메인
+// mofe.go.kr에 자체 RSS를 새로 열었다(curl로 직접 확인). 기획예산처·국세청·
+// 금융감독원(FSS)은 사이트 자체에 RSS가 없어 뉴스 검색으로만 커버한다.
 const OFFICIAL_SOURCES = [
   {
     name: "한국은행",
@@ -19,6 +20,10 @@ const OFFICIAL_SOURCES = [
   {
     name: "금융위원회",
     url: "https://www.fsc.go.kr/about/fsc_bbs_rss/?fid=0111"
+  },
+  {
+    name: "재정경제부",
+    url: "https://mofe.go.kr/com/detailRssTagService.do?bbsId=MOSFBBS_000000000028"
   }
 ];
 

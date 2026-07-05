@@ -19,12 +19,20 @@ const NAMED_ENTITIES = {
   apos: "'"
 };
 
+// 일부 부처 RSS는 &amp;amp;처럼 엔티티가 여러 겹 인코딩되어 내려온다.
+// 더 이상 바뀌지 않을 때까지 반복 적용해 몇 겹이든 풀어낸다.
 function decodeEntities(str) {
-  return str
-    .replace(/&#(\d+);/g, (_, code) => String.fromCharCode(Number(code)))
-    .replace(/&#x([0-9a-f]+);/gi, (_, code) => String.fromCharCode(parseInt(code, 16)))
-    .replace(/&(\w+);/g, (m, name) => (name in NAMED_ENTITIES ? NAMED_ENTITIES[name] : m))
-    .replace(/&amp;/g, "&");
+  let result = str;
+  let prev;
+  do {
+    prev = result;
+    result = result
+      .replace(/&#(\d+);/g, (_, code) => String.fromCharCode(Number(code)))
+      .replace(/&#x([0-9a-f]+);/gi, (_, code) => String.fromCharCode(parseInt(code, 16)))
+      .replace(/&(\w+);/g, (m, name) => (name in NAMED_ENTITIES ? NAMED_ENTITIES[name] : m))
+      .replace(/&amp;/g, "&");
+  } while (result !== prev);
+  return result;
 }
 
 function stripHtml(str) {
@@ -51,7 +59,8 @@ function parseRssItems(xml) {
     title: stripHtml(extractTag(block, "title")),
     link: decodeEntities(extractTag(block, "link")).trim(),
     pubDate: extractTag(block, "pubDate"),
-    description: stripHtml(extractTag(block, "description")),
+    // msit.go.kr처럼 <description> 없이 <content:encoded>만 내려주는 사이트가 있다.
+    description: stripHtml(extractTag(block, "description") || extractTag(block, "content:encoded")),
     sourceTag: stripHtml(extractTag(block, "source"))
   }));
 }
@@ -64,6 +73,22 @@ function toDateStr(pubDateRaw) {
     // "KST" 타임존 약어를 쓴다 (예: "Mon Mar 30 09:00:00 KST 2026").
     d = new Date(pubDateRaw.replace(/\bKST\b/, "GMT+0900"));
   }
+  if (isNaN(d.getTime())) {
+    // mss.go.kr: 구분자 없는 "20260703161752"(YYYYMMDDHHmmss)
+    const compact = pubDateRaw.match(/^(\d{4})(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})$/);
+    if (compact) {
+      const [, y, mo, day, h, mi, se] = compact;
+      d = new Date(Number(y), Number(mo) - 1, Number(day), Number(h), Number(mi), Number(se));
+    }
+  }
+  if (isNaN(d.getTime())) {
+    // mois.go.kr: "토, 04 7월 2026 12:00:00 KST" 같은 한글 요일/월 표기
+    const korean = pubDateRaw.match(/(\d{1,2})\s*(\d{1,2})월\s*(\d{4})\s+(\d{1,2}):(\d{2}):(\d{2})/);
+    if (korean) {
+      const [, day, mo, y, h, mi, se] = korean;
+      d = new Date(Number(y), Number(mo) - 1, Number(day), Number(h), Number(mi), Number(se));
+    }
+  }
   if (isNaN(d.getTime())) return null;
   const y = d.getFullYear();
   const m = String(d.getMonth() + 1).padStart(2, "0");
@@ -71,22 +96,29 @@ function toDateStr(pubDateRaw) {
   return `${y}-${m}-${day}`;
 }
 
-async function fetchText(url, { method = "GET" } = {}) {
-  const res = await fetch(url, {
-    method,
-    headers: { "User-Agent": "Mozilla/5.0 (compatible; DailyBriefingBot/1.0)" }
-  });
+// mofa.go.kr·molit.go.kr 등은 WAF가 첫 요청에 쿠키 발급용 307을 내려주고,
+// 그 쿠키 없이 재요청하면 같은 307을 반복한다(fetch가 자동으로 리다이렉트를
+// 따라가면 "redirect count exceeded"로 죽는다). cookieBootstrapUrl을 주면
+// 리다이렉트를 직접 처리해 쿠키만 받아온 뒤 본 요청에 실어 보낸다.
+async function fetchText(url, { method = "GET", cookieBootstrapUrl } = {}) {
+  const headers = { "User-Agent": "Mozilla/5.0 (compatible; DailyBriefingBot/1.0)" };
+  if (cookieBootstrapUrl) {
+    const bootRes = await fetch(cookieBootstrapUrl, { headers, redirect: "manual" });
+    const cookies = bootRes.headers.getSetCookie ? bootRes.headers.getSetCookie() : [];
+    if (cookies.length > 0) headers.Cookie = cookies.map(c => c.split(";")[0]).join("; ");
+  }
+  const res = await fetch(url, { method, headers });
   if (!res.ok) throw new Error(`HTTP ${res.status}`);
   return res.text();
 }
 
-// sources: [{ name, url, method? }] — 각 기관의 공식 발표자료 RSS.
+// sources: [{ name, url, method?, cookieBootstrapUrl? }] — 각 기관의 공식 발표자료 RSS.
 // method은 motir.go.kr처럼 RSS를 폼 POST로만 내려주는 사이트를 위한 옵션(기본 GET).
 async function collectOfficial(sources, category, maxPerSource) {
   const results = [];
   for (const source of sources) {
     try {
-      const xml = await fetchText(source.url, { method: source.method });
+      const xml = await fetchText(source.url, { method: source.method, cookieBootstrapUrl: source.cookieBootstrapUrl });
       const items = parseRssItems(xml).slice(0, maxPerSource);
       const today = toDateStr(new Date().toString());
       for (const item of items) {

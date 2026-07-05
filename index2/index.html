@@ -19,6 +19,24 @@
       <button class="side-nav-btn" data-view="gap">정책 갭 레이더</button>
       <a class="side-nav-btn side-nav-link" href="https://claude.ai/new" target="_blank" rel="noopener noreferrer">클로드에게 질문하기</a>
     </nav>
+
+    <div class="ripeness-widget" id="ripenessWidget">
+      <div class="ripeness-widget-header">
+        <span class="ripeness-widget-title">지금 주목할 태그</span>
+        <button type="button" id="ripenessSettingsBtn" class="ripeness-settings-btn">설정</button>
+      </div>
+      <div class="ripeness-settings" id="ripenessSettings" hidden>
+        <label class="ripeness-settings-label">
+          기간(일)
+          <input type="number" id="ripenessWindowInput" min="7" max="90" step="1" class="ripeness-settings-input" />
+        </label>
+        <label class="ripeness-settings-label">
+          최소 등장
+          <input type="number" id="ripenessThresholdInput" min="2" max="20" step="1" class="ripeness-settings-input" />
+        </label>
+      </div>
+      <div class="ripeness-list" id="ripenessList"></div>
+    </div>
   </aside>
 
   <div class="main-area">

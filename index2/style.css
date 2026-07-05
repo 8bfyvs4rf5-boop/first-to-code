@@ -88,6 +88,139 @@ body {
   background: rgba(167, 139, 250, 0.1);
 }
 
+/* --- 지금 주목할 태그 위젯 --- */
+
+.ripeness-widget {
+  margin: 12px 16px 0;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.ripeness-widget-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.ripeness-widget-title {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #e2e8f0;
+}
+
+.ripeness-settings-btn {
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: none;
+  color: #94a3b8;
+  font-size: 0.7rem;
+  padding: 2px 8px;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.ripeness-settings-btn:hover {
+  color: #e2e8f0;
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.ripeness-settings {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 10px;
+  padding: 8px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.ripeness-settings[hidden] {
+  display: none;
+}
+
+.ripeness-settings-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.72rem;
+  color: #cbd5e1;
+}
+
+.ripeness-settings-input {
+  width: 52px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  border-radius: 6px;
+  padding: 2px 6px;
+  font-size: 0.75rem;
+}
+
+.ripeness-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.ripeness-empty {
+  margin: 0;
+  font-size: 0.74rem;
+  color: #94a3b8;
+  line-height: 1.5;
+}
+
+.ripeness-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  border: none;
+  background: none;
+  padding: 5px 4px;
+  border-radius: 6px;
+  cursor: pointer;
+  text-align: left;
+}
+
+.ripeness-row:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.ripeness-rank {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #f97316;
+  width: 14px;
+}
+
+.ripeness-label {
+  flex: 1;
+  font-size: 0.82rem;
+  color: #e2e8f0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ripeness-count {
+  font-size: 0.72rem;
+  color: #94a3b8;
+}
+
+/* --- "주목할 시점" 배지 (태그 필터, 카드 태그 칩 공용) --- */
+
+.ripe-badge {
+  display: inline-block;
+  margin-left: 5px;
+  font-size: 0.66rem;
+  font-weight: 700;
+  color: #fff;
+  background: #f97316;
+  padding: 1px 6px;
+  border-radius: 999px;
+  vertical-align: middle;
+}
+
 .main-area {
   flex: 1;
   min-width: 0;

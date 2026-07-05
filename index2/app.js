@@ -26,6 +26,11 @@ const patternSummaryEl = document.getElementById("patternSummary");
 const patternItemsEl = document.getElementById("patternItems");
 const gapViewEl = document.getElementById("gapView");
 const gapListEl = document.getElementById("gapList");
+const ripenessSettingsBtn = document.getElementById("ripenessSettingsBtn");
+const ripenessSettingsEl = document.getElementById("ripenessSettings");
+const ripenessWindowInputEl = document.getElementById("ripenessWindowInput");
+const ripenessThresholdInputEl = document.getElementById("ripenessThresholdInput");
+const ripenessListEl = document.getElementById("ripenessList");
 
 let activeCategory = "economy";
 let activeMinistry = "all";
@@ -406,9 +411,11 @@ newIdeaFormEl.addEventListener("submit", e => {
 
 const PATTERN_WINDOW_DAYS = 30;
 
-function getRecentItems() {
+// windowDays를 받아 최근 N일 이내 항목만 추린다. 패턴 뷰는 고정 30일을
+// 쓰고, 아래 "지금 주목할 태그" 위젯은 사용자가 조정한 기간을 넘겨준다.
+function getRecentItems(windowDays = PATTERN_WINDOW_DAYS) {
   const cutoff = new Date();
-  cutoff.setDate(cutoff.getDate() - PATTERN_WINDOW_DAYS);
+  cutoff.setDate(cutoff.getDate() - windowDays);
   return getAllItems().filter(item => {
     const d = new Date(item.date);
     return !isNaN(d.getTime()) && d >= cutoff;
@@ -625,6 +632,129 @@ function renderGapView() {
   for (const gap of gaps) gapListEl.appendChild(renderGapCard(gap));
 }
 
+// --- 태그 무르익음 신호 ------------------------------------------------
+// 최근 N일간 등장 횟수가 임계값을 넘긴 태그에 "주목할 시점" 배지를 붙인다.
+// 사이드바 위젯은 항상 떠 있어야(뷰를 전환해도) 하는 성격이라 다른 뷰들과
+// 달리 hidden 토글 없이 별도 렌더 함수를 여러 곳에서 직접 호출한다.
+
+const RIPENESS_CONFIG_KEY = "dailyBriefing.ripenessConfig";
+const RIPENESS_DEFAULTS = { windowDays: 30, threshold: 3 };
+
+function loadRipenessConfig() {
+  try {
+    const raw = localStorage.getItem(RIPENESS_CONFIG_KEY);
+    return raw ? { ...RIPENESS_DEFAULTS, ...JSON.parse(raw) } : { ...RIPENESS_DEFAULTS };
+  } catch {
+    return { ...RIPENESS_DEFAULTS };
+  }
+}
+
+function saveRipenessConfig(config) {
+  localStorage.setItem(RIPENESS_CONFIG_KEY, JSON.stringify(config));
+}
+
+// 분야/유형 태그를 한 목록으로 합쳐서 임계값을 넘긴 태그를 건수 내림차순으로 반환.
+function computeRipeTags() {
+  const config = loadRipenessConfig();
+  const recentItems = getRecentItems(config.windowDays);
+  const ripe = [];
+  for (const axis of Object.keys(TAG_TAXONOMY)) {
+    const counts = computeTagCounts(recentItems, axis);
+    for (const [tag, count] of Object.entries(counts)) {
+      if (count >= config.threshold) ripe.push({ axis, tag, count });
+    }
+  }
+  return ripe.sort((a, b) => b.count - a.count);
+}
+
+function getRipeTagKeySet() {
+  return new Set(computeRipeTags().map(r => `${r.axis}:${r.tag}`));
+}
+
+function isTagRipe(axis, tag, ripeKeySet) {
+  return ripeKeySet.has(`${axis}:${tag}`);
+}
+
+// 위젯에서 태그를 클릭하면, 그 태그가 실제로 가장 많이 붙어있는 카테고리
+// 탭으로 옮겨간 뒤 그 태그만 선택된 필터 상태로 브리핑 화면을 보여준다.
+// 지금 탭에만 필터를 걸면 다른 카테고리에 몰려있는 태그일 때 0건으로
+// 보일 수 있어서, 실제로 결과가 나오는 탭까지 같이 옮겨준다.
+function goToTagFilter(axis, tag) {
+  const config = loadRipenessConfig();
+  const matching = getRecentItems(config.windowDays).filter(item => getItemTags(item)[axis].includes(tag));
+  const categoryCounts = {};
+  for (const item of matching) categoryCounts[item.category] = (categoryCounts[item.category] || 0) + 1;
+  const dominantCategory = Object.entries(categoryCounts).sort((a, b) => b[1] - a[1])[0]?.[0] || activeCategory;
+
+  activeCategory = dominantCategory;
+  activeMinistry = "all";
+  activeTagFilters.domain.clear();
+  activeTagFilters.type.clear();
+  activeTagFilters[axis].add(tag);
+
+  tabsEl.querySelectorAll(".tab-btn").forEach(b => {
+    b.classList.toggle("active", b.dataset.category === dominantCategory);
+  });
+
+  switchView("briefing");
+  renderTagFilters();
+}
+
+function renderRipenessWidget() {
+  const config = loadRipenessConfig();
+  ripenessWindowInputEl.value = config.windowDays;
+  ripenessThresholdInputEl.value = config.threshold;
+
+  const top5 = computeRipeTags().slice(0, 5);
+  ripenessListEl.innerHTML = "";
+
+  if (top5.length === 0) {
+    const empty = document.createElement("p");
+    empty.className = "ripeness-empty";
+    empty.textContent = `최근 ${config.windowDays}일간 ${config.threshold}회 이상 등장한 태그가 아직 없습니다.`;
+    ripenessListEl.appendChild(empty);
+    return;
+  }
+
+  top5.forEach((r, i) => {
+    const row = document.createElement("button");
+    row.type = "button";
+    row.className = "ripeness-row";
+
+    const rank = document.createElement("span");
+    rank.className = "ripeness-rank";
+    rank.textContent = String(i + 1);
+    row.appendChild(rank);
+
+    const label = document.createElement("span");
+    label.className = "ripeness-label";
+    label.textContent = r.tag;
+    row.appendChild(label);
+
+    const count = document.createElement("span");
+    count.className = "ripeness-count";
+    count.textContent = `${r.count}건`;
+    row.appendChild(count);
+
+    row.addEventListener("click", () => goToTagFilter(r.axis, r.tag));
+    ripenessListEl.appendChild(row);
+  });
+}
+
+ripenessSettingsBtn.addEventListener("click", () => {
+  ripenessSettingsEl.hidden = !ripenessSettingsEl.hidden;
+});
+
+function handleRipenessSettingsChange() {
+  const windowDays = Math.min(90, Math.max(7, Number(ripenessWindowInputEl.value) || RIPENESS_DEFAULTS.windowDays));
+  const threshold = Math.min(20, Math.max(2, Number(ripenessThresholdInputEl.value) || RIPENESS_DEFAULTS.threshold));
+  saveRipenessConfig({ windowDays, threshold });
+  renderRipenessWidget();
+}
+
+ripenessWindowInputEl.addEventListener("change", handleRipenessSettingsChange);
+ripenessThresholdInputEl.addEventListener("change", handleRipenessSettingsChange);
+
 function renderAutoUpdatedNote() {
   const lines = [];
   if (typeof economyAutoMeta !== "undefined") {
@@ -708,6 +838,7 @@ function renderMinistryFilters() {
 
 function renderTagFilters() {
   tagFiltersEl.innerHTML = "";
+  const ripeKeySet = getRipeTagKeySet();
 
   for (const axis of Object.keys(TAG_TAXONOMY)) {
     const group = document.createElement("div");
@@ -718,7 +849,7 @@ function renderTagFilters() {
     label.textContent = TAG_AXIS_LABELS[axis];
     group.appendChild(label);
 
-    const makeChip = (value, text) => {
+    const makeChip = (value, text, ripe) => {
       const chip = document.createElement("button");
       chip.className = "tag-chip";
       chip.dataset.axis = axis;
@@ -727,11 +858,17 @@ function renderTagFilters() {
       if (value === "all" ? activeTagFilters[axis].size === 0 : activeTagFilters[axis].has(value)) {
         chip.classList.add("active");
       }
+      if (ripe) {
+        const badge = document.createElement("span");
+        badge.className = "ripe-badge";
+        badge.textContent = "주목할 시점";
+        chip.appendChild(badge);
+      }
       group.appendChild(chip);
     };
 
-    makeChip("all", "전체");
-    for (const tag of TAG_TAXONOMY[axis]) makeChip(tag, tag);
+    makeChip("all", "전체", false);
+    for (const tag of TAG_TAXONOMY[axis]) makeChip(tag, tag, isTagRipe(axis, tag, ripeKeySet));
 
     tagFiltersEl.appendChild(group);
   }
@@ -862,13 +999,23 @@ function renderCard(item) {
   cardTags.className = "card-tags";
   const syncCardTags = () => {
     const tags = getItemTags(item);
-    const all = [...tags.domain, ...tags.type];
+    const all = [
+      ...tags.domain.map(tag => ({ axis: "domain", tag })),
+      ...tags.type.map(tag => ({ axis: "type", tag }))
+    ];
     cardTags.innerHTML = "";
     cardTags.hidden = all.length === 0;
-    for (const t of all) {
+    const ripeKeySet = getRipeTagKeySet();
+    for (const { axis, tag } of all) {
       const chip = document.createElement("span");
       chip.className = "card-tag-chip";
-      chip.textContent = t;
+      chip.textContent = tag;
+      if (isTagRipe(axis, tag, ripeKeySet)) {
+        const badge = document.createElement("span");
+        badge.className = "ripe-badge";
+        badge.textContent = "주목할 시점";
+        chip.appendChild(badge);
+      }
       cardTags.appendChild(chip);
     }
   };
@@ -979,6 +1126,8 @@ function renderCard(item) {
         toggleItemTag(item, axis, value);
         btn.classList.toggle("active");
         syncCardTags();
+        renderRipenessWidget();
+        renderTagFilters();
         if (activeTagFilters.domain.size > 0 || activeTagFilters.type.size > 0) renderFeed();
       });
       group.appendChild(btn);
@@ -1019,6 +1168,7 @@ tabsEl.addEventListener("click", (e) => {
   activeCategory = btn.dataset.category;
   activeMinistry = "all";
   renderMinistryFilters();
+  renderTagFilters();
   renderFeed();
 });
 
@@ -1140,4 +1290,5 @@ renderAutoUpdatedNote();
 applyViewChrome();
 renderMinistryFilters();
 renderTagFilters();
+renderRipenessWidget();
 renderFeed();

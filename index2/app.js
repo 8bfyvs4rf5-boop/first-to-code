@@ -236,6 +236,83 @@ function deleteIdea(id) {
   saveIdeas(loadIdeas().filter(i => i.id !== id));
 }
 
+// --- 반박 시뮬레이션 (Claude API) --------------------------------------
+// 이 사이트는 백엔드가 없는 정적 페이지라, API 키를 안전하게 보관할 서버가
+// 없다. 브라우저 localStorage에만 저장하고(깃에는 절대 올라가지 않음),
+// 처음 쓸 때 한 번만 물어본다. Anthropic API는 기본적으로 브라우저에서의
+// 직접 호출을 CORS로 막아두는데, anthropic-dangerous-direct-browser-access
+// 헤더를 붙이면 허용된다 — 이름 그대로 위험을 인지하고 쓰는 옵션이라,
+// 브라우저 개발자도구로 키가 노출될 수 있다는 점을 감안해야 한다
+// (본인만 쓰는 로컬 개인 도구라 위험은 제한적이지만 화면/브라우저를
+// 공유하는 상황에서는 주의).
+const CLAUDE_API_KEY_STORAGE = "dailyBriefing.anthropicApiKey";
+
+function getClaudeApiKey() {
+  let key = localStorage.getItem(CLAUDE_API_KEY_STORAGE);
+  if (!key) {
+    key = window.prompt(
+      "Claude API 키를 입력하세요.\n이 브라우저의 localStorage에만 저장되며, 다른 곳으로 전송되지 않습니다."
+    );
+    if (key) {
+      key = key.trim();
+      localStorage.setItem(CLAUDE_API_KEY_STORAGE, key);
+    }
+  }
+  return key || null;
+}
+
+function buildRebuttalPrompt(idea) {
+  const allItems = getAllItems();
+  const linkedSummaries = (idea.linkedItemKeys || [])
+    .map(key => allItems.find(it => itemKey(it) === key))
+    .filter(Boolean)
+    .map(it => `- ${it.title}: ${it.summary || it.content || ""}`)
+    .join("\n");
+
+  return [
+    "다음 정책 아이디어에 대해 예상되는 반대 논리 3가지를 각각 2~3문장으로 제시해줘.",
+    "실제 정책 토론에서 나올 법한 현실적인 반박이어야 해.",
+    "",
+    `제목: ${idea.title}`,
+    `설명: ${idea.description || "(설명 없음)"}`,
+    linkedSummaries ? `관련 브리핑 항목:\n${linkedSummaries}` : ""
+  ]
+    .filter(Boolean)
+    .join("\n");
+}
+
+async function generateRebuttal(idea) {
+  const apiKey = getClaudeApiKey();
+  if (!apiKey) throw new Error("API 키를 입력해야 반박을 생성할 수 있습니다.");
+
+  const res = await fetch("https://api.anthropic.com/v1/messages", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "x-api-key": apiKey,
+      "anthropic-version": "2023-06-01",
+      "anthropic-dangerous-direct-browser-access": "true"
+    },
+    body: JSON.stringify({
+      model: "claude-sonnet-4-6",
+      max_tokens: 1000,
+      messages: [{ role: "user", content: buildRebuttalPrompt(idea) }]
+    })
+  });
+
+  if (!res.ok) {
+    const errBody = await res.json().catch(() => ({}));
+    // 키가 틀렸을 가능성이 커서 다음에 다시 물어보도록 지워둔다.
+    if (res.status === 401) localStorage.removeItem(CLAUDE_API_KEY_STORAGE);
+    throw new Error(errBody?.error?.message || `HTTP ${res.status}`);
+  }
+
+  const data = await res.json();
+  const textBlock = (data.content || []).find(b => b.type === "text");
+  if (!textBlock || !textBlock.text) throw new Error("응답에서 텍스트를 찾지 못했습니다.");
+  return textBlock.text.trim();
+}
+
 // --- 태그 → 부처 매핑 -------------------------------------------------
 // 실제 매핑 표는 tag-ministry-map.js(TAG_MINISTRY_MAP)에 분리해뒀다.
 // 유형 태그(규제/지원 등)는 정책 수단이라 부처를 특정할 수 없어 분야
@@ -488,6 +565,66 @@ function renderIdeaCard(idea) {
   linkSearchWrap.appendChild(linkSearchInput);
   linkSearchWrap.appendChild(linkResults);
   card.appendChild(linkSearchWrap);
+
+  const rebuttalSection = document.createElement("div");
+  rebuttalSection.className = "rebuttal-section";
+
+  const rebuttalBtn = document.createElement("button");
+  rebuttalBtn.type = "button";
+  rebuttalBtn.className = "rebuttal-btn";
+  rebuttalBtn.textContent = idea.rebuttal ? "다시 생성" : "반박 시뮬레이션";
+
+  const rebuttalBody = document.createElement("div");
+  rebuttalBody.className = "rebuttal-body";
+
+  const renderRebuttalBody = () => {
+    rebuttalBody.innerHTML = "";
+    if (!idea.rebuttal) {
+      rebuttalBody.hidden = true;
+      return;
+    }
+    rebuttalBody.hidden = false;
+    const label = document.createElement("div");
+    label.className = "rebuttal-label";
+    label.textContent = "예상 반박";
+    rebuttalBody.appendChild(label);
+    const text = document.createElement("p");
+    text.className = "rebuttal-text";
+    text.textContent = idea.rebuttal;
+    rebuttalBody.appendChild(text);
+  };
+  renderRebuttalBody();
+
+  rebuttalBtn.addEventListener("click", async () => {
+    rebuttalBtn.disabled = true;
+    rebuttalBtn.textContent = "생성 중...";
+    rebuttalBody.hidden = false;
+    rebuttalBody.innerHTML = "";
+    const loading = document.createElement("p");
+    loading.className = "rebuttal-loading";
+    loading.textContent = "Claude에게 반박 논리를 요청하는 중...";
+    rebuttalBody.appendChild(loading);
+
+    try {
+      const result = await generateRebuttal(idea);
+      idea.rebuttal = result;
+      updateIdea(idea.id, { rebuttal: result });
+      renderRebuttalBody();
+    } catch (err) {
+      rebuttalBody.innerHTML = "";
+      const errorEl = document.createElement("p");
+      errorEl.className = "rebuttal-error";
+      errorEl.textContent = `반박 생성 실패: ${err.message}`;
+      rebuttalBody.appendChild(errorEl);
+    } finally {
+      rebuttalBtn.disabled = false;
+      rebuttalBtn.textContent = idea.rebuttal ? "다시 생성" : "반박 시뮬레이션";
+    }
+  });
+
+  rebuttalSection.appendChild(rebuttalBtn);
+  rebuttalSection.appendChild(rebuttalBody);
+  card.appendChild(rebuttalSection);
 
   const deleteBtn = document.createElement("button");
   deleteBtn.type = "button";

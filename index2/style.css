@@ -1041,6 +1041,74 @@ body {
   text-decoration: underline;
 }
 
+/* --- 반박 시뮬레이션 --- */
+
+.rebuttal-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.rebuttal-btn {
+  align-self: flex-start;
+  border: 1px solid var(--accent);
+  background: #fff;
+  color: var(--accent);
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 5px 12px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.rebuttal-btn:hover:not(:disabled) {
+  background: var(--accent);
+  color: #fff;
+}
+
+.rebuttal-btn:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.rebuttal-body {
+  border: 1px solid #bfdbfe;
+  background: #eff6ff;
+  border-radius: 8px;
+  padding: 10px 12px;
+}
+
+.rebuttal-body[hidden] {
+  display: none;
+}
+
+.rebuttal-label {
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 4px;
+}
+
+.rebuttal-text {
+  margin: 0;
+  font-size: 0.86rem;
+  color: #1e3a5f;
+  white-space: pre-line;
+}
+
+.rebuttal-loading {
+  margin: 0;
+  font-size: 0.82rem;
+  color: var(--accent);
+}
+
+.rebuttal-error {
+  margin: 0;
+  font-size: 0.82rem;
+  color: #b91c1c;
+}
+
 /* --- 패턴 뷰 --- */
 
 .pattern-view[hidden] {

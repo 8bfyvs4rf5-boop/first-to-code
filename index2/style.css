@@ -1224,6 +1224,134 @@ body {
   border-radius: 999px;
 }
 
+/* --- 태그 교차 매트릭스 --- */
+
+.matrix-view[hidden] {
+  display: none;
+}
+
+.matrix-toolbar {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.brainstorm-card {
+  background: var(--card-bg);
+  border: 1px solid var(--policy);
+  border-radius: var(--radius);
+  padding: 16px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 10px rgba(124, 58, 237, 0.12);
+}
+
+.brainstorm-card[hidden] {
+  display: none;
+}
+
+.brainstorm-heading {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--policy);
+  margin-bottom: 6px;
+}
+
+.brainstorm-prompt {
+  margin: 0 0 10px;
+  font-size: 0.86rem;
+  color: var(--text-muted);
+}
+
+.brainstorm-textarea {
+  display: block;
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 8px 10px;
+  font: inherit;
+  font-size: 0.9rem;
+  color: var(--text);
+  resize: vertical;
+  margin-bottom: 10px;
+}
+
+.brainstorm-textarea:focus {
+  outline: none;
+  border-color: var(--policy);
+}
+
+.brainstorm-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.matrix-grid-wrap {
+  overflow-x: auto;
+  padding-bottom: 8px;
+}
+
+.matrix-table {
+  border-collapse: collapse;
+  margin: 0 auto;
+}
+
+.matrix-table th,
+.matrix-table td {
+  padding: 0;
+  text-align: center;
+}
+
+.matrix-col-header,
+.matrix-row-header {
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.matrix-row-header {
+  text-align: right;
+  padding: 0 6px;
+}
+
+/* 세로로 촘촘한 컬럼 헤더는 글자가 서로 붙어 보여서 45도로 돌려 펼친다. */
+.matrix-col-header {
+  height: 78px;
+  vertical-align: bottom;
+  padding: 0;
+}
+
+.matrix-col-header span {
+  display: inline-block;
+  transform: rotate(-40deg);
+  transform-origin: left bottom;
+  padding-left: 4px;
+}
+
+.matrix-cell {
+  width: 30px;
+  height: 30px;
+  border: 1px solid var(--border);
+}
+
+.matrix-cell-diagonal {
+  background: repeating-linear-gradient(45deg, #f1f1f1, #f1f1f1 3px, #e5e7eb 3px, #e5e7eb 6px);
+}
+
+.matrix-cell-combined {
+  background: #f3f4f6;
+}
+
+.matrix-cell-open {
+  background: #ede9fe;
+  cursor: pointer;
+  transition: background 0.12s ease;
+}
+
+.matrix-cell-open:hover {
+  background: var(--policy);
+}
+
 .site-footer {
   text-align: center;
   padding: 20px;

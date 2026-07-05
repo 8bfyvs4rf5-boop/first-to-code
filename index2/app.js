@@ -28,6 +28,10 @@ const gapViewEl = document.getElementById("gapView");
 const gapListEl = document.getElementById("gapList");
 const unresolvedViewEl = document.getElementById("unresolvedView");
 const unresolvedListEl = document.getElementById("unresolvedList");
+const matrixViewEl = document.getElementById("matrixView");
+const randomComboBtn = document.getElementById("randomComboBtn");
+const brainstormCardEl = document.getElementById("brainstormCard");
+const matrixGridWrapEl = document.getElementById("matrixGridWrap");
 const ripenessSettingsBtn = document.getElementById("ripenessSettingsBtn");
 const ripenessSettingsEl = document.getElementById("ripenessSettings");
 const ripenessWindowInputEl = document.getElementById("ripenessWindowInput");
@@ -252,6 +256,19 @@ function renderIdeaCard(idea) {
     updateIdea(idea.id, { description: descTextarea.value });
   }, 300));
   card.appendChild(descTextarea);
+
+  // 태그 교차 매트릭스에서 등록된 아이디어는 어떤 조합에서 나왔는지 보여준다.
+  if (idea.comboTags && idea.comboTags.length > 0) {
+    const comboWrap = document.createElement("div");
+    comboWrap.className = "card-tags";
+    for (const t of idea.comboTags) {
+      const chip = document.createElement("span");
+      chip.className = "card-tag-chip";
+      chip.textContent = t;
+      comboWrap.appendChild(chip);
+    }
+    card.appendChild(comboWrap);
+  }
 
   const statusSelect = document.createElement("select");
   statusSelect.className = "idea-status-select";
@@ -716,6 +733,193 @@ function renderUnresolvedView() {
     for (const item of dayItems) dayGroup.appendChild(renderUnresolvedCard(item));
     unresolvedListEl.appendChild(dayGroup);
   }
+}
+
+// --- 태그 교차 매트릭스 -----------------------------------------------
+// 실제로 같은 항목에 함께 등장한 적 없는 태그 두 개를 강제로 짝지어
+// "이 조합에서 뭐가 나올 수 있을까"를 브레인스토밍하게 유도한다.
+// 태그가 많아지면(가로*세로 격자가 감당 안 되면) 격자 대신 랜덤 뽑기
+// 중심 카드 UI로 자동 전환한다.
+const MATRIX_GRID_MAX_TAGS = 24;
+
+function getAllTagEntries() {
+  return [
+    ...TAG_TAXONOMY.domain.map(tag => ({ axis: "domain", tag })),
+    ...TAG_TAXONOMY.type.map(tag => ({ axis: "type", tag }))
+  ];
+}
+
+function pairKey(tagA, tagB) {
+  return [tagA, tagB].sort().join("|");
+}
+
+// 같은 항목에 두 태그가 모두 붙어있으면 "이미 등장한 조합"으로 취급.
+function computeCombinedPairKeys() {
+  const keys = new Set();
+  for (const item of getAllItems()) {
+    const tags = getItemTags(item);
+    const all = [...tags.domain, ...tags.type];
+    for (let i = 0; i < all.length; i++) {
+      for (let j = i + 1; j < all.length; j++) {
+        keys.add(pairKey(all[i], all[j]));
+      }
+    }
+  }
+  return keys;
+}
+
+function computeUncombinedPairs() {
+  const entries = getAllTagEntries();
+  const combined = computeCombinedPairKeys();
+  const pairs = [];
+  for (let i = 0; i < entries.length; i++) {
+    for (let j = i + 1; j < entries.length; j++) {
+      if (!combined.has(pairKey(entries[i].tag, entries[j].tag))) {
+        pairs.push([entries[i], entries[j]]);
+      }
+    }
+  }
+  return pairs;
+}
+
+// 브레인스토밍 카드는 격자 셀 클릭과 "랜덤 조합 뽑기" 버튼이 동일하게 쓴다.
+function showBrainstormCard(entryA, entryB) {
+  brainstormCardEl.innerHTML = "";
+  brainstormCardEl.hidden = false;
+
+  const heading = document.createElement("div");
+  heading.className = "brainstorm-heading";
+  heading.textContent = `${entryA.tag} × ${entryB.tag}`;
+  brainstormCardEl.appendChild(heading);
+
+  const prompt = document.createElement("p");
+  prompt.className = "brainstorm-prompt";
+  prompt.textContent = "이 조합으로 브레인스토밍: 두 주제를 엮으면 어떤 정책 아이디어가 나올 수 있을까요?";
+  brainstormCardEl.appendChild(prompt);
+
+  const textarea = document.createElement("textarea");
+  textarea.className = "brainstorm-textarea";
+  textarea.rows = 3;
+  textarea.placeholder = "떠오르는 아이디어를 자유롭게 적어보세요.";
+  brainstormCardEl.appendChild(textarea);
+
+  const actions = document.createElement("div");
+  actions.className = "brainstorm-actions";
+
+  const registerBtn = document.createElement("button");
+  registerBtn.type = "button";
+  registerBtn.className = "new-idea-submit";
+  registerBtn.textContent = "아이디어로 등록";
+  registerBtn.addEventListener("click", () => {
+    const memo = textarea.value.trim();
+    const comboTags = [entryA.tag, entryB.tag];
+    const tags = { domain: [], type: [] };
+    for (const e of [entryA, entryB]) tags[e.axis].push(e.tag);
+
+    const ideas = loadIdeas();
+    ideas.push({
+      id: `idea_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`,
+      title: `[태그 조합] ${entryA.tag} × ${entryB.tag}`,
+      description: memo || `"${entryA.tag}"와 "${entryB.tag}"를 엮은 정책 아이디어를 검토합니다.`,
+      status: "idea",
+      linkedItemKeys: [],
+      comboTags,
+      tags,
+      createdAt: new Date().toISOString()
+    });
+    saveIdeas(ideas);
+    switchView("board");
+  });
+  actions.appendChild(registerBtn);
+
+  const closeBtn = document.createElement("button");
+  closeBtn.type = "button";
+  closeBtn.className = "new-idea-cancel";
+  closeBtn.textContent = "닫기";
+  closeBtn.addEventListener("click", () => {
+    brainstormCardEl.hidden = true;
+  });
+  actions.appendChild(closeBtn);
+
+  brainstormCardEl.appendChild(actions);
+  brainstormCardEl.scrollIntoView({ behavior: "smooth", block: "nearest" });
+}
+
+function pickRandomCombo() {
+  const uncombined = computeUncombinedPairs();
+  if (uncombined.length === 0) {
+    brainstormCardEl.innerHTML = "";
+    brainstormCardEl.hidden = false;
+    const empty = document.createElement("p");
+    empty.className = "pattern-empty";
+    empty.textContent = "가능한 태그 조합을 이미 모두 사용해봤습니다!";
+    brainstormCardEl.appendChild(empty);
+    return;
+  }
+  const [a, b] = uncombined[Math.floor(Math.random() * uncombined.length)];
+  showBrainstormCard(a, b);
+}
+
+randomComboBtn.addEventListener("click", pickRandomCombo);
+
+function renderMatrixGrid() {
+  matrixGridWrapEl.innerHTML = "";
+  const entries = getAllTagEntries();
+
+  if (entries.length > MATRIX_GRID_MAX_TAGS) {
+    const hint = document.createElement("p");
+    hint.className = "pattern-empty";
+    hint.textContent = `태그가 ${entries.length}개로 많아져서 격자 대신 "랜덤 조합 뽑기"로 탐색하는 걸 추천합니다.`;
+    matrixGridWrapEl.appendChild(hint);
+    return;
+  }
+
+  const combined = computeCombinedPairKeys();
+  const table = document.createElement("table");
+  table.className = "matrix-table";
+
+  const headRow = document.createElement("tr");
+  headRow.appendChild(document.createElement("th"));
+  for (const col of entries) {
+    const th = document.createElement("th");
+    th.className = "matrix-col-header";
+    const label = document.createElement("span");
+    label.textContent = col.tag;
+    th.appendChild(label);
+    headRow.appendChild(th);
+  }
+  table.appendChild(headRow);
+
+  for (const row of entries) {
+    const tr = document.createElement("tr");
+    const rowHeader = document.createElement("th");
+    rowHeader.className = "matrix-row-header";
+    rowHeader.textContent = row.tag;
+    tr.appendChild(rowHeader);
+
+    for (const col of entries) {
+      const td = document.createElement("td");
+      if (row.tag === col.tag) {
+        td.className = "matrix-cell matrix-cell-diagonal";
+      } else if (combined.has(pairKey(row.tag, col.tag))) {
+        td.className = "matrix-cell matrix-cell-combined";
+        td.title = `"${row.tag}"와 "${col.tag}"는 이미 함께 등장했습니다.`;
+      } else {
+        td.className = "matrix-cell matrix-cell-open";
+        td.title = `"${row.tag}" × "${col.tag}" 조합으로 브레인스토밍하기`;
+        td.addEventListener("click", () => showBrainstormCard(row, col));
+      }
+      tr.appendChild(td);
+    }
+    table.appendChild(tr);
+  }
+
+  matrixGridWrapEl.appendChild(table);
+}
+
+function renderMatrixView() {
+  brainstormCardEl.hidden = true;
+  renderMatrixGrid();
 }
 
 // --- 태그 무르익음 신호 ------------------------------------------------
@@ -1335,10 +1539,19 @@ const VIEW_CONFIG = {
     showMinistry: false,
     showTagFilters: false,
     showSearch: false
+  },
+  matrix: {
+    title: "태그 교차 매트릭스",
+    subtitle: "아직 조합된 적 없는 태그를 강제로 붙여 브레인스토밍해 보세요",
+    contentEl: matrixViewEl,
+    showTabs: false,
+    showMinistry: false,
+    showTagFilters: false,
+    showSearch: false
   }
 };
 
-const VIEW_CONTENT_ELS = [feedEl, ideaBoardEl, patternViewEl, gapViewEl, unresolvedViewEl];
+const VIEW_CONTENT_ELS = [feedEl, ideaBoardEl, patternViewEl, gapViewEl, unresolvedViewEl, matrixViewEl];
 
 const VIEW_RENDER = {
   briefing: () => {
@@ -1349,7 +1562,8 @@ const VIEW_RENDER = {
   board: renderBoard,
   patterns: renderPatternView,
   gap: renderGapView,
-  unresolved: renderUnresolvedView
+  unresolved: renderUnresolvedView,
+  matrix: renderMatrixView
 };
 
 function applyViewChrome() {

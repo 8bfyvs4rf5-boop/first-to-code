@@ -18,6 +18,7 @@
       <button class="side-nav-btn" data-view="patterns">패턴 뷰</button>
       <button class="side-nav-btn" data-view="gap">정책 갭 레이더</button>
       <button class="side-nav-btn" data-view="unresolved">미해결 이슈</button>
+      <button class="side-nav-btn" data-view="matrix">태그 교차 매트릭스</button>
       <a class="side-nav-btn side-nav-link" href="https://claude.ai/new" target="_blank" rel="noopener noreferrer">클로드에게 질문하기</a>
     </nav>
 
@@ -96,6 +97,15 @@
       <section id="unresolvedView" class="unresolved-view" hidden>
         <p class="pattern-hint">제목·본문에 문제 제기형 표현은 있지만 해결·시행형 표현은 아직 없는 항목을 모읍니다. 키워드 기반 자동 분류이니 참고용으로 확인해 주세요.</p>
         <div id="unresolvedList" class="unresolved-list"></div>
+      </section>
+
+      <section id="matrixView" class="matrix-view" hidden>
+        <p class="pattern-hint">아직 함께 등장한 적 없는 태그 조합을 강제로 붙여서 새 정책 아이디어를 브레인스토밍해 보세요.</p>
+        <div class="matrix-toolbar">
+          <button type="button" id="randomComboBtn" class="idea-new-btn">랜덤 조합 뽑기</button>
+        </div>
+        <div id="brainstormCard" class="brainstorm-card" hidden></div>
+        <div id="matrixGridWrap" class="matrix-grid-wrap"></div>
       </section>
     </main>
 

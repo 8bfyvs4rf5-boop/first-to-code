@@ -16,6 +16,7 @@ const viewTitleEl = document.getElementById("viewTitle");
 const viewSubtitleEl = document.getElementById("viewSubtitle");
 const ideaBoardEl = document.getElementById("ideaBoard");
 const ideaBoardColumnsEl = document.getElementById("ideaBoardColumns");
+const ideaBoardFiltersEl = document.getElementById("ideaBoardFilters");
 const newIdeaBtn = document.getElementById("newIdeaBtn");
 const newIdeaFormEl = document.getElementById("newIdeaForm");
 const newIdeaTitleEl = document.getElementById("newIdeaTitle");
@@ -43,6 +44,7 @@ let activeMinistry = "all";
 let activeView = "briefing"; // "briefing" | "scrap" | "board" | "patterns" | "gap"
 let searchQuery = "";
 let selectedPattern = null; // { axis, tag } | null
+let activeIdeaMinistryFilter = "all";
 
 // --- 검색 ---------------------------------------------------------
 
@@ -234,6 +236,66 @@ function deleteIdea(id) {
   saveIdeas(loadIdeas().filter(i => i.id !== id));
 }
 
+// --- 태그 → 부처 매핑 -------------------------------------------------
+// 실제 매핑 표는 tag-ministry-map.js(TAG_MINISTRY_MAP)에 분리해뒀다.
+// 유형 태그(규제/지원 등)는 정책 수단이라 부처를 특정할 수 없어 분야
+// 태그만 대상으로 한다.
+
+function getMinistriesForTag(tag) {
+  if (typeof TAG_MINISTRY_MAP === "undefined") return [];
+  const value = TAG_MINISTRY_MAP[tag];
+  if (!value) return [];
+  return Array.isArray(value) ? value : [value];
+}
+
+// 아이디어의 분야 태그는 두 경로에서 온다: ① 태그 매트릭스에서 등록한
+// 아이디어는 idea.tags에 직접 있고, ② 갭 레이더/미해결 이슈에서 등록한
+// 아이디어는 태그가 없는 대신 linkedItemKeys로 연결된 브리핑 항목이
+// 있으니 그 항목들에 실제로 붙은 태그를 가져온다. 둘을 합쳐야 모든
+// 등록 경로에서 부처가 제대로 뜬다.
+function getIdeaDomainTags(idea) {
+  const set = new Set(idea.tags?.domain || []);
+  if ((idea.linkedItemKeys || []).length > 0) {
+    const allItems = getAllItems();
+    for (const key of idea.linkedItemKeys) {
+      const item = allItems.find(it => itemKey(it) === key);
+      if (item) for (const t of getItemTags(item).domain) set.add(t);
+    }
+  }
+  return Array.from(set);
+}
+
+// 자동 판정(태그 매핑, "미분류" 포함) + 수동 지정 부처를 합쳐 배지
+// 목록을 만든다. label 기준으로 중복은 하나만 남긴다.
+function getIdeaMinistryBadges(idea) {
+  const badges = [];
+  const seen = new Set();
+  const add = (label, kind) => {
+    if (seen.has(label)) return;
+    seen.add(label);
+    badges.push({ label, kind });
+  };
+
+  for (const tag of getIdeaDomainTags(idea)) {
+    const ministries = getMinistriesForTag(tag);
+    if (ministries.length === 0) add("미분류", "unclassified");
+    else for (const m of ministries) add(m, "auto");
+  }
+  for (const m of idea.manualMinistries || []) add(m, "manual");
+
+  return badges;
+}
+
+function getAllKnownMinistries() {
+  if (typeof TAG_MINISTRY_MAP === "undefined") return [];
+  const set = new Set();
+  for (const value of Object.values(TAG_MINISTRY_MAP)) {
+    if (Array.isArray(value)) value.forEach(v => set.add(v));
+    else set.add(value);
+  }
+  return Array.from(set).sort((a, b) => a.localeCompare(b, "ko"));
+}
+
 function renderIdeaCard(idea) {
   const card = document.createElement("div");
   card.className = "idea-card";
@@ -269,6 +331,79 @@ function renderIdeaCard(idea) {
     }
     card.appendChild(comboWrap);
   }
+
+  // 태그 기반 자동 판정 부처 + "미분류" 배지.
+  const ministryAutoWrap = document.createElement("div");
+  ministryAutoWrap.className = "idea-ministry-row";
+  const renderMinistryBadges = () => {
+    ministryAutoWrap.innerHTML = "";
+    const badges = getIdeaMinistryBadges(idea);
+    if (badges.length === 0) return;
+    for (const b of badges) {
+      if (b.kind === "manual") continue; // 수동 지정은 아래 별도 줄에서.
+      const chip = document.createElement("span");
+      chip.className = b.kind === "unclassified" ? "idea-ministry-badge idea-ministry-unclassified" : "idea-ministry-badge";
+      chip.textContent = b.label;
+      ministryAutoWrap.appendChild(chip);
+    }
+  };
+  renderMinistryBadges();
+  card.appendChild(ministryAutoWrap);
+
+  // 자동 판정과 별개로 사용자가 직접 부처를 지정/제거할 수 있는 줄.
+  const ministryManualWrap = document.createElement("div");
+  ministryManualWrap.className = "idea-ministry-manual-row";
+
+  const manualChipsWrap = document.createElement("div");
+  manualChipsWrap.className = "idea-ministry-row";
+  const renderManualChips = () => {
+    manualChipsWrap.innerHTML = "";
+    for (const m of idea.manualMinistries || []) {
+      const chip = document.createElement("span");
+      chip.className = "idea-linked-chip";
+      chip.textContent = m;
+      const removeBtn = document.createElement("button");
+      removeBtn.type = "button";
+      removeBtn.className = "idea-linked-remove";
+      removeBtn.textContent = "×";
+      removeBtn.title = "지정 해제";
+      removeBtn.addEventListener("click", () => {
+        idea.manualMinistries = (idea.manualMinistries || []).filter(x => x !== m);
+        updateIdea(idea.id, { manualMinistries: idea.manualMinistries });
+        renderManualChips();
+        renderIdeaBoardFilters();
+      });
+      chip.appendChild(removeBtn);
+      manualChipsWrap.appendChild(chip);
+    }
+  };
+  renderManualChips();
+
+  const manualSelect = document.createElement("select");
+  manualSelect.className = "idea-ministry-select";
+  const placeholderOpt = document.createElement("option");
+  placeholderOpt.value = "";
+  placeholderOpt.textContent = "+ 부처 직접 지정";
+  manualSelect.appendChild(placeholderOpt);
+  for (const m of getAllKnownMinistries()) {
+    const opt = document.createElement("option");
+    opt.value = m;
+    opt.textContent = m;
+    manualSelect.appendChild(opt);
+  }
+  manualSelect.addEventListener("change", () => {
+    const value = manualSelect.value;
+    manualSelect.value = "";
+    if (!value) return;
+    idea.manualMinistries = Array.from(new Set([...(idea.manualMinistries || []), value]));
+    updateIdea(idea.id, { manualMinistries: idea.manualMinistries });
+    renderManualChips();
+    renderIdeaBoardFilters();
+  });
+
+  ministryManualWrap.appendChild(manualChipsWrap);
+  ministryManualWrap.appendChild(manualSelect);
+  card.appendChild(ministryManualWrap);
 
   const statusSelect = document.createElement("select");
   statusSelect.className = "idea-status-select";
@@ -369,8 +504,53 @@ function renderIdeaCard(idea) {
   return card;
 }
 
+function ideaMatchesMinistryFilter(idea) {
+  if (activeIdeaMinistryFilter === "all") return true;
+  return getIdeaMinistryBadges(idea).some(b => b.label === activeIdeaMinistryFilter);
+}
+
+function renderIdeaBoardFilters() {
+  const allIdeas = loadIdeas();
+  const ministries = Array.from(
+    new Set(allIdeas.flatMap(idea => getIdeaMinistryBadges(idea).map(b => b.label)))
+  ).sort((a, b) => a.localeCompare(b, "ko"));
+
+  if (ministries.length === 0) {
+    ideaBoardFiltersEl.hidden = true;
+    ideaBoardFiltersEl.innerHTML = "";
+    return;
+  }
+
+  if (!ministries.includes(activeIdeaMinistryFilter) && activeIdeaMinistryFilter !== "all") {
+    activeIdeaMinistryFilter = "all";
+  }
+
+  ideaBoardFiltersEl.hidden = false;
+  ideaBoardFiltersEl.innerHTML = "";
+
+  const makeChip = (value, label) => {
+    const chip = document.createElement("button");
+    chip.className = "ministry-chip";
+    chip.dataset.ideaMinistry = value;
+    chip.textContent = label;
+    if (value === activeIdeaMinistryFilter) chip.classList.add("active");
+    ideaBoardFiltersEl.appendChild(chip);
+  };
+
+  makeChip("all", "전체 부처");
+  for (const ministry of ministries) makeChip(ministry, ministry);
+}
+
+ideaBoardFiltersEl.addEventListener("click", (e) => {
+  const chip = e.target.closest(".ministry-chip");
+  if (!chip) return;
+  activeIdeaMinistryFilter = chip.dataset.ideaMinistry;
+  renderBoard();
+});
+
 function renderBoard() {
-  const ideas = loadIdeas();
+  renderIdeaBoardFilters();
+  const ideas = loadIdeas().filter(ideaMatchesMinistryFilter);
   ideaBoardColumnsEl.innerHTML = "";
 
   for (const statusDef of IDEA_STATUSES) {

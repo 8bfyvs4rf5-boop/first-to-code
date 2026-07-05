@@ -984,6 +984,83 @@ body {
   margin-bottom: 16px;
 }
 
+/* --- 정책 갭 레이더 --- */
+
+.gap-view[hidden] {
+  display: none;
+}
+
+.gap-list {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.gap-view-empty {
+  text-align: center;
+  padding: 40px 0;
+}
+
+.gap-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+}
+
+.gap-card-header {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.gap-card-tag {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--foreign);
+}
+
+.gap-card-badge {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #b45309;
+  background: #fef3c7;
+  padding: 3px 9px;
+  border-radius: 999px;
+}
+
+.gap-card-count {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+.gap-to-idea-btn {
+  margin-left: auto;
+  border: none;
+  background: var(--policy);
+  color: #fff;
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+}
+
+.gap-to-idea-btn:hover {
+  opacity: 0.88;
+}
+
+.gap-card-items {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-top: 12px;
+  border-top: 1px dashed var(--border);
+}
+
 .site-footer {
   text-align: center;
   padding: 20px;

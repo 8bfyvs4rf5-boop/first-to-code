@@ -16,6 +16,7 @@
       <button class="side-nav-btn" data-view="scrap">스크랩</button>
       <button class="side-nav-btn" data-view="board">아이디어 보드</button>
       <button class="side-nav-btn" data-view="patterns">패턴 뷰</button>
+      <button class="side-nav-btn" data-view="gap">정책 갭 레이더</button>
       <a class="side-nav-btn side-nav-link" href="https://claude.ai/new" target="_blank" rel="noopener noreferrer">클로드에게 질문하기</a>
     </nav>
   </aside>
@@ -66,6 +67,11 @@
         <p class="pattern-hint">최근 30일간 항목에 붙은 태그를 집계합니다. 막대를 클릭하면 해당 태그가 붙은 항목을 아래에서 볼 수 있어요.</p>
         <div id="patternSummary" class="pattern-summary"></div>
         <div id="patternItems" class="pattern-items"></div>
+      </section>
+
+      <section id="gapView" class="gap-view" hidden>
+        <p class="pattern-hint">주요외신동향에는 등장했지만 국내 정책·경제 항목에는 아직 없는 분야 태그를 찾아봅니다. 카드를 펼쳐 태그를 붙일수록 더 정확해져요.</p>
+        <div id="gapList" class="gap-list"></div>
       </section>
     </main>
 

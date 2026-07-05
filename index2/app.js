@@ -24,10 +24,12 @@ const newIdeaCancelEl = document.getElementById("newIdeaCancel");
 const patternViewEl = document.getElementById("patternView");
 const patternSummaryEl = document.getElementById("patternSummary");
 const patternItemsEl = document.getElementById("patternItems");
+const gapViewEl = document.getElementById("gapView");
+const gapListEl = document.getElementById("gapList");
 
 let activeCategory = "economy";
 let activeMinistry = "all";
-let activeView = "briefing"; // "briefing" | "scrap" | "board" | "patterns"
+let activeView = "briefing"; // "briefing" | "scrap" | "board" | "patterns" | "gap"
 let searchQuery = "";
 let selectedPattern = null; // { axis, tag } | null
 
@@ -512,6 +514,117 @@ function renderPatternView() {
   }
 }
 
+// --- 정책 갭 레이더 ---------------------------------------------------
+// 주요외신동향에는 등장했지만 국내(주요 정책·주요 경제정책) 항목에는
+// 아직 안 붙은 "분야" 태그를 찾는다. 유형(규제/지원 등) 태그는 정책
+// 수단이라 "해외엔 있는데 국내엔 없다" 비교 대상으로는 안 맞아서 뺐다.
+// 새 저장소 없이 기존 getItemTags() 오버레이만으로 계산하는 읽기 전용 뷰.
+
+function computeTagCounts(items, axis) {
+  const counts = {};
+  for (const item of items) {
+    for (const tag of getItemTags(item)[axis]) counts[tag] = (counts[tag] || 0) + 1;
+  }
+  return counts;
+}
+
+function computePolicyGaps() {
+  const all = getAllItems();
+  const foreignItems = all.filter(item => item.category === "foreign");
+  const domesticItems = all.filter(item => item.category === "policy" || item.category === "economy");
+  const foreignCounts = computeTagCounts(foreignItems, "domain");
+  const domesticCounts = computeTagCounts(domesticItems, "domain");
+
+  return Object.keys(foreignCounts)
+    .filter(tag => !domesticCounts[tag])
+    .map(tag => ({
+      tag,
+      count: foreignCounts[tag],
+      items: foreignItems
+        .filter(item => getItemTags(item).domain.includes(tag))
+        .sort((a, b) => b.date.localeCompare(a.date))
+    }))
+    .sort((a, b) => b.count - a.count);
+}
+
+function renderGapCard(gap) {
+  const card = document.createElement("div");
+  card.className = "gap-card";
+
+  const header = document.createElement("div");
+  header.className = "gap-card-header";
+
+  const tagName = document.createElement("span");
+  tagName.className = "gap-card-tag";
+  tagName.textContent = gap.tag;
+  header.appendChild(tagName);
+
+  const badge = document.createElement("span");
+  badge.className = "gap-card-badge";
+  badge.textContent = "국내 아직 없음";
+  header.appendChild(badge);
+
+  const count = document.createElement("span");
+  count.className = "gap-card-count";
+  count.textContent = `해외 ${gap.count}건`;
+  header.appendChild(count);
+
+  const toIdeaBtn = document.createElement("button");
+  toIdeaBtn.type = "button";
+  toIdeaBtn.className = "gap-to-idea-btn";
+  toIdeaBtn.textContent = "아이디어로 등록";
+  toIdeaBtn.addEventListener("click", () => {
+    const idea = {
+      id: `idea_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`,
+      title: `[해외 사례] ${gap.tag} 관련 정책 검토`,
+      description: `주요외신동향에서 "${gap.tag}" 태그가 붙은 해외 사례 ${gap.count}건을 참고해 국내 적용 여부를 검토합니다.`,
+      status: "idea",
+      linkedItemKeys: gap.items.map(itemKey),
+      createdAt: new Date().toISOString()
+    };
+    const ideas = loadIdeas();
+    ideas.push(idea);
+    saveIdeas(ideas);
+    switchView("board");
+  });
+  header.appendChild(toIdeaBtn);
+
+  card.appendChild(header);
+
+  const list = document.createElement("div");
+  list.className = "gap-card-items";
+  for (const item of gap.items) list.appendChild(renderCard(item));
+  card.appendChild(list);
+
+  return card;
+}
+
+function renderGapView() {
+  gapListEl.innerHTML = "";
+
+  const foreignItems = getAllItems().filter(item => item.category === "foreign");
+  const foreignHasTags = foreignItems.some(item => getItemTags(item).domain.length > 0);
+
+  if (!foreignHasTags) {
+    const empty = document.createElement("p");
+    empty.className = "pattern-empty gap-view-empty";
+    empty.textContent = "주요외신동향 항목에 분야 태그가 아직 없습니다. 카드를 펼쳐 태그를 몇 개 붙여보면 갭 레이더가 채워집니다.";
+    gapListEl.appendChild(empty);
+    return;
+  }
+
+  const gaps = computePolicyGaps();
+  if (gaps.length === 0) {
+    const empty = document.createElement("p");
+    empty.className = "pattern-empty gap-view-empty";
+    empty.textContent = "현재 해외에만 있고 국내에는 없는 분야 태그가 없습니다 — 국내 정책이 외신 흐름을 잘 커버하고 있습니다.";
+    gapListEl.appendChild(empty);
+    return;
+  }
+
+  for (const gap of gaps) gapListEl.appendChild(renderGapCard(gap));
+}
+
 function renderAutoUpdatedNote() {
   const lines = [];
   if (typeof economyAutoMeta !== "undefined") {
@@ -930,48 +1043,96 @@ tagFiltersEl.addEventListener("click", (e) => {
   renderFeed();
 });
 
+// 뷰가 하나 늘 때마다 조건문을 또 추가하는 대신, 뷰별 chrome 설정과
+// 렌더 함수를 표로 관리한다.
+const VIEW_CONFIG = {
+  briefing: {
+    title: "데일리 브리핑",
+    subtitle: "주요 정책 · 주요 경제정책 · 주요외신동향을 한 곳에서",
+    contentEl: feedEl,
+    showTabs: true,
+    showMinistry: true,
+    showTagFilters: true,
+    showSearch: true
+  },
+  scrap: {
+    title: "스크랩",
+    subtitle: "저장해 둔 정책·경제·외신 항목 모음",
+    contentEl: feedEl,
+    showTabs: false,
+    showMinistry: false,
+    showTagFilters: true,
+    showSearch: true
+  },
+  board: {
+    title: "아이디어 보드",
+    subtitle: "브리핑에서 발견한 내용을 정책 아이디어로 발전시켜 보세요",
+    contentEl: ideaBoardEl,
+    showTabs: false,
+    showMinistry: false,
+    showTagFilters: false,
+    showSearch: false
+  },
+  patterns: {
+    title: "패턴 뷰",
+    subtitle: "반복적으로 등장하는 태그로 흐름을 파악해 보세요",
+    contentEl: patternViewEl,
+    showTabs: false,
+    showMinistry: false,
+    showTagFilters: false,
+    showSearch: false
+  },
+  gap: {
+    title: "정책 갭 레이더",
+    subtitle: "외신엔 있는데 국내엔 아직 없는 분야를 찾아보세요",
+    contentEl: gapViewEl,
+    showTabs: false,
+    showMinistry: false,
+    showTagFilters: false,
+    showSearch: false
+  }
+};
+
+const VIEW_CONTENT_ELS = [feedEl, ideaBoardEl, patternViewEl, gapViewEl];
+
+const VIEW_RENDER = {
+  briefing: () => {
+    renderMinistryFilters();
+    renderFeed();
+  },
+  scrap: renderFeed,
+  board: renderBoard,
+  patterns: renderPatternView,
+  gap: renderGapView
+};
+
 function applyViewChrome() {
-  const isScrapView = activeView === "scrap";
-  const isBoardView = activeView === "board";
-  const isPatternView = activeView === "patterns";
-  const isFeedView = !isBoardView && !isPatternView;
+  const config = VIEW_CONFIG[activeView];
 
-  tabsEl.hidden = isScrapView || isBoardView || isPatternView;
-  ministryFiltersEl.hidden = isScrapView || isBoardView || isPatternView;
-  tagFiltersEl.hidden = isBoardView || isPatternView;
-  searchBarEl.hidden = isBoardView || isPatternView;
-  feedEl.hidden = !isFeedView;
-  ideaBoardEl.hidden = !isBoardView;
-  patternViewEl.hidden = !isPatternView;
-  if (!isFeedView) emptyStateEl.hidden = true;
+  tabsEl.hidden = !config.showTabs;
+  ministryFiltersEl.hidden = !config.showMinistry;
+  tagFiltersEl.hidden = !config.showTagFilters;
+  searchBarEl.hidden = !config.showSearch;
+  for (const el of VIEW_CONTENT_ELS) el.hidden = el !== config.contentEl;
+  if (config.contentEl !== feedEl) emptyStateEl.hidden = true;
 
-  viewTitleEl.textContent = isBoardView
-    ? "아이디어 보드"
-    : isPatternView
-      ? "패턴 뷰"
-      : isScrapView
-        ? "스크랩"
-        : "데일리 브리핑";
-  viewSubtitleEl.textContent = isBoardView
-    ? "브리핑에서 발견한 내용을 정책 아이디어로 발전시켜 보세요"
-    : isPatternView
-      ? "반복적으로 등장하는 태그로 흐름을 파악해 보세요"
-      : isScrapView
-        ? "저장해 둔 정책·경제·외신 항목 모음"
-        : "주요 정책 · 주요 경제정책 · 주요외신동향을 한 곳에서";
+  viewTitleEl.textContent = config.title;
+  viewSubtitleEl.textContent = config.subtitle;
+}
+
+function switchView(view) {
+  activeView = view;
+  sideNavEl.querySelectorAll(".side-nav-btn").forEach(b => {
+    b.classList.toggle("active", b.dataset.view === view);
+  });
+  applyViewChrome();
+  VIEW_RENDER[view]();
 }
 
 sideNavEl.addEventListener("click", (e) => {
   const btn = e.target.closest(".side-nav-btn");
   if (!btn || !btn.dataset.view) return;
-  sideNavEl.querySelectorAll(".side-nav-btn").forEach(b => b.classList.remove("active"));
-  btn.classList.add("active");
-  activeView = btn.dataset.view;
-  applyViewChrome();
-  if (activeView === "briefing") renderMinistryFilters();
-  if (activeView === "board") renderBoard();
-  else if (activeView === "patterns") renderPatternView();
-  else renderFeed();
+  switchView(btn.dataset.view);
 });
 
 renderTodayDate();

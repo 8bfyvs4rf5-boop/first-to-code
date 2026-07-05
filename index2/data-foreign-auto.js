@@ -1,117 +1,150 @@
 // 자동 생성 파일 — 직접 수정하지 마세요.
 // 생성: node fetch-foreign-news.js
-// 마지막 갱신: Sat Jul 04 2026 19:15:50 GMT+0900 (Korean Standard Time)
-const foreignAutoMeta = {"updatedAt":"Sat Jul 04 2026 19:15:50 GMT+0900 (Korean Standard Time)","count":30};
+// 마지막 갱신: Sun Jul 05 2026 17:15:45 GMT+0900 (Korean Standard Time)
+const foreignAutoMeta = {"updatedAt":"Sun Jul 05 2026 17:15:45 GMT+0900 (Korean Standard Time)","count":30};
 const foreignAutoItems = [
   {
-    "date": "2026-07-04",
+    "date": "2026-07-05",
     "category": "foreign",
     "type": "foreign",
     "ministry": "정치",
-    "title": "Taylor Swift marries Travis Kelce in NYC ceremony officiated by Adam Sandler",
-    "summary": "The star-studded celebration saw several streets in Midtown Manhattan shut, as hordes of f…",
-    "content": "The star-studded celebration saw several streets in Midtown Manhattan shut, as hordes of fans gathered outside the arena.",
+    "title": "미국, 화력쇼와 비행전술로 250주년 기념",
+    "summary": "도널드 트럼프 대통령은 연설에서 자신의 정치 일정을 언급하면서 동시에 전쟁 참전 용사들과 미국 역사에 경의를 표했다.",
+    "content": "도널드 트럼프 대통령은 연설에서 자신의 정치 일정을 언급하면서 동시에 전쟁 참전 용사들과 미국 역사에 경의를 표했다.",
     "source": "BBC",
-    "url": "https://www.bbc.co.uk/news/articles/c982ry2pen3o?at_medium=RSS&at_campaign=rss"
+    "url": "https://www.bbc.co.uk/news/articles/cp9lppvkmz5o?at_medium=RSS&at_campaign=rss"
   },
   {
-    "date": "2026-07-04",
+    "date": "2026-07-05",
     "category": "foreign",
     "type": "foreign",
     "ministry": "정치",
-    "title": "폭염으로 인해 워싱턴DC부터 필라델피아까지 독립기념일 행사 취소",
-    "summary": "미국 동부에서 최고 38도의 극심한 더위와 습기가 계속되면서, 워싱턴DC와 필라델피아 등지에서 열릴 예정이었던 독립기념일 행사를 비롯해 여러 행사들이 취소되고 있…",
-    "content": "미국 동부에서 최고 38도의 극심한 더위와 습기가 계속되면서, 워싱턴DC와 필라델피아 등지에서 열릴 예정이었던 독립기념일 행사를 비롯해 여러 행사들이 취소되고 있다. 이 폭염은 미국 인구의 약 1억 6500만 명에게 영향을 미치고 있다.",
+    "title": "우크라이나가 러시아 상트페테르부르크의 주요 원유 터미널 공격",
+    "summary": "우크라이나 대통령 볼로디미르 젤렌스키는 이번 타겟이 러시아 전쟁 비용을 조달하는 핵심 인프라라고 밝혔다.",
+    "content": "우크라이나 대통령 볼로디미르 젤렌스키는 이번 타겟이 러시아 전쟁 비용을 조달하는 핵심 인프라라고 밝혔다.",
     "source": "BBC",
-    "url": "https://www.bbc.co.uk/news/articles/cevlkzer7vdo?at_medium=RSS&at_campaign=rss"
+    "url": "https://www.bbc.co.uk/news/articles/c8j2vmzxezro?at_medium=RSS&at_campaign=rss"
   },
   {
-    "date": "2026-07-04",
+    "date": "2026-07-05",
     "category": "foreign",
     "type": "foreign",
     "ministry": "정치",
-    "title": "페루 대선에서 후지모리 케이코가 승리 선언",
-    "summary": "알베르토 후지모리 전 대통령의 딸인 케이코 후지모리가 투표일로부터 약 한 달 뒤에 치열한 대선에서 승리했다.",
-    "content": "알베르토 후지모리 전 대통령의 딸인 케이코 후지모리가 투표일로부터 약 한 달 뒤에 치열한 대선에서 승리했다.",
+    "title": "중국 지하 교회 인물 진밍리가 석방됨",
+    "summary": "도널드 트럼프 전 미국 대통령이 시진핑 주석에게 직접 요청한 결과, 중국의zion 교회 창립자인 진밍리가 감옥에서 석방되었다.",
+    "content": "도널드 트럼프 전 미국 대통령이 시진핑 주석에게 직접 요청한 결과, 중국의zion 교회 창립자인 진밍리가 감옥에서 석방되었다.",
     "source": "BBC",
-    "url": "https://www.bbc.co.uk/news/articles/cr5jpvv06e1o?at_medium=RSS&at_campaign=rss"
+    "url": "https://www.bbc.co.uk/news/articles/c4gy51ky75vo?at_medium=RSS&at_campaign=rss"
   },
   {
-    "date": "2026-07-04",
+    "date": "2026-07-05",
     "category": "foreign",
     "type": "foreign",
     "ministry": "정치",
-    "title": "테헤란에서 카메네이 아야톨라 장례 첫날 대규모 시민 모임",
-    "summary": "알리 카메네이 아야톨라의 장례식 첫 날, 테헤란에서는 그의 유해가 거행되는 대형 모스크인 그랜드 모살라에서 수많은 사람들이 모여 애도하고 있습니다. 그의 유해는…",
-    "content": "알리 카메네이 아야톨라의 장례식 첫 날, 테헤란에서는 그의 유해가 거행되는 대형 모스크인 그랜드 모살라에서 수많은 사람들이 모여 애도하고 있습니다. 그의 유해는 월요일까지 이곳에 안치되며 이후 이란 전역과 이라크를 순례할 예정입니다.",
+    "title": "Former chess champion Kramnik banned over cheating remarks",
+    "summary": "The former Russian world chess champion had accused other players, including the late Dani…",
+    "content": "The former Russian world chess champion had accused other players, including the late Daniel Naroditsky, of cheating.",
     "source": "BBC",
-    "url": "https://www.bbc.co.uk/news/articles/c0ky2zen1kgo?at_medium=RSS&at_campaign=rss"
+    "url": "https://www.bbc.co.uk/news/articles/cd6epx607dqo?at_medium=RSS&at_campaign=rss"
   },
   {
-    "date": "2026-07-04",
+    "date": "2026-07-05",
     "category": "foreign",
     "type": "foreign",
     "ministry": "정치",
-    "title": "모나코 폭발 사건 용의자, 남성으로 위장하다 경찰 수사 받다",
-    "summary": "모나코에서 발생한 폭발 사건을 계기로 조사 중인 우크라이나 국적의 용의자가 혼자 행동하지 않았을 가능성이 있으며, 그는 일주일 이상 현장을 미행하고 탐색했다고 한…",
-    "content": "모나코에서 발생한 폭발 사건을 계기로 조사 중인 우크라이나 국적의 용의자가 혼자 행동하지 않았을 가능성이 있으며, 그는 일주일 이상 현장을 미행하고 탐색했다고 한다.",
+    "title": "Moment of destiny for France's Le Pen in verdict to decide her future in presidential race",
+    "summary": "Far-right leader Marine Le Pen is appealing against a verdict which found her guilty of mi…",
+    "content": "Far-right leader Marine Le Pen is appealing against a verdict which found her guilty of misusing EU funds.",
     "source": "BBC",
-    "url": "https://www.bbc.co.uk/news/articles/c4gy603z2qlo?at_medium=RSS&at_campaign=rss"
+    "url": "https://www.bbc.co.uk/news/articles/c5yzlwz34p7o?at_medium=RSS&at_campaign=rss"
   },
   {
-    "date": "2026-07-04",
+    "date": "2026-07-05",
     "category": "foreign",
     "type": "foreign",
     "ministry": "정치",
-    "title": "케이프베르데 팬들, 아르헨티나전 패배에도 불구하고 월드컵에서의 팀 성과에 들뜨다",
-    "summary": "케이프베르데라는 작은 섬 국가가 세계 최강팀인 아르헨티나와의 경기에서도 뛰어난 성적을 거두며 국민들이 자국 대표팀에게 큰 자부심을 느끼고 있다.",
-    "content": "케이프베르데라는 작은 섬 국가가 세계 최강팀인 아르헨티나와의 경기에서도 뛰어난 성적을 거두며 국민들이 자국 대표팀에게 큰 자부심을 느끼고 있다.",
+    "title": "Egypt and Morocco fans celebrate World Cup wins by singing for Palestine",
+    "summary": "Egypt and Morocco fans celebrated their World Cup success by singing ‘My Blood is Palestin…",
+    "content": "Egypt and Morocco fans celebrated their World Cup success by singing ‘My Blood is Palestinian’ at a Dallas fan zone.",
     "source": "Al Jazeera",
-    "url": "https://www.aljazeera.com/sports/2026/7/4/cape-verde-fans-overjoyed-with-teams-world-cup-run-despite-argentina-loss?traffic_source=rss"
+    "url": "https://www.aljazeera.com/video/newsfeed/2026/7/5/egypt-and-morocco-fans-celebrate-world-cup-wins-by-singing-for-palestine?traffic_source=rss"
   },
   {
-    "date": "2026-07-04",
+    "date": "2026-07-05",
     "category": "foreign",
     "type": "foreign",
     "ministry": "정치",
-    "title": "테헤란에서 카메네이 장례식 개막, 수천 명 참석",
-    "summary": "이라니의 전 최고지도자 알리 카메네이의 장례식 일환으로 테헤란에서 대규모 공개 행렬이 열렸으며 이를 보기 위해 수천 명의 애도객들이 모였습니다.",
-    "content": "이라니의 전 최고지도자 알리 카메네이의 장례식 일환으로 테헤란에서 대규모 공개 행렬이 열렸으며 이를 보기 위해 수천 명의 애도객들이 모였습니다.",
+    "title": "브라질 대 노르웨이: 월드컵 16강전 - 비니시우스, 하aland와 전망",
+    "summary": "브라질은 지금까지 월드컵에서 맞붙은 세 번째 국가인 노르웨이에게 아직 한 번도 승리를 거두지 못한 유일한 국가 중 하나입니다.",
+    "content": "브라질은 지금까지 월드컵에서 맞붙은 세 번째 국가인 노르웨이에게 아직 한 번도 승리를 거두지 못한 유일한 국가 중 하나입니다.",
     "source": "Al Jazeera",
-    "url": "https://www.aljazeera.com/video/newsfeed/2026/7/4/thousands-gather-as-khamenei-funeral-ceremonies-open-in-tehran?traffic_source=rss"
+    "url": "https://www.aljazeera.com/sports/2026/7/5/brazil-vs-norway-fifa-world-cup-last-16-vinicius-haaland-and-prediction?traffic_source=rss"
   },
   {
-    "date": "2026-07-04",
+    "date": "2026-07-05",
     "category": "foreign",
     "type": "foreign",
     "ministry": "정치",
-    "title": "Armed fighters attack multiple towns across Mali",
-    "summary": "Tuareg-led armed ⁠group says it attacked northern town where Malian troops and Russian fig…",
-    "content": "Tuareg-led armed ⁠group says it attacked northern town where Malian troops and Russian fighters are based.",
+    "title": "네이티브 아메리칸들이 이민세관수사국에 저항하다",
+    "summary": "미국에서 세대를 거쳐 내려온 저항 정신을 바탕으로 법정은 이민세관수사국의 활동에 맞서 공정한 세상을 위해 싸우고 있다.",
+    "content": "미국에서 세대를 거쳐 내려온 저항 정신을 바탕으로 법정은 이민세관수사국의 활동에 맞서 공정한 세상을 위해 싸우고 있다.",
     "source": "Al Jazeera",
-    "url": "https://www.aljazeera.com/news/2026/7/4/armed-fighters-attack-multiple-towns-across-mali?traffic_source=rss"
+    "url": "https://www.aljazeera.com/video/witness/2026/7/5/native-americans-resisting-ice?traffic_source=rss"
   },
   {
-    "date": "2026-07-04",
+    "date": "2026-07-05",
     "category": "foreign",
     "type": "foreign",
     "ministry": "정치",
-    "title": "사우디 주도 연합군, 후티 세력에 대한 '역사상 유례없는' 강경 대응을 선언합니다.",
-    "summary": "후티 세력이 사우디 전투기의 비행을 방해하고 이란 항공기를 10년 만에 샌아 공항에 착륙시킨 이후, 사우디 주도 연합군은 후티 세력에 대한 강경 대응을 선언했습니…",
-    "content": "후티 세력이 사우디 전투기의 비행을 방해하고 이란 항공기를 10년 만에 샌아 공항에 착륙시킨 이후, 사우디 주도 연합군은 후티 세력에 대한 강경 대응을 선언했습니다.",
+    "title": "트럼프, 폭풍으로 연기된 국가 창건 250주년 기념연설에서 미국인 치하",
+    "summary": "도널드 트럼프 대통령은 폭풍으로 인해 연기된 미국의 창건 250주년 기념식에서 미국인들을 역사적이고 영웅적인 존재로 치하했습니다.",
+    "content": "도널드 트럼프 대통령은 폭풍으로 인해 연기된 미국의 창건 250주년 기념식에서 미국인들을 역사적이고 영웅적인 존재로 치하했습니다.",
     "source": "Al Jazeera",
-    "url": "https://www.aljazeera.com/news/2026/7/4/saudi-led-coalition-pledges-unprecedented-force-against-houthi-threats?traffic_source=rss"
+    "url": "https://www.aljazeera.com/video/newsfeed/2026/7/5/aje-onl-nf_trump-lauds-americans-in-250th-anniversary-speech-050726?traffic_source=rss"
   },
   {
-    "date": "2026-07-04",
+    "date": "2026-07-05",
     "category": "foreign",
     "type": "foreign",
     "ministry": "정치",
-    "title": "2026 월드컵 32강 스테이지 주요 내용",
-    "summary": "2026 월드컵 32강 스테이지에서 골든부트 경쟁이 더욱 치열해졌고, 프랑스가 뛰어난 활약을 보였으며, 메시와 아르헨티나가 캐프베르데를 어렵게 누르며 통과했다.",
-    "content": "2026 월드컵 32강 스테이지에서 골든부트 경쟁이 더욱 치열해졌고, 프랑스가 뛰어난 활약을 보였으며, 메시와 아르헨티나가 캐프베르데를 어렵게 누르며 통과했다.",
+    "title": "카메룬의 모든 어린이 등록 캠페인",
+    "summary": "카메룬에서는 출생등록을 확대하기 위한 노력이 진행되고 있지만 여전히 수백만 명의 아동들이 등록되지 않은 상태입니다.",
+    "content": "카메룬에서는 출생등록을 확대하기 위한 노력이 진행되고 있지만 여전히 수백만 명의 아동들이 등록되지 않은 상태입니다.",
     "source": "Al Jazeera",
-    "url": "https://www.aljazeera.com/sports/2026/7/4/key-takeaways-from-round-of-32-stage-at-world-cup-2026?traffic_source=rss"
+    "url": "https://www.aljazeera.com/news/2026/7/5/a-name-a-document-a-future-cameroons-fight-to-register-every-child?traffic_source=rss"
+  },
+  {
+    "date": "2026-07-05",
+    "category": "foreign",
+    "type": "foreign",
+    "ministry": "사회",
+    "title": "NHS 앱에 AI 도입으로 환자 적합한 서비스 안내",
+    "summary": "영국의 NHS는 향후 1년 동안 약 20만 명의 환자를 대상으로 앱을 통해 인공지능(AI) 기술을 활용해 환자들을 적절한 의료 서비스로 연결하는 시스템을 도입할…",
+    "content": "영국의 NHS는 향후 1년 동안 약 20만 명의 환자를 대상으로 앱을 통해 인공지능(AI) 기술을 활용해 환자들을 적절한 의료 서비스로 연결하는 시스템을 도입할 예정이다. 이 시스템은 환자의 상태에 따라 일반진료, 약국 방문 또는 응급실 이용 등을 추천한다.",
+    "source": "Guardian",
+    "url": "https://www.theguardian.com/society/2026/jul/04/nhs-ai-app-patients-appropriate-services-health"
+  },
+  {
+    "date": "2026-07-05",
+    "category": "foreign",
+    "type": "foreign",
+    "ministry": "사회",
+    "title": "Archaeologists uncover ancient Byzantine city in Egypt’s western desert",
+    "summary": "<p>Well-preserved fourth-century quarters reveal details of daily life, urban development…",
+    "content": "<p>Well-preserved fourth-century quarters reveal details of daily life, urban development and economic activities</p><p>Archaeologists in Egypt have uncovered a well-preserved Byzantine-era city in the western desert.</p><p>The fourth-century quarters had residential and religious structures, including a basilica-style church in the Dakhla oasis. Archaeologists also found coins, pottery fragments and tools.</p> <a href=\"https://www.theguardian.com/world/2026/jul/04/archaeologists-uncover-ancient-byzantine-city-in-egypts-western-desert\">Continue reading...</a>",
+    "source": "Guardian",
+    "url": "https://www.theguardian.com/world/2026/jul/04/archaeologists-uncover-ancient-byzantine-city-in-egypts-western-desert"
+  },
+  {
+    "date": "2026-07-05",
+    "category": "foreign",
+    "type": "foreign",
+    "ministry": "사회",
+    "title": "수단 도시에 드론 공습이 계속되는 가운데 인도주의적 상황이 심각하다고 현지 지원 단체들이 호소",
+    "summary": "수단의 정규군과 민병대인 RSF 사이의 전쟁에서 중요한 격전지로 떠오른 알 오베이드 시에서 최근 드론 공습으로 학교와 연료 기지가 파괴되고 20명 이상의 사상자가…",
+    "content": "수단의 정규군과 민병대인 RSF 사이의 전쟁에서 중요한 격전지로 떠오른 알 오베이드 시에서 최근 드론 공습으로 학교와 연료 기지가 파괴되고 20명 이상의 사상자가 발생했다. 이에 따라 현지 인도주의 단체들은 심각한 상황을 호소하고 있다.",
+    "source": "Guardian",
+    "url": "https://www.theguardian.com/world/2026/jul/04/el-obeid-aid-workers-sudan-war-drone-strikes"
   },
   {
     "date": "2026-07-04",
@@ -133,7 +166,7 @@ const foreignAutoItems = [
     "summary": "암호화폐 분석 기관은 트럼프 관련 매크로코인을 구매한 투자자들의 결과를 조사해, 대부분의 소매 투자자가 손해를 입은 반면 전문가들은 더 나은 성과를 거두었다고 밝…",
     "content": "암호화폐 분석 기관은 트럼프 관련 매크로코인을 구매한 투자자들의 결과를 조사해, 대부분의 소매 투자자가 손해를 입은 반면 전문가들은 더 나은 성과를 거두었다고 밝혔다.",
     "source": "NYT",
-    "url": "https://www.nytimes.com/2026/07/04/us/politics/nearly-a-million-investors-lost-a-total-of-3-8-billion-on-trump-crypto-coin.html"
+    "url": "https://www.nytimes.com/2026/07/04/us/politics/trump-coin-crypto-investors-loss.html"
   },
   {
     "date": "2026-07-04",
@@ -167,6 +200,17 @@ const foreignAutoItems = [
     "content": "다비드 S. 도티 전 연방법관은 1993년의 핵심적인 협정을 주재하며 선수들의 자유계약과 임금 상한제를 가능하게 했으며, 오랜 기간 동안 NFL과 선수들 간의 분쟁을 심리해 왔다.",
     "source": "NYT",
     "url": "https://www.nytimes.com/2026/07/03/sports/football/david-s-doty-dead.html"
+  },
+  {
+    "date": "2026-07-04",
+    "category": "foreign",
+    "type": "foreign",
+    "ministry": "사회",
+    "title": "영국 의료협회, 재정 위기로 직원 3분의 1 줄이겠다고 협박",
+    "summary": "영국 의료협회가 심각한 재정난을 극복하기 위해 전체 직원의 최대 3분의 1에 해당하는 인력을 감축할 가능성이 제기되어 직원들 사이에서 불안과 분노를 일으키고 있다…",
+    "content": "영국 의료협회가 심각한 재정난을 극복하기 위해 전체 직원의 최대 3분의 1에 해당하는 인력을 감축할 가능성이 제기되어 직원들 사이에서 불안과 분노를 일으키고 있다. 특히 잉글랜드 지역에서 600명 중 200명이 구조조정 대상으로 지목되면서 협회 내부에서는 부당한 처사와 이중적 행위로 비난받고 있다.",
+    "source": "Guardian",
+    "url": "https://www.theguardian.com/society/2026/jul/04/british-medical-association-union-could-axe-staff-cash-crisis"
   },
   {
     "date": "2026-07-04",
@@ -272,28 +316,6 @@ const foreignAutoItems = [
     "category": "foreign",
     "type": "foreign",
     "ministry": "사회",
-    "title": "‘Hugely significant’: those affected by forced adoptions welcome apology but demand more remedy",
-    "summary": "<p>Victims say hearing Keir Starmer’s acknowledgment of their suffering was emotional but…",
-    "content": "<p>Victims say hearing Keir Starmer’s acknowledgment of their suffering was emotional but want more mental support</p><p>This summer’s World Cup fever vividly takes Ann Keen back to 1966 and the day England won the tournament – she was 17 years old and it was the day she told her father she was pregnant. “It was the worst thing that could ever have been said to him. I was told I’d put shame on the family and I must be sent away,” the former Labour MP said.</p><p>“I was in an unmarried mother’s home where I had to scrub the steps from morning until night. It was all about punishment. Even in the delivery room I was told I couldn’t have anything for the pain, because I was a bad girl. And when NHS staff are telling you that, you start to believe it.”</p> <a href=\"https://www.theguardian.com/society/2026/jul/02/hugely-significant-those-affected-by-forced-adoptions-welcome-apology-but-demand-more-remedy\">Continue reading...</a>",
-    "source": "Guardian",
-    "url": "https://www.theguardian.com/society/2026/jul/02/hugely-significant-those-affected-by-forced-adoptions-welcome-apology-but-demand-more-remedy"
-  },
-  {
-    "date": "2026-07-03",
-    "category": "foreign",
-    "type": "foreign",
-    "ministry": "사회",
-    "title": "영국 경찰이 국제적인 성폭력 조직 네트워크를 적발하다",
-    "summary": "영국 국가범죄조사청(NCA)은 온라인을 통해 조직적으로 이루어지는 약물 이용 성폭행과 성착취 사건들이 국제적으로 연결되어 있다는 사실을 밝혔다. 범죄자들은 인터넷…",
-    "content": "영국 국가범죄조사청(NCA)은 온라인을 통해 조직적으로 이루어지는 약물 이용 성폭행과 성착취 사건들이 국제적으로 연결되어 있다는 사실을 밝혔다. 범죄자들은 인터넷을 통해 피해자를 유인하고, 그들을 마취시킨 후 성폭행 및 성적 학대로 이어진다는 것이다.",
-    "source": "Guardian",
-    "url": "https://www.theguardian.com/society/2026/jul/02/international-network-drug-facilitated-rape-uncovered-by-uk-crime-agency"
-  },
-  {
-    "date": "2026-07-03",
-    "category": "foreign",
-    "type": "foreign",
-    "ministry": "사회",
     "title": "해외 방문마다 상을 받아가는 모디 총리",
     "summary": "나렌드라 모디 인도 총리는 최근 세이셸 방문 시 세이셸 대통령으로부터 '푸른 지평의 수호자'라는 국가 최고상 중 하나를 받았으며, 이는 그가 해외 방문 때마다 상…",
     "content": "나렌드라 모디 인도 총리는 최근 세이셸 방문 시 세이셸 대통령으로부터 '푸른 지평의 수호자'라는 국가 최고상 중 하나를 받았으며, 이는 그가 해외 방문 때마다 상을 받아가는 습관을 보여준다.",
@@ -310,27 +332,5 @@ const foreignAutoItems = [
     "content": "코트디부아르에서 지난 5월부터 발생한 홍수로 현재까지 59명이 숨졌으며, 이와 함께 가나에서는 13명의 사망자가 추가로 보고되고 있다. 구조팀은 여전히 피해자들을 찾는 중으로, 비계절이 끝날 때까지 사망자 수가 더 늘어날 가능성이 있다고 한다.",
     "source": "Guardian",
     "url": "https://www.theguardian.com/world/2026/jul/02/cote-d-ivoire-floods-dead-west-africa-rains"
-  },
-  {
-    "date": "2026-07-02",
-    "category": "foreign",
-    "type": "foreign",
-    "ministry": "사회",
-    "title": "Understanding Ebola’s wildlife origins is crucial to preventing next big outbreak",
-    "summary": "<p>If we don’t know the source, not only do humans remain at risk but wildlife can suffer…",
-    "content": "<p>If we don’t know the source, not only do humans remain at risk but wildlife can suffer needlessly via retaliation</p><p>While virologists and public health departments were palpitating over the news of an <a href=\"https://www.theguardian.com/world/2026/may/07/argentina-origins-hantavirus-outbreak-cruise-ship-mv-hondius\">Andes virus</a> infectious disease outbreak on a cruise ship (13 cases, three deaths), in the Democratic Republic of the Congo the Bundibugyo virus, the root of the current <a href=\"https://www.theguardian.com/global-development/2026/may/28/medical-staff-ebola-frontline-congolese-doctors-nurses-disease\">Ebola outbreak</a> (currently more than 1,250 cases and at least <a href=\"https://www.cdc.gov/ebola/situation-summary/index.html\">362</a> deaths), was smouldering under the radar.</p><p>Bundibugyo virus is a horrifying, highly fatal pathogen. Symptom onset is sudden and includes headaches, diarrhoea, malfunctioning kidneys and liver, and, less frequently, internal and external bleeding (hence the term “haemorrhagic disease”). Grimly, contagiousness remains after death, meaning the family and loved ones of the deceased can be exposed when they wash and clothe the body in preparation for the funeral.</p> <a href=\"https://www.theguardian.com/environment/2026/jul/02/understanding-ebola-wildlife-origins-crucial-preventing-next-big-outbreak\">Continue reading...</a>",
-    "source": "Guardian",
-    "url": "https://www.theguardian.com/environment/2026/jul/02/understanding-ebola-wildlife-origins-crucial-preventing-next-big-outbreak"
-  },
-  {
-    "date": "2026-07-01",
-    "category": "foreign",
-    "type": "foreign",
-    "ministry": "사회",
-    "title": "수단 RSF, 엘파시르에서 인권 침해 혐의 받다",
-    "summary": "앰네스티 국제는 수단 민병대 빠스트 지원군이 엘파시르 점령을 위해 시민 대상으로 체계적으로 인권 침해와 민족 정화를 저지른 것으로 밝혔다. 이 보고서에 따르면 살…",
-    "content": "앰네스티 국제는 수단 민병대 빠스트 지원군이 엘파시르 점령을 위해 시민 대상으로 체계적으로 인권 침해와 민족 정화를 저지른 것으로 밝혔다. 이 보고서에 따르면 살인, 고문, 강간 등 중대 범죄들이 발생했다.",
-    "source": "Guardian",
-    "url": "https://www.theguardian.com/world/2026/jul/01/sudan-rsf-rapid-support-forces-crimes-against-humanity-el-fasher-amnesty-ethnic-cleansing"
   }
 ];

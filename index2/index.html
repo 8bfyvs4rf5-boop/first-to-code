@@ -17,6 +17,7 @@
       <button class="side-nav-btn" data-view="board">아이디어 보드</button>
       <button class="side-nav-btn" data-view="patterns">패턴 뷰</button>
       <button class="side-nav-btn" data-view="gap">정책 갭 레이더</button>
+      <button class="side-nav-btn" data-view="unresolved">미해결 이슈</button>
       <a class="side-nav-btn side-nav-link" href="https://claude.ai/new" target="_blank" rel="noopener noreferrer">클로드에게 질문하기</a>
     </nav>
 
@@ -90,6 +91,11 @@
       <section id="gapView" class="gap-view" hidden>
         <p class="pattern-hint">주요외신동향에는 등장했지만 국내 정책·경제 항목에는 아직 없는 분야 태그를 찾아봅니다. 카드를 펼쳐 태그를 붙일수록 더 정확해져요.</p>
         <div id="gapList" class="gap-list"></div>
+      </section>
+
+      <section id="unresolvedView" class="unresolved-view" hidden>
+        <p class="pattern-hint">제목·본문에 문제 제기형 표현은 있지만 해결·시행형 표현은 아직 없는 항목을 모읍니다. 키워드 기반 자동 분류이니 참고용으로 확인해 주세요.</p>
+        <div id="unresolvedList" class="unresolved-list"></div>
       </section>
     </main>
 

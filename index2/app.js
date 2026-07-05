@@ -26,6 +26,8 @@ const patternSummaryEl = document.getElementById("patternSummary");
 const patternItemsEl = document.getElementById("patternItems");
 const gapViewEl = document.getElementById("gapView");
 const gapListEl = document.getElementById("gapList");
+const unresolvedViewEl = document.getElementById("unresolvedView");
+const unresolvedListEl = document.getElementById("unresolvedList");
 const ripenessSettingsBtn = document.getElementById("ripenessSettingsBtn");
 const ripenessSettingsEl = document.getElementById("ripenessSettings");
 const ripenessWindowInputEl = document.getElementById("ripenessWindowInput");
@@ -630,6 +632,90 @@ function renderGapView() {
   }
 
   for (const gap of gaps) gapListEl.appendChild(renderGapCard(gap));
+}
+
+// --- 미해결 이슈 ---------------------------------------------------
+// 제목+본문에 문제 제기형 표현은 있지만 해결/시행형 표현이 아직 없는
+// 항목을 키워드 매칭만으로 골라낸다. 태그처럼 사용자가 미리 뭔가
+// 붙여둘 필요가 없어서 데이터가 있으면 바로 결과가 나온다. 100%
+// 정확할 수 없는 휴리스틱이라 뷰 상단에 참고용이라는 안내를 둔다.
+// 나중에 쉽게 손볼 수 있도록 키워드는 이 두 배열에만 몰아둔다.
+const PROBLEM_KEYWORDS = ["논란", "지적", "부족", "필요성", "우려", "한계", "미흡"];
+const RESOLUTION_KEYWORDS = ["시행", "도입", "발표", "통과", "시행령", "개정", "확정"];
+
+function classifyIssueStatus(item) {
+  const text = `${item.title} ${item.content || item.summary || ""}`;
+  const hasProblem = PROBLEM_KEYWORDS.some(kw => text.includes(kw));
+  const hasResolution = RESOLUTION_KEYWORDS.some(kw => text.includes(kw));
+  return hasProblem && !hasResolution;
+}
+
+function computeUnresolvedIssues() {
+  return getAllItems()
+    .filter(classifyIssueStatus)
+    .sort((a, b) => b.date.localeCompare(a.date));
+}
+
+// 갭 레이더와 같은 조합 패턴: 공용 카드 컴포넌트는 그대로 두고, 배지 +
+// "아이디어로 등록" 버튼을 얹은 얇은 래퍼로만 감싼다.
+function renderUnresolvedCard(item) {
+  const wrapper = document.createElement("div");
+  wrapper.className = "unresolved-card";
+
+  const header = document.createElement("div");
+  header.className = "unresolved-card-header";
+
+  const badge = document.createElement("span");
+  badge.className = "unresolved-card-badge";
+  badge.textContent = "아직 해결책 없음";
+  header.appendChild(badge);
+
+  const toIdeaBtn = document.createElement("button");
+  toIdeaBtn.type = "button";
+  toIdeaBtn.className = "gap-to-idea-btn";
+  toIdeaBtn.textContent = "아이디어로 등록";
+  toIdeaBtn.addEventListener("click", () => {
+    const ideas = loadIdeas();
+    ideas.push({
+      id: `idea_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`,
+      title: `[미해결 이슈] ${item.title}`,
+      description: `"${item.title}" 항목에 문제 제기는 있었지만 아직 해결·시행 소식은 확인되지 않았습니다. 대응 방안을 검토합니다.`,
+      status: "idea",
+      linkedItemKeys: [itemKey(item)],
+      createdAt: new Date().toISOString()
+    });
+    saveIdeas(ideas);
+    switchView("board");
+  });
+  header.appendChild(toIdeaBtn);
+
+  wrapper.appendChild(header);
+  wrapper.appendChild(renderCard(item));
+  return wrapper;
+}
+
+function renderUnresolvedView() {
+  unresolvedListEl.innerHTML = "";
+
+  const issues = computeUnresolvedIssues();
+  if (issues.length === 0) {
+    const empty = document.createElement("p");
+    empty.className = "pattern-empty";
+    empty.textContent = "현재 문제 제기형인데 아직 해결책이 안 나온 이슈가 없습니다.";
+    unresolvedListEl.appendChild(empty);
+    return;
+  }
+
+  for (const [date, dayItems] of groupByDate(issues)) {
+    const dayGroup = document.createElement("div");
+    dayGroup.className = "day-group";
+    const heading = document.createElement("div");
+    heading.className = "day-heading";
+    heading.textContent = date;
+    dayGroup.appendChild(heading);
+    for (const item of dayItems) dayGroup.appendChild(renderUnresolvedCard(item));
+    unresolvedListEl.appendChild(dayGroup);
+  }
 }
 
 // --- 태그 무르익음 신호 ------------------------------------------------
@@ -1240,10 +1326,19 @@ const VIEW_CONFIG = {
     showMinistry: false,
     showTagFilters: false,
     showSearch: false
+  },
+  unresolved: {
+    title: "미해결 이슈",
+    subtitle: "문제 제기는 있었지만 아직 해결책이 안 나온 이슈를 찾아보세요",
+    contentEl: unresolvedViewEl,
+    showTabs: false,
+    showMinistry: false,
+    showTagFilters: false,
+    showSearch: false
   }
 };
 
-const VIEW_CONTENT_ELS = [feedEl, ideaBoardEl, patternViewEl, gapViewEl];
+const VIEW_CONTENT_ELS = [feedEl, ideaBoardEl, patternViewEl, gapViewEl, unresolvedViewEl];
 
 const VIEW_RENDER = {
   briefing: () => {
@@ -1253,7 +1348,8 @@ const VIEW_RENDER = {
   scrap: renderFeed,
   board: renderBoard,
   patterns: renderPatternView,
-  gap: renderGapView
+  gap: renderGapView,
+  unresolved: renderUnresolvedView
 };
 
 function applyViewChrome() {

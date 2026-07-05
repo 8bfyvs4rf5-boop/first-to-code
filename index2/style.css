@@ -1194,6 +1194,36 @@ body {
   border-top: 1px dashed var(--border);
 }
 
+/* --- 미해결 이슈 --- */
+
+.unresolved-view[hidden] {
+  display: none;
+}
+
+.unresolved-list .day-group {
+  margin-bottom: 16px;
+}
+
+.unresolved-card {
+  margin-bottom: 12px;
+}
+
+.unresolved-card-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.unresolved-card-badge {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #b91c1c;
+  background: #fee2e2;
+  padding: 3px 9px;
+  border-radius: 999px;
+}
+
 .site-footer {
   text-align: center;
   padding: 20px;

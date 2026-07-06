@@ -1240,7 +1240,10 @@ function renderMatrixView() {
 }
 
 // --- 태그 무르익음 신호 ------------------------------------------------
-// 최근 N일간 등장 횟수가 임계값을 넘긴 태그에 "주목할 시점" 배지를 붙인다.
+// 최근 N일간 등장 횟수가 임계값을 넘긴 태그를 사이드바 위젯에 Top 5로 보여준다.
+// (예전엔 태그 필터/카드에도 "주목할 시점" 배지를 붙였는데, 자동수집 데이터가
+// 쌓이면서 거의 모든 태그가 임계값을 넘겨 배지가 항상 켜져 있는 상태가 되어
+// 신호로서 의미가 없어졌다. 그래서 실제로 랭킹이 있는 이 위젯만 남겼다.)
 // 사이드바 위젯은 항상 떠 있어야(뷰를 전환해도) 하는 성격이라 다른 뷰들과
 // 달리 hidden 토글 없이 별도 렌더 함수를 여러 곳에서 직접 호출한다.
 
@@ -1272,14 +1275,6 @@ function computeRipeTags() {
     }
   }
   return ripe.sort((a, b) => b.count - a.count);
-}
-
-function getRipeTagKeySet() {
-  return new Set(computeRipeTags().map(r => `${r.axis}:${r.tag}`));
-}
-
-function isTagRipe(axis, tag, ripeKeySet) {
-  return ripeKeySet.has(`${axis}:${tag}`);
 }
 
 // 위젯에서 태그를 클릭하면, 그 태그가 실제로 가장 많이 붙어있는 카테고리
@@ -1445,7 +1440,6 @@ function renderMinistryFilters() {
 
 function renderTagFilters() {
   tagFiltersEl.innerHTML = "";
-  const ripeKeySet = getRipeTagKeySet();
 
   for (const axis of Object.keys(TAG_TAXONOMY)) {
     const group = document.createElement("div");
@@ -1456,7 +1450,7 @@ function renderTagFilters() {
     label.textContent = TAG_AXIS_LABELS[axis];
     group.appendChild(label);
 
-    const makeChip = (value, text, ripe) => {
+    const makeChip = (value, text) => {
       const chip = document.createElement("button");
       chip.className = "tag-chip";
       chip.dataset.axis = axis;
@@ -1465,17 +1459,11 @@ function renderTagFilters() {
       if (value === "all" ? activeTagFilters[axis].size === 0 : activeTagFilters[axis].has(value)) {
         chip.classList.add("active");
       }
-      if (ripe) {
-        const badge = document.createElement("span");
-        badge.className = "ripe-badge";
-        badge.textContent = "주목할 시점";
-        chip.appendChild(badge);
-      }
       group.appendChild(chip);
     };
 
-    makeChip("all", "전체", false);
-    for (const tag of TAG_TAXONOMY[axis]) makeChip(tag, tag, isTagRipe(axis, tag, ripeKeySet));
+    makeChip("all", "전체");
+    for (const tag of TAG_TAXONOMY[axis]) makeChip(tag, tag);
 
     tagFiltersEl.appendChild(group);
   }
@@ -1613,23 +1601,13 @@ function renderCard(item) {
   cardTags.className = "card-tags";
   const syncCardTags = () => {
     const tags = getItemTags(item);
-    const all = [
-      ...tags.domain.map(tag => ({ axis: "domain", tag })),
-      ...tags.type.map(tag => ({ axis: "type", tag }))
-    ];
+    const all = [...tags.domain, ...tags.type];
     cardTags.innerHTML = "";
     cardTags.hidden = all.length === 0;
-    const ripeKeySet = getRipeTagKeySet();
-    for (const { axis, tag } of all) {
+    for (const tag of all) {
       const chip = document.createElement("span");
       chip.className = "card-tag-chip";
       chip.textContent = tag;
-      if (isTagRipe(axis, tag, ripeKeySet)) {
-        const badge = document.createElement("span");
-        badge.className = "ripe-badge";
-        badge.textContent = "주목할 시점";
-        chip.appendChild(badge);
-      }
       cardTags.appendChild(chip);
     }
   };

@@ -207,20 +207,6 @@ body {
   color: #94a3b8;
 }
 
-/* --- "주목할 시점" 배지 (태그 필터, 카드 태그 칩 공용) --- */
-
-.ripe-badge {
-  display: inline-block;
-  margin-left: 5px;
-  font-size: 0.66rem;
-  font-weight: 700;
-  color: #fff;
-  background: #f97316;
-  padding: 1px 6px;
-  border-radius: 999px;
-  vertical-align: middle;
-}
-
 .main-area {
   flex: 1;
   min-width: 0;
